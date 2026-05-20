@@ -25,12 +25,68 @@
             line-height: 1.6;
             color: var(--dark-text);
             background-color: var(--light-bg);
-            padding: 40px 20px;
+            padding-top: 70px; /* Space for the fixed navbar */
         }
 
-        .container {
+        /* Top Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+        }
+
+        .nav-container {
             max-width: 1000px;
             margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        .nav-brand {
+            color: var(--white);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .nav-brand span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--white);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Main Content Container */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
             background: var(--white);
             padding: 40px;
             border-radius: 8px;
@@ -173,6 +229,18 @@
 </head>
 <body>
 
+<nav class="navbar">
+    <div class="nav-container">
+        <a class="nav-brand" href="#">M. Hyde <span>Framework</span></a>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Dashboard</a></li>
+            <li><a href="content/daily-structure.html">Daily Structure</a></li>
+            <li><a href="content/legal-divorce.html">Legal Plan</a></li>
+            <li><a href="content/personal-growth.html">Personal Growth</a></li>
+        </ul>
+    </div>
+</nav>
+
 <div class="container">
     <header>
         <h1>Michael Hyde</h1>
@@ -200,7 +268,7 @@
 
     <section>
         <h2>Purpose of this Framework</h2>
-        <p>This digital platform operationalizes the full scope of stability initiatives, legal structures, and proactive financial milestones independently outlined by Mr. Hyde for his formal reentry transition[cite: 41, 42]. Developed in partnership with professional academic mentorship, this data-driven structure acts as a transparent baseline for daily routine enforcement, systemic debt elimination, and proactive family reunification tracking[cite: 41, 49, 51].</p>
+        <p>This digital platform operationalizes the full scope of stability initiatives, legal structures, and proactive financial milestones independently outlined by Mr. Hyde for his formal reentry transition[cite: 38, 41]. Developed in partnership with professional academic mentorship, this data-driven structure acts as a transparent baseline for daily routine enforcement, systemic debt elimination, and proactive family reunification tracking[cite: 41, 42, 49].</p>
     </section>
 
     <section>
@@ -222,7 +290,7 @@
             <div class="card">
                 <h3>📆 Structured Recovery Window</h3>
                 <div class="metric">12–18 <span style="font-size: 1rem; font-weight: normal; color:#666;">Months</span></div>
-                <div class="metric-sub">Complete targeted window for absolute debt elimination across all obligations[cite: 74].</div>
+                <div class="metric-sub">Complete targeted window for absolute debt elimination across all obligations[cite: 74, 77].</div>
             </div>
 
         </div>
@@ -230,7 +298,7 @@
 
     <section>
         <h2>Supervisor Benchmark Assessment</h2>
-        <p>Unlike purely aspirational declarations, this portfolio serves as an explicitly measured framework incorporating statutory legal research, precise child placement restructuring logic, and hyper-structured logistical time mapping[cite: 118, 122, 124]. Every element is built to facilitate rigorous ongoing evaluation against clear, distinct financial and personal metrics[cite: 127].</p>
+        <p>Unlike purely aspirational declarations, this portfolio serves as an explicitly measured framework incorporating statutory legal research, precise child placement restructuring logic, and hyper-structured logistical time mapping[cite: 118]. Every element is built to facilitate rigorous ongoing evaluation against clear, distinct financial and personal metrics[cite: 127].</p>
         
         <div class="quote-box">
             <p>“I take full responsibility for my past actions and the impact they had on my life and my family. I am committed to change, hard work, and making a positive life for myself and my children. I will follow all conditions of my probation and continue to strive for a better future.”</p>
