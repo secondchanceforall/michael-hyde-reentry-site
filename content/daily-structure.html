@@ -2,33 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Structure & Discipline - Michael Hyde</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Michael Hyde | Interactive Reentry Calendar</title>
     <style>
+        /* === BASE STYLES (matching the original index theme) === */
         :root {
-            --primary-color: #1e4620; /* Deep Institutional Green */
-            --secondary-color: #d4af37; /* Muted Gold Accent */
+            --primary-color: #1e4620;
+            --primary-dark: #143015;
+            --secondary-color: #d4af37;
+            --gold-light: #f3e5ab;
             --dark-text: #222222;
             --light-bg: #f9f9f9;
             --white: #ffffff;
             --border-color: #e0e0e0;
+            --danger: #bc3f2e;
+            --success: #2a6e2a;
+            --gray-mid: #6c757d;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--dark-text);
             background-color: var(--light-bg);
+            color: var(--dark-text);
             padding-top: 70px;
+            line-height: 1.5;
         }
 
-        /* Top Navigation Bar */
+        /* Navbar (exactly as in given index) */
         .navbar {
             position: fixed;
             top: 0;
@@ -40,7 +46,7 @@
         }
 
         .nav-container {
-            max-width: 1100px;
+            max-width: 1300px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -65,7 +71,8 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 15px;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
@@ -73,148 +80,269 @@
             text-decoration: none;
             font-size: 0.85rem;
             font-weight: 500;
-            transition: color 0.2s ease;
-            padding: 8px 10px;
+            transition: 0.2s;
+            padding: 6px 10px;
             border-radius: 4px;
             white-space: nowrap;
         }
 
         .nav-links a:hover, .nav-links a.active {
-            color: var(--white);
+            color: white;
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* Main Content Container */
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
+        /* main layout */
+        .app-container {
+            max-width: 1300px;
+            margin: 30px auto;
+            padding: 0 24px;
+        }
+
+        .calendar-card {
             background: var(--white);
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            border-top: 6px solid var(--primary-color);
-        }
-
-        header {
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        h1 {
-            color: var(--primary-color);
-            font-size: 2.2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 5px;
-        }
-
-        .back-link {
-            display: inline-block;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-        }
-
-        .back-link:hover {
-            color: var(--secondary-color);
-        }
-
-        .btn-reset {
-            background-color: var(--primary-color);
-            color: var(--white);
-            border: 1px solid var(--primary-color);
-            padding: 10px 18px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-reset:hover {
-            background-color: var(--white);
-            color: var(--primary-color);
-        }
-
-        /* Schedule Calendar View Styling */
-        .calendar-container {
-            margin-top: 30px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
             overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            border-top: 5px solid var(--primary-color);
         }
 
         .calendar-header {
-            background-color: #f1f4f1;
-            padding: 12px 20px;
-            font-weight: 700;
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--border-color);
-            display: grid;
-            grid-template-columns: 150px 1fr;
-        }
-
-        .time-slot-row {
-            display: grid;
-            grid-template-columns: 150px 1fr;
+            padding: 20px 24px;
+            background: #fefef7;
             border-bottom: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
             align-items: center;
-            background: var(--white);
+            gap: 16px;
         }
 
-        .time-slot-row:last-child {
-            border-bottom: none;
+        .view-controls {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
-        .time-label {
-            padding: 10px 20px;
+        .view-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 40px;
             font-weight: 600;
-            font-size: 0.9rem;
-            color: #555;
-            background-color: #fafafa;
-            border-right: 1px solid var(--border-color);
-            height: 100%;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #333;
+        }
+
+        .view-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .nav-controls {
             display: flex;
             align-items: center;
+            gap: 12px;
         }
 
-        .activity-input {
-            width: 100%;
+        .nav-btn {
+            background: var(--primary-color);
             border: none;
-            padding: 10px 20px;
-            font-size: 0.95rem;
-            color: var(--dark-text);
-            background: transparent;
-            font-family: inherit;
-            transition: background-color 0.15s ease;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
         }
 
-        .activity-input:focus {
-            outline: none;
-            background-color: #fffdf0;
+        .nav-btn:hover {
+            background: var(--primary-dark);
         }
 
-        /* Color-coding variations via injection placeholder classes */
-        .slot-routine { color: #555; }
-        .slot-work { font-weight: 600; color: #1b5e20; }
-        .slot-family { font-weight: 600; color: #b71c1c; }
+        .date-display {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
 
+        .add-event-btn {
+            background: var(--secondary-color);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #1e2a1e;
+        }
+
+        .add-event-btn:hover {
+            background: #c4a229;
+        }
+
+        /* calendar core */
+        .calendar-viewport {
+            padding: 20px 24px;
+            min-height: 500px;
+        }
+
+        /* month grid */
+        .month-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+        }
+
+        .weekday {
+            font-weight: 700;
+            text-align: center;
+            padding: 12px 5px;
+            background: #f0f2ef;
+            border-radius: 12px;
+            color: var(--primary-color);
+        }
+
+        .day-cell {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            min-height: 100px;
+            padding: 8px 6px;
+            cursor: pointer;
+            transition: 0.1s;
+            position: relative;
+        }
+
+        .day-cell:hover {
+            background: #fff9e8;
+            border-color: var(--secondary-color);
+        }
+
+        .day-number {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: #2c3e2b;
+        }
+
+        .event-dot {
+            background: var(--primary-color);
+            color: white;
+            font-size: 0.7rem;
+            border-radius: 20px;
+            padding: 2px 8px;
+            margin: 3px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+        }
+
+        .event-dot:hover {
+            background: var(--secondary-color);
+            color: black;
+        }
+
+        /* weekly/daily view list */
+        .events-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .event-item {
+            background: #f8f9fa;
+            border-left: 5px solid var(--primary-color);
+            padding: 12px 16px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .event-actions button {
+            margin-left: 8px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .quarter-grid, .annual-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .quarter-card, .month-card {
+            background: #fef9e6;
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid var(--gold-light);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 500px;
+            width: 90%;
+            border-radius: 28px;
+            padding: 24px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+        }
+
+        .modal-content input, .modal-content textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 16px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+        }
+
+        button.submit-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        .routine-tools {
+            background: #edf4ea;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .badge-routine {
+            background: var(--secondary-color);
+            border-radius: 50px;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            display: inline-block;
+            margin: 4px;
+        }
         footer {
             text-align: center;
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
-            font-size: 0.85rem;
-            color: #777;
+            padding: 20px;
+            font-size: 0.75rem;
+            color: gray;
+        }
+        @media (max-width: 760px) {
+            .day-cell { min-height: 70px; }
+            .event-dot { font-size: 0.6rem; }
         }
     </style>
 </head>
@@ -222,128 +350,473 @@
 
 <nav class="navbar">
     <div class="nav-container">
-        <a class="nav-brand" href="../index.html">M. Hyde <span>Framework</span></a>
+        <a class="nav-brand" href="#">M. Hyde <span>Accountability</span></a>
         <ul class="nav-links">
-            <li><a href="../index.html">Dashboard</a></li>
-            <li><a href="#" class="active">Daily Structure</a></li>
-            <li><a href="filing-steps.html">Filing Steps</a></li>
-            <li><a href="costs-resources.html">Costs & Resources</a></li>
-            <li><a href="timeline.html">Timeline</a></li>
-            <li><a href="family-framework.html">Family Framework</a></li>
+            <li><a href="#" class="active">Interactive Calendar</a></li>
+            <li><a href="#">Daily Structure</a></li>
+            <li><a href="#">Filing Steps</a></li>
+            <li><a href="#">Costs & Resources</a></li>
+            <li><a href="#">Timeline</a></li>
+            <li><a href="#">Family Framework</a></li>
         </ul>
     </div>
 </nav>
 
-<div class="container">
-    <a href="../index.html" class="back-link">← Return to Dashboard</a>
-    
-    <header>
-        <div>
-            <h1>Daily Structure & Discipline</h1>
-            <p style="color: #666; font-weight: 500;">Interactive 15-Minute Interval Execution Log</p>
-        </div>
-        <button class="btn-reset" onclick="loadBaselineRoutine()">Reset to Baseline Routine</button>
-    </header>
-
-    <p>Every hour of the day is managed explicitly to protect routine metrics and isolate potential negative baseline impacts. Click directly into any calendar slot below to update, adjust, or check off tracking adjustments in real time.</p>
-
-    <div class="calendar-container">
+<div class="app-container">
+    <div class="calendar-card">
         <div class="calendar-header">
-            <div>Time Block</div>
-            <div>Programmed Focus Activity</div>
-        </div>
-        <div id="calendar-body">
+            <div class="view-controls">
+                <button data-view="day" class="view-btn">📅 Day</button>
+                <button data-view="week" class="view-btn">📆 Week</button>
+                <button data-view="month" class="view-btn active">🗓 Month</button>
+                <button data-view="quarter" class="view-btn">📊 Quarter</button>
+                <button data-view="year" class="view-btn">📅 Year</button>
             </div>
-    </div>
+            <div class="nav-controls">
+                <button id="prevBtn" class="nav-btn">◀ Prev</button>
+                <span id="currentDateLabel" class="date-display">March 2026</span>
+                <button id="nextBtn" class="nav-btn">Next ▶</button>
+            </div>
+            <button id="globalAddEventBtn" class="add-event-btn">+ New Event</button>
+        </div>
 
+        <!-- quick routine reminder / daily structure block -->
+        <div class="routine-tools" style="margin: 0 24px 10px 24px;">
+            <span style="font-weight:bold;">📋 Michael's Core Daily Routine (pre-loaded template):</span>
+            <span class="badge-routine">5:00 Wake</span>
+            <span class="badge-routine">5:30 Exercise</span>
+            <span class="badge-routine">6:00 Prep Work</span>
+            <span class="badge-routine">7:00-19:00 Work Shift</span>
+            <span class="badge-routine">19:30 Dinner</span>
+            <span class="badge-routine">20:00 Family/Plan</span>
+            <span class="badge-routine">21:30 Sleep</span>
+            <button id="applyRoutineToSelectedDate" style="margin-left:12px; background:var(--primary-color); color:white; border:none; padding:4px 14px; border-radius:30px;">➕ Apply routine to today/selected day</button>
+        </div>
+
+        <div id="calendarViewContainer" class="calendar-viewport">
+            <!-- dynamic content rendered by js -->
+            <div class="loading">Loading interactive calendar...</div>
+        </div>
+    </div>
     <footer>
-        Confidential Portfolio — Documented Under Academic Oversight — Formaly Incarcerated Helping The Incarcerated
+        <p>🔒 Edits are auto-saved in your browser. All changes reflect Michael's evolving plan. Full commitment to reentry, probation & family support.</p>
     </footer>
 </div>
 
+<!-- Modal for event add/edit -->
+<div id="eventModal" class="modal">
+    <div class="modal-content">
+        <h3 id="modalTitle">Add / Edit Event</h3>
+        <input type="text" id="eventTitle" placeholder="Event title (ex: Probation meeting)" autocomplete="off">
+        <label>Start date & time</label>
+        <input type="datetime-local" id="eventStart">
+        <label>End date & time</label>
+        <input type="datetime-local" id="eventEnd">
+        <label>Description (optional)</label>
+        <textarea id="eventDesc" rows="2" placeholder="Notes, location, obligations..."></textarea>
+        <input type="hidden" id="editingEventId" value="">
+        <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+            <button id="deleteEventBtn" style="background:#bc3f2e; color:white; border:none; padding:8px 16px; border-radius:30px;">Delete</button>
+            <div>
+                <button id="closeModalBtn" style="background:#aaa;">Cancel</button>
+                <button id="saveEventBtn" class="submit-btn">Save Event</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    // Generates absolute array list tracking 15-minute intervals from 4:30 AM to 10:00 PM
-    function generateTimeSlots() {
-        let slots = [];
-        let startHour = 4;
-        let startMin = 30;
-        let endHour = 22; // 10:00 PM
-        
-        let currentHour = startHour;
-        let currentMin = startMin;
-        
-        while (currentHour < endHour || (currentHour === endHour && currentMin === 0)) {
-            let ampm = currentHour >= 12 ? 'PM' : 'AM';
-            let displayHour = currentHour % 12;
-            displayHour = displayHour === 0 ? 12 : displayHour;
-            let displayMin = currentMin === 0 ? '00' : currentMin;
-            
-            slots.push({
-                timeLabel: `${displayHour}:${displayMin} ${ampm}`,
-                rawHour: currentHour,
-                rawMin: currentMin
-            });
-            
-            currentMin += 15;
-            if (currentMin === 60) {
-                currentMin = 0;
-                currentHour++;
-            }
-        }
-        return slots;
-    }
+    // ------------------- DATA MODEL --------------------
+    let events = [];          // each event: { id, title, start, end, description }
+    let currentView = "month";   // day, week, month, quarter, year
+    let currentFocusDate = new Date();  // reference date
+    // helper storage key
+    const STORAGE_KEY = "michael_hyde_calendar_events";
 
-    // Assigns baseline actions based on the document's structured daily schedule thresholds
-    function getBaselineActivity(hour, min) {
-        let val = hour * 60 + min; // minutes from midnight calculation
-        
-        if (val >= 270 && val < 300) {  // 4:30 AM - 5:00 AM
-            return { text: "Wake Up — Pray, Meditate, Structure Daily Targets", css: "slot-routine" };
-        } else if (val >= 300 && val < 360) { // 5:00 AM - 6:00 AM
-            return { text: "Physical Training & Exercise Activity", css: "slot-routine" };
-        } else if (val >= 360 && val < 390) { // 6:00 AM - 6:30 AM
-            return { text: "Shave, Dress, Tool Preparation", css: "slot-routine" };
-        } else if (val >= 390 && val < 1110) { // 6:30 AM - 6:30 PM
-            return { text: "Employment Window (Disciplined 12-Hour Labor Slot)", css: "slot-work" };
-        } else if (val >= 1110 && val < 1170) { // 6:30 PM - 7:30 PM
-            return { text: "Commute Home / Post-Work Clean up / Dinner", css: "slot-routine" };
-        } else if (val >= 1170 && val < 1230) { // 7:30 PM - 8:30 PM
-            return { text: "Skill Acquisition (Reading, Active Trade Module Tracking)", css: "slot-routine" };
-        } else if (val >= 1230 && val < 1290) { // 8:30 PM - 9:30 PM
-            return { text: "Financial Auditing / Budget Balance Check", css: "slot-routine" };
-        } else if (val >= 1290 && val < 1320) { // 9:30 PM - 10:00 PM
-            return { text: "Family Safety Check (Structured Calls & Letters to Children)", css: "slot-family" };
+    function loadEvents() {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+            events = JSON.parse(stored);
         } else {
-            return { text: "Wind Down — Isolate Negative Inputs / Prepare for Sleep", css: "slot-routine" };
+            // DEFAULT SEED events: based on Michael's plan, important obligations & some routine events
+            const today = new Date();
+            const baseDate = new Date(today);
+            baseDate.setHours(0,0,0,0);
+            events = [];
+            // Add child support recurring monthly on 5th
+            for(let i=0; i<6; i++){
+                let payDay = new Date(today.getFullYear(), today.getMonth() + i, 5);
+                if(payDay >= today) {
+                    addEventObject(`💸 Child Support (${payDay.toLocaleDateString()})`, payDay, payDay, "Monthly obligation $850", false);
+                }
+            }
+            // probation meeting every 2 weeks
+            let nextMeeting = new Date(today);
+            nextMeeting.setDate(today.getDate() + (3 - today.getDay() + 7)%7);
+            for(let i=0;i<4;i++){
+                let meet = new Date(nextMeeting);
+                meet.setDate(nextMeeting.getDate() + i*14);
+                addEventObject(`⚖️ Probation Check-in`, meet, meet, "Report to officer Noah Gilbert", false);
+            }
+            // DMV license reinstatement target
+            let dmvTarget = new Date(today);
+            dmvTarget.setDate(today.getDate() + 10);
+            addEventObject(`🚗 License Reinstatement Filing`, dmvTarget, dmvTarget, "DMV fee $150", false);
+            // divorce filing reminder
+            let divorceDate = new Date(today);
+            divorceDate.setDate(today.getDate() + 5);
+            addEventObject(`📄 Divorce Filing`, divorceDate, divorceDate, "Fee $300, courthouse", false);
+            // example work shift block for next 7 days to show his committed schedule
+            for(let d = 0; d<7; d++){
+                let workDay = new Date(today);
+                workDay.setDate(today.getDate() + d);
+                let startWork = new Date(workDay);
+                startWork.setHours(7,0,0,0);
+                let endWork = new Date(workDay);
+                endWork.setHours(19,0,0,0);
+                if(workDay >= today)
+                    addEventObject(`💼 Work Shift (12hr)`, startWork, endWork, "Construction / labor, 6 days/week", false);
+            }
+            // hospital bill reminder
+            let hospDue = new Date(today);
+            hospDue.setDate(today.getDate() + 18);
+            addEventObject(`🏥 Hospital Bill Payment Plan`, hospDue, hospDue, "$200 monthly towards $3,500", false);
         }
+        renderCurrentView();
     }
 
-    // Renders the interactive layout inside the HTML tree
-    function loadBaselineRoutine() {
-        const bodyContainer = document.getElementById('calendar-body');
-        bodyContainer.innerHTML = ''; // wipe historical values
-        
-        const slots = generateTimeSlots();
-        
-        slots.forEach(slot => {
-            let baseline = getBaselineActivity(slot.rawHour, slot.rawMin);
-            
-            let row = document.createElement('div');
-            row.className = 'time-slot-row';
-            
-            row.innerHTML = `
-                <div class="time-label">${slot.timeLabel}</div>
-                <div>
-                    <input type="text" class="activity-input ${baseline.css}" value="${baseline.text}">
-                </div>
-            `;
-            bodyContainer.appendChild(row);
+    function addEventObject(title, startDate, endDate, description, saveImmediate=true) {
+        let id = Date.now() + Math.random()*10000 + events.length;
+        let ev = {
+            id: id,
+            title: title,
+            start: startDate.toISOString(),
+            end: endDate.toISOString(),
+            description: description || ""
+        };
+        events.push(ev);
+        if(saveImmediate) saveToLocal();
+        return ev;
+    }
+
+    function saveToLocal() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
+    }
+
+    // helper: get events for a specific day (date only, compare date YYYY-MM-DD)
+    function getEventsForDay(date) {
+        const targetDate = new Date(date);
+        targetDate.setHours(0,0,0,0);
+        return events.filter(ev => {
+            let evStart = new Date(ev.start);
+            let evEnd = new Date(ev.end);
+            evStart.setHours(0,0,0,0);
+            // check if event covers this day (start <= day <= end)
+            return evStart <= targetDate && new Date(ev.end) >= targetDate;
         });
     }
 
-    // Start generator automatically upon deployment loading execution
-    window.onload = loadBaselineRoutine;
-</script>
+    // add routine (Michael's committed daily schedule) to specific date
+    function addRoutineToDate(dateObj) {
+        const baseDay = new Date(dateObj);
+        baseDay.setHours(0,0,0,0);
+        const routines = [
+            { title: "🌅 Wake Up & Hygiene", startHour:5, startMin:0, endHour:5, endMin:30, desc: "Start disciplined morning" },
+            { title: "🏋️ Exercise / Stretching", startHour:5, startMin:30, endHour:6, endMin:0, desc: "Physical health commitment" },
+            { title: "🚿 Prepare for Work", startHour:6, startMin:0, endHour:6, endMin:30, desc: "Shower, breakfast, reflection" },
+            { title: "💼 Work Shift (Main Job)", startHour:7, startMin:0, endHour:19, endMin:0, desc: "12-hour labor, 6 days weekly" },
+            { title: "🍽️ Dinner & Reset", startHour:19, startMin:30, endHour:20, endMin:0, desc: "Healthy meal" },
+            { title: "📞 Family Communication / Planning", startHour:20, startMin:0, endHour:20, endMin:45, desc: "Support children, budget review" },
+            { title: "📖 Positive Reading / Recovery", startHour:20, startMin:45, endHour:21, endMin:30, desc: "Avoid negative influences" },
+            { title: "😴 Sleep / Rest", startHour:21, startMin:30, endHour:23, endMin:59, desc: "Rest for next day productivity" }
+        ];
+        let added = 0;
+        for(let r of routines) {
+            let startDate = new Date(baseDay);
+            startDate.setHours(r.startHour, r.startMin, 0, 0);
+            let endDate = new Date(baseDay);
+            endDate.setHours(r.endHour, r.endMin, 0, 0);
+            // avoid duplicates: don't add if same title already exists on that day
+            const already = events.some(ev => {
+                let evStartDate = new Date(ev.start);
+                return evStartDate.toDateString() === startDate.toDateString() && ev.title === r.title;
+            });
+            if(!already) {
+                addEventObject(r.title, startDate, endDate, r.desc, true);
+                added++;
+            }
+        }
+        if(added) alert(`Added ${added} routine events to ${baseDay.toDateString()}. You can edit/remove as needed.`);
+        else alert("Routine already exists for this day (or events overlap).");
+        renderCurrentView();
+    }
 
+    // ---------- RENDER engines based on view ----------
+    let currentContainer = document.getElementById("calendarViewContainer");
+
+    function renderCurrentView() {
+        if(!currentContainer) return;
+        const year = currentFocusDate.getFullYear();
+        const month = currentFocusDate.getMonth();
+        const todayYMD = new Date().toDateString();
+
+        if(currentView === "month") {
+            const firstDayOfMonth = new Date(year, month, 1);
+            const startWeekday = firstDayOfMonth.getDay(); // 0 sun
+            const daysInMonth = new Date(year, month+1, 0).getDate();
+            let gridHtml = `<div class="month-grid">`;
+            const weekdays = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+            weekdays.forEach(d => gridHtml += `<div class="weekday">${d}</div>`);
+            let dayCounter = 1;
+            for(let i=0; i<42; i++) {
+                if(i < startWeekday || dayCounter > daysInMonth) {
+                    gridHtml += `<div class="day-cell" style="background:#fcfcfc; opacity:0.6;"></div>`;
+                    if(i >= startWeekday) dayCounter++;
+                    continue;
+                }
+                let currentDate = new Date(year, month, dayCounter);
+                let eventsToday = getEventsForDay(currentDate);
+                let eventDots = eventsToday.slice(0,3).map(ev => `<div class="event-dot" data-event-id="${ev.id}" data-view-action="edit">${ev.title.length>18?ev.title.substring(0,15)+"..":ev.title}</div>`).join('');
+                let more = eventsToday.length > 3 ? `<div class="event-dot" style="background:#bdb76b;">+${eventsToday.length-3} more</div>` : '';
+                let isTodayClass = (currentDate.toDateString() === new Date().toDateString()) ? 'style="background:#fef1cf;"' : '';
+                gridHtml += `<div class="day-cell" data-date="${currentDate.toISOString()}" ${isTodayClass}>
+                                <div class="day-number">${dayCounter}</div>
+                                ${eventDots} ${more}
+                            </div>`;
+                dayCounter++;
+            }
+            gridHtml += `</div>`;
+            currentContainer.innerHTML = gridHtml;
+            document.querySelectorAll('.event-dot[data-event-id]').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const evId = parseInt(el.getAttribute('data-event-id'));
+                    openEditModalById(evId);
+                });
+            });
+            document.querySelectorAll('.day-cell[data-date]').forEach(cell => {
+                cell.addEventListener('click', (e) => {
+                    if(e.target.classList.contains('event-dot')) return;
+                    const iso = cell.getAttribute('data-date');
+                    const dateObj = new Date(iso);
+                    openAddModalForDate(dateObj);
+                });
+            });
+        } 
+        else if(currentView === "week") {
+            let startOfWeek = new Date(currentFocusDate);
+            startOfWeek.setDate(currentFocusDate.getDate() - currentFocusDate.getDay());
+            let weekHtml = `<div style="display:flex; flex-direction:column; gap:20px;"><h3>Week of ${startOfWeek.toDateString()}</h3>`;
+            for(let i=0;i<7;i++) {
+                let day = new Date(startOfWeek);
+                day.setDate(startOfWeek.getDate() + i);
+                let dayEvents = getEventsForDay(day);
+                weekHtml += `<div style="border-left:4px solid var(--primary-color); background:#fafaf5; border-radius:14px; padding:10px;"><strong>${day.toDateString()}</strong>
+                            <div class="events-list" style="margin-top:6px;">`;
+                if(dayEvents.length === 0) weekHtml += `<em>No scheduled events. Click to add.</em>`;
+                dayEvents.forEach(ev => {
+                    let startHour = new Date(ev.start).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+                    weekHtml += `<div class="event-item" data-event-id="${ev.id}">📌 ${ev.title} (${startHour}) <span style="cursor:pointer; color:var(--primary-color);" class="edit-week-event">✏️</span></div>`;
+                });
+                weekHtml += `<button class="add-day-event-btn" data-date="${day.toISOString()}" style="margin-top:8px; background:var(--secondary-color); border:none; padding:4px 10px; border-radius:50px;">+ Add</button></div></div>`;
+            }
+            weekHtml += `</div>`;
+            currentContainer.innerHTML = weekHtml;
+            document.querySelectorAll('.event-item').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    if(e.target.classList.contains('edit-week-event') || e.target === el.querySelector('.edit-week-event')) {
+                        const eventDiv = el.closest('.event-item');
+                        const evIdAttr = eventDiv.getAttribute('data-event-id');
+                        if(evIdAttr) openEditModalById(parseInt(evIdAttr));
+                    }
+                });
+            });
+            document.querySelectorAll('.add-day-event-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const dateStr = btn.getAttribute('data-date');
+                    openAddModalForDate(new Date(dateStr));
+                });
+            });
+        } 
+        else if(currentView === "day") {
+            let eventsToday = getEventsForDay(currentFocusDate);
+            let dayHtml = `<div><h2>📌 ${currentFocusDate.toDateString()}</h2><div class="events-list">`;
+            if(eventsToday.length===0) dayHtml += `<p>No events for this day. Add using button above or click +New Event.</p>`;
+            eventsToday.forEach(ev => {
+                let startTime = new Date(ev.start).toLocaleString();
+                let endTime = new Date(ev.end).toLocaleTimeString();
+                dayHtml += `<div class="event-item" data-event-id="${ev.id}"><div><strong>${ev.title}</strong><br><small>⏰ ${startTime} — ${endTime}</small><br><em>${ev.description || ""}</em></div><div><button class="edit-day-event">✏️ Edit</button></div></div>`;
+            });
+            dayHtml += `<button id="addEventForTodayBtn" style="margin-top:20px; background:var(--primary-color); color:white; border:none; padding:8px 18px; border-radius:40px;">+ Add Event for Today</button></div>`;
+            currentContainer.innerHTML = dayHtml;
+            document.querySelectorAll('.event-item').forEach(el => {
+                const evId = parseInt(el.getAttribute('data-event-id'));
+                el.querySelector('.edit-day-event')?.addEventListener('click',()=>openEditModalById(evId));
+            });
+            const addToday = document.getElementById('addEventForTodayBtn');
+            if(addToday) addToday.addEventListener('click',()=>openAddModalForDate(currentFocusDate));
+        }
+        else if(currentView === "quarter") {
+            let quarterStart = new Date(currentFocusDate);
+            let quarterMonth = Math.floor(currentFocusDate.getMonth() / 3);
+            quarterStart.setMonth(quarterMonth * 3, 1);
+            let quarterEnd = new Date(quarterStart);
+            quarterEnd.setMonth(quarterStart.getMonth() + 3, 0);
+            let eventsInQuarter = events.filter(ev => new Date(ev.start) >= quarterStart && new Date(ev.start) <= quarterEnd);
+            let grouped = {};
+            eventsInQuarter.forEach(ev => { let d = new Date(ev.start).toDateString(); if(!grouped[d]) grouped[d]=[]; grouped[d].push(ev); });
+            let html = `<h3>📆 Quarter ${Math.floor(currentFocusDate.getMonth()/3)+1} - ${quarterStart.toDateString()} to ${quarterEnd.toDateString()}</h3><div class="quarter-grid">`;
+            for(let [dateStr, evts] of Object.entries(grouped)) {
+                html += `<div class="quarter-card"><strong>📅 ${dateStr}</strong><ul>`;
+                evts.forEach(ev => html += `<li style="cursor:pointer;" data-id="${ev.id}">📌 ${ev.title}</li>`);
+                html += `</ul><button class="quarter-add-btn" data-date="${new Date(dateStr).toISOString()}">➕ Add event</button></div>`;
+            }
+            if(Object.keys(grouped).length===0) html += `<div>No events this quarter. Use "New Event".</div>`;
+            html += `</div>`;
+            currentContainer.innerHTML = html;
+            document.querySelectorAll('.quarter-card li').forEach(li => {
+                li.addEventListener('click',()=>openEditModalById(parseInt(li.dataset.id)));
+            });
+            document.querySelectorAll('.quarter-add-btn').forEach(btn => {
+                btn.addEventListener('click',()=>openAddModalForDate(new Date(btn.dataset.date)));
+            });
+        }
+        else if(currentView === "year") {
+            let year = currentFocusDate.getFullYear();
+            let eventsInYear = events.filter(ev => new Date(ev.start).getFullYear() === year);
+            let monthGroups = Array(12).fill().map(()=>[]);
+            eventsInYear.forEach(ev => { let m = new Date(ev.start).getMonth(); monthGroups[m].push(ev); });
+            let html = `<h2>Year ${year} Overview</h2><div class="annual-grid">`;
+            for(let i=0;i<12;i++) {
+                html += `<div class="month-card"><strong>${new Date(year,i,1).toLocaleString('default',{month:'long'})}</strong> (${monthGroups[i].length} events)<ul>`;
+                monthGroups[i].slice(0,5).forEach(ev => html += `<li data-id="${ev.id}" style="cursor:pointer;">📌 ${ev.title}</li>`);
+                if(monthGroups[i].length>5) html += `<li><em>+${monthGroups[i].length-5} more</em></li>`;
+                html += `</ul><button class="year-add-btn" data-month="${i}" data-year="${year}">➕ Add event this month</button></div>`;
+            }
+            html += `</div>`;
+            currentContainer.innerHTML = html;
+            document.querySelectorAll('.month-card li').forEach(li => {
+                if(li.dataset.id) li.addEventListener('click',()=>openEditModalById(parseInt(li.dataset.id)));
+            });
+            document.querySelectorAll('.year-add-btn').forEach(btn => {
+                btn.addEventListener('click',()=>{
+                    let month = parseInt(btn.dataset.month);
+                    let yr = parseInt(btn.dataset.year);
+                    let dateMid = new Date(yr, month, 15);
+                    openAddModalForDate(dateMid);
+                });
+            });
+        }
+        updateDateLabel();
+    }
+
+    function updateDateLabel() {
+        let label = document.getElementById('currentDateLabel');
+        if(currentView === 'month') label.innerText = currentFocusDate.toLocaleDateString(undefined, { month:'long', year:'numeric' });
+        else if(currentView === 'week') label.innerText = `Week of ${currentFocusDate.toDateString()}`;
+        else if(currentView === 'day') label.innerText = currentFocusDate.toDateString();
+        else if(currentView === 'quarter') label.innerText = `Quarter ${Math.floor(currentFocusDate.getMonth()/3)+1} ${currentFocusDate.getFullYear()}`;
+        else label.innerText = currentFocusDate.getFullYear().toString();
+    }
+
+    function openAddModalForDate(dateObj) {
+        document.getElementById('modalTitle').innerText = "Add New Event";
+        document.getElementById('eventTitle').value = "";
+        document.getElementById('eventDesc').value = "";
+        let startIso = new Date(dateObj);
+        startIso.setHours(9,0,0,0);
+        let endIso = new Date(dateObj);
+        endIso.setHours(10,0,0,0);
+        document.getElementById('eventStart').value = startIso.toISOString().slice(0,16);
+        document.getElementById('eventEnd').value = endIso.toISOString().slice(0,16);
+        document.getElementById('editingEventId').value = "";
+        document.getElementById('deleteEventBtn').style.display = 'none';
+        document.getElementById('eventModal').style.display = 'flex';
+    }
+
+    function openEditModalById(eventId) {
+        const ev = events.find(e => e.id == eventId);
+        if(!ev) return;
+        document.getElementById('modalTitle').innerText = "Edit Event";
+        document.getElementById('eventTitle').value = ev.title;
+        document.getElementById('eventDesc').value = ev.description || "";
+        document.getElementById('eventStart').value = new Date(ev.start).toISOString().slice(0,16);
+        document.getElementById('eventEnd').value = new Date(ev.end).toISOString().slice(0,16);
+        document.getElementById('editingEventId').value = ev.id;
+        document.getElementById('deleteEventBtn').style.display = 'block';
+        document.getElementById('eventModal').style.display = 'flex';
+    }
+
+    function saveEventFromModal() {
+        const idElem = document.getElementById('editingEventId').value;
+        const title = document.getElementById('eventTitle').value.trim();
+        const start = document.getElementById('eventStart').value;
+        const end = document.getElementById('eventEnd').value;
+        const desc = document.getElementById('eventDesc').value;
+        if(!title || !start || !end) { alert("Title and dates required"); return; }
+        if(idElem) {
+            const idx = events.findIndex(e => e.id == idElem);
+            if(idx !== -1) {
+                events[idx] = { ...events[idx], title, start: new Date(start).toISOString(), end: new Date(end).toISOString(), description: desc };
+            }
+        } else {
+            events.push({ id: Date.now()+Math.random(), title, start: new Date(start).toISOString(), end: new Date(end).toISOString(), description: desc });
+        }
+        saveToLocal();
+        renderCurrentView();
+        document.getElementById('eventModal').style.display = 'none';
+    }
+
+    function deleteCurrentEvent() {
+        const id = document.getElementById('editingEventId').value;
+        if(id && confirm("Delete this event permanently?")) {
+            events = events.filter(e => e.id != id);
+            saveToLocal();
+            renderCurrentView();
+            document.getElementById('eventModal').style.display = 'none';
+        }
+    }
+
+    // Event listeners & Navigation
+    function init() {
+        loadEvents();
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentView = btn.getAttribute('data-view');
+                renderCurrentView();
+            });
+        });
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if(currentView === 'month') currentFocusDate.setMonth(currentFocusDate.getMonth()-1);
+            else if(currentView === 'week') currentFocusDate.setDate(currentFocusDate.getDate()-7);
+            else if(currentView === 'day') currentFocusDate.setDate(currentFocusDate.getDate()-1);
+            else if(currentView === 'quarter') currentFocusDate.setMonth(currentFocusDate.getMonth()-3);
+            else if(currentView === 'year') currentFocusDate.setFullYear(currentFocusDate.getFullYear()-1);
+            renderCurrentView();
+        });
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if(currentView === 'month') currentFocusDate.setMonth(currentFocusDate.getMonth()+1);
+            else if(currentView === 'week') currentFocusDate.setDate(currentFocusDate.getDate()+7);
+            else if(currentView === 'day') currentFocusDate.setDate(currentFocusDate.getDate()+1);
+            else if(currentView === 'quarter') currentFocusDate.setMonth(currentFocusDate.getMonth()+3);
+            else if(currentView === 'year') currentFocusDate.setFullYear(currentFocusDate.getFullYear()+1);
+            renderCurrentView();
+        });
+        document.getElementById('globalAddEventBtn').addEventListener('click', () => openAddModalForDate(currentFocusDate));
+        document.getElementById('saveEventBtn').addEventListener('click', saveEventFromModal);
+        document.getElementById('closeModalBtn').addEventListener('click', () => document.getElementById('eventModal').style.display = 'none');
+        document.getElementById('deleteEventBtn').addEventListener('click', deleteCurrentEvent);
+        document.getElementById('applyRoutineToSelectedDate').addEventListener('click', () => {
+            let refDate = currentFocusDate;
+            if(currentView === 'day') refDate = currentFocusDate;
+            else if(currentView === 'week') refDate = currentFocusDate;
+            else refDate = currentFocusDate;
+            addRoutineToDate(refDate);
+        });
+    }
+    init();
+</script>
 </body>
 </html>
