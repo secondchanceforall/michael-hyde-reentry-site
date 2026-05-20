@@ -1,1 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step-by-Step Filing Plan - Michael Hyde</title>
+    <style>
+        :root {
+            --primary-color: #1e4620; /* Deep Institutional Green */
+            --secondary-color: #d4af37; /* Muted Gold Accent */
+            --dark-text: #222222;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --border-color: #e0e0e0;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+            padding-top: 70px; /* Space for fixed navbar */
+        }
+
+        /* Top Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        .nav-brand {
+            color: var(--white);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .nav-brand span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--white);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Main Content Container */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-top: 6px solid var(--primary-color);
+        }
+
+        header {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+        }
+
+        section {
+            margin-bottom: 35px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #444;
+        }
+
+        /* Checklist Style */
+        .checklist {
+            list-style: none;
+            margin: 15px 0;
+            background: #fdfdfd;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 15px 20px;
+        }
+
+        .checklist li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--border-color);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+
+        .checklist input[type="checkbox"] {
+            margin-top: 5px;
+            accent-color: var(--primary-color);
+        }
+
+        .form-code {
+            font-family: monospace;
+            background: #f1f4f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Step Timeline Styling */
+        .step-block {
+            margin-bottom: 25px;
+            padding-left: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .step-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a class="nav-brand" href="../index.html">M. Hyde <span>Framework</span></a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Dashboard</a></li>
+            <li><a href="daily-structure.html">Daily Structure</a></li>
+            <li><a href="legal-divorce.html">Legal Plan</a></li>
+            <li><a href="personal-growth.html">Personal Growth</a></li>
+            <li><a href="#" class="active">Filing Steps</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <a href="../index.html" class="back-link">← Return to Dashboard</a>
+    
+    <header>
+        <h1>Step-by-Step Filing Plan</h1>
+        <p style="color: #666; font-weight: 500;">Pro Se Legal Roadmap & Document Preparation Protocol</p>
+    </header>
+
+    <section>
+        <h2>Overview</h2>
+        <p>This roadmap details the exact steps required to navigate the self-represented filing process in Kenosha County, ensuring all statutory guidelines are executed systematically and correctly.</p>
+    </section>
+
+    <section>
+        <h2>Step 1 — Gather Required Documents</h2>
+        <p>Before initiating any paperwork, the following verification materials must be organized and on hand:</p>
+        <ul class="checklist">
+            <li><input type="checkbox"> Proof of Wisconsin residency (Minimum 6 months verification)</li>
+            <li><input type="checkbox"> Proof of Kenosha County residency (Minimum 30 days verification)</li>
+            <li><input type="checkbox"> Proof of income (Current pay stubs for financial disclosures and fee waiver)</li>
+            <li><input type="checkbox"> Historical income proofs (2024 & 2025 completed tax returns)</li>
+            <li><input type="checkbox"> Complete itemized list of all marital assets and liabilities</li>
+            <li><input type="checkbox"> Existing statutory child support order documentation</li>
+            <li><input type="checkbox"> Original certified marriage certificate</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Step 2 — Mandatory Court Forms</h2>
+        <p>The following official Wisconsin Court System documents are required for this action and are prepared via the self-help assistant:</p>
+        <ul class="checklist">
+            <li><input type="checkbox"> <span class="form-code">FA-4104V</span> — Summons with Minor Children</li>
+            <li><input type="checkbox"> <span class="form-code">FA-4108V</span> — Petition with Minor Children</li>
+            <li><input type="checkbox"> <span class="form-code">FA-4119V</span> — Admission of Service (or process server alternative)</li>
+            <li><input type="checkbox"> <span class="form-code">FA-4120V</span> — Declaration of Service</li>
+            <li><input type="checkbox"> <span class="form-code">FA-4126V</span> — Stipulation for Temporary Order with Minor Children</li>
+            <li><input type="checkbox"> <span class="form-code">FA-4130V</span> — Motion for New (De Novo) Hearing</li>
+            <li><input type="checkbox"> <span class="form-code">FA-4136V</span> — Petition for Appointment of Guardian ad Litem</li>
+            <li><input type="checkbox"> <span class="form-code">FA-4138V</span> — Income and Expense Statement</li>
+            <li><input type="checkbox"> <span class="form-code">FA-4139V</span> — Financial Disclosure Statement</li>
+            <li><input type="checkbox"> <span class="form-code">FA-4147V</span> — Proposed Parenting Plan</li>
+            <li><input type="checkbox"> <span class="form-code">FA-4150V</span> — Marital Settlement Agreement with Minor Children</li>
+            <li><input type="checkbox"> <span class="form-code">CV-410A</span> — Petition for Waiver of Fees and Costs</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Filing Protocol & Procedural Steps</h2>
+        
+        <div class="step-block">
+            <div class="step-title">Step 3 — Fee Waiver Submission</div>
+            <p>File Form CV-410A concurrently with the divorce petition. This step addresses the statutory $184.50 filing fee and the matching $10 child support administrative add-on, attempting to bring standard baseline court processing costs down to $0 based on income qualification thresholds.</p>
+        </div>
+
+        <div class="step-block">
+            <div class="step-title">Step 4 — E-Filing Execution</div>
+            <p>Submit all verified documents electronically through the Wisconsin eFiling portal (efiling.wicourts.gov). The filing goes under the supervision of the Clerk of Circuit Court, Rebecca Matoska-Mentink, and is reviewed within the Family Court system overseen by Court Commissioner Elizabeth Pfeuffer.</p>
+        </div>
+
+        <div class="step-block">
+            <div class="step-title">Step 5 — Formal Service of Process</div>
+            <p>Formally serve the filed paperwork to the spouse. Prioritize certified mail with an Admission of Service (the lowest-cost method at approximately $10.00). If formal service is rejected, budget an external process server allocation (~$60) to fulfill statutory notice mandates.</p>
+        </div>
+
+        <div class="step-block">
+            <div class="step-title">Step 6 — Mandatory 120-Day Waiting Period</div>
+            <p>Abide by the mandatory Wisconsin statutory cooling-off window. This 120-day clock begins immediately upon proof of service and cannot be skipped. Use this timeframe to draft and finalize the comprehensive Marital Settlement Agreement with the maternal grandfather.</p>
+        </div>
+
+        <div class="step-block">
+            <div class="step-title">Step 7 — Final Hearing Appearance</div>
+            <p>Represent yourself pro se at the final hearing scheduled after the 120-day window closes. Present the completed Marital Settlement Agreement (Form FA-4150V) containing the formal placement and arrears structured updates to the Court Commissioner for final decree approval.</p>
+        </div>
+    </section>
+
+    <footer>
+        Confidential Portfolio — Documented Under Academic Oversight — University of Wisconsin-Parkside
+    </footer>
+</div>
+
+</body>
+</html>
