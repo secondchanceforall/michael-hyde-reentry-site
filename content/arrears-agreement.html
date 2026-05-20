@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Loan & Arrears Redirection Agreement | Michael Hyde Reentry</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Georgia, 'Segoe UI', serif;
+            background: #e9ecef;
+            padding: 40px 20px;
+            color: #1e2a1e;
+        }
+
+        /* main card container */
+        .agreement-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* interactive form area (editing) */
+        .form-panel {
+            background: #fcf9f0;
+            padding: 32px 36px;
+            border-bottom: 2px dashed #c0b280;
+        }
+
+        .form-panel h2 {
+            font-family: system-ui, sans-serif;
+            color: #1e4620;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin: 20px 0;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #3b5c3b;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            background: white;
+        }
+
+        .signature-line {
+            font-family: 'Courier New', monospace;
+            border-bottom: 1px dashed #aaa;
+            margin-top: 8px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end;
+            margin-top: 24px;
+        }
+
+        .btn-print, .btn-reset {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: system-ui;
+        }
+
+        .btn-print {
+            background: #1e4620;
+            color: white;
+        }
+
+        .btn-print:hover {
+            background: #0e2e10;
+        }
+
+        .btn-reset {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        /* printable agreement area (court-style) */
+        .print-area {
+            padding: 48px 56px;
+            background: white;
+            transition: all 0.2s;
+        }
+
+        .legal-document {
+            max-width: 100%;
+            font-size: 1rem;
+            line-height: 1.45;
+        }
+
+        .legal-document h1 {
+            font-size: 1.8rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #222;
+            display: inline-block;
+            width: auto;
+            margin: 0 auto 20px;
+            padding-bottom: 6px;
+        }
+
+        .doc-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .court-caption {
+            font-size: 0.85rem;
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        .clause {
+            margin: 20px 0;
+        }
+
+        .underline-field {
+            display: inline-block;
+            min-width: 180px;
+            border-bottom: 1px solid black;
+            font-weight: 500;
+            padding: 0 4px;
+        }
+
+        .signature-block {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .sign-item {
+            flex: 1;
+            border-top: 1px solid #222;
+            padding-top: 12px;
+            margin-top: 30px;
+        }
+
+        .sign-item p {
+            margin: 5px 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            .form-panel, .btn-group, .navbar, footer, .no-print {
+                display: none !important;
+            }
+            .agreement-wrapper {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .print-area {
+                padding: 0.75in;
+            }
+            .legal-document {
+                font-size: 11pt;
+            }
+            .underline-field {
+                border-bottom: 1px solid #000;
+            }
+        }
+
+        .note-court {
+            background: #f0f3ea;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.7rem;
+            color: #6c6c6c;
+            border-top: 1px solid #eee;
+        }
+
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+<div class="agreement-wrapper">
+    <!-- interactive form panel (hidden when printing) -->
+    <div class="form-panel no-print">
+        <h2>✍️ Fill & Customize Agreement</h2>
+        <p>Complete the fields below. The legal document will update automatically. Then click "Generate / Print for Court".</p>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>Full name (Debtor / Father)</label>
+                <input type="text" id="debtorName" value="Michael Hyde" placeholder="Michael Hyde">
+            </div>
+            <div class="form-group">
+                <label>Full name (Creditor / Grandfather)</label>
+                <input type="text" id="creditorName" value="Maternal Grandfather" placeholder="Full legal name">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Total Arrears Amount ($)</label>
+                <input type="number" id="arrearsAmount" value="15000" step="100">
+            </div>
+            <div class="form-group">
+                <label>Repayment Term (months)</label>
+                <input type="number" id="repaymentMonths" value="36" step="1">
+            </div>
+            <div class="form-group">
+                <label>Monthly Arrears Payment ($)</label>
+                <input type="number" id="monthlyArrearsPayment" value="417" step="1">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Current Ongoing Monthly Support (projected) $</label>
+                <input type="number" id="ongoingSupport" value="816" step="10">
+            </div>
+            <div class="form-group">
+                <label>Total Monthly Payment to Grandfather ($)</label>
+                <input type="number" id="totalMonthly" value="1233" step="10" readonly style="background:#f0f0f0;">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Court Case / Divorce Caption (optional)</label>
+                <input type="text" id="caseCaption" value="In re the Marriage of: Michael Hyde and (Spouse) , Kenosha County Case No. 2026-FA-XXXX">
+            </div>
+            <div class="form-group">
+                <label>Effective Date of Agreement</label>
+                <input type="date" id="effectiveDate" value="2026-06-01">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Father Printed Name (signature prep)</label>
+                <input type="text" id="fatherSignedPrint" value="Michael Hyde">
+            </div>
+            <div class="form-group">
+                <label>Grandfather Printed Name</label>
+                <input type="text" id="grandfatherPrint" value="[Grandfather Full Name]">
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="btn-reset" id="resetBtn">Reset Fields</button>
+            <button class="btn-print" id="printBtn">📄 Generate & Print for Court</button>
+        </div>
+        <div class="note-court">
+            ⚖️ After filling, print this document. Both parties must sign in the presence of a notary or two witnesses for court acceptance in Wisconsin. Attach to Marital Settlement Agreement (FA-4150V).
+        </div>
+    </div>
+
+    <!-- printable legal document area -->
+    <div class="print-area" id="printArea">
+        <div class="legal-document" id="legalDoc">
+            <div class="doc-header">
+                <h1 style="font-size: 1.7rem;">LOAN & ARREARS REDIRECTION AGREEMENT</h1>
+                <div class="court-caption">(Child Support Arrears Acknowledgment & Repayment Plan)</div>
+                <div class="court-caption">Prepared for Submission to Kenosha County Circuit Court, Wisconsin</div>
+            </div>
+
+            <p><strong>THIS AGREEMENT</strong> is made and entered into as of <span class="underline-field" id="docDateDisplay">___________</span>, by and between:</p>
+            <p><strong>Debtor/Father:</strong> <span class="underline-field" id="docDebtor">_______________</span> (“Michael Hyde”), and<br>
+            <strong>Creditor/Grandfather:</strong> <span class="underline-field" id="docCreditor">_______________</span> (“Maternal Grandfather”), who is the current de facto sole custodian of the minor children.</p>
+
+            <div class="clause">
+                <p><strong>RECITALS</strong></p>
+                <p>WHEREAS, Debtor currently owes child support arrears in the amount of <strong>$<span id="docArrearsAmt">15,000</span></strong> according to prior court orders, but said arrears are legally recorded as payable to the maternal grandmother, who does not have custody of the children; and</p>
+                <p>WHEREAS, the maternal grandfather has physical placement and care of the children 100% of the time; and</p>
+                <p>WHEREAS, the parties desire to redirect the arrears obligation and establish a repayment plan directly to the maternal grandfather, which the Court will incorporate into a modified child support order as part of the pending divorce action.</p>
+            </div>
+
+            <div class="clause">
+                <p><strong>1. ARREARS REDIRECTION & LOAN ACKNOWLEDGMENT.</strong> Creditor (Grandfather) agrees to accept repayment of the total arrears balance of <strong>$<span id="docArrearsAmt2">15,000</span></strong> as a “loan” in form only, meaning that Debtor shall pay that sum directly to Creditor in installments. The parties agree that this satisfies the prior arrears obligation in full once paid, and Creditor shall not seek enforcement of the prior order naming the maternal grandmother.</p>
+                <p><strong>2. REPAYMENT TERMS.</strong> Debtor shall pay to Creditor the sum of <strong>$<span id="docMonthlyArrears">417</span></strong> per month toward the arrears, for a term of <strong><span id="docTermMonths">36</span> months</strong>, beginning on the first day of the month after the final divorce hearing or as otherwise ordered by the court. Total arrears repaid: $<span id="docTotalArrearsPaid">15000</span>.</p>
+                <p><strong>3. ONGOING CHILD SUPPORT.</strong> In addition to the arrears payment, Debtor shall pay ongoing monthly child support in the amount of <strong>$<span id="docOngoingSupport">816</span></strong> directly to Creditor, consistent with Wisconsin child support guidelines. Combined monthly payment to Creditor: <strong>$<span id="docTotalMonthlyPayment">1233</span></strong>.</p>
+                <p><strong>4. COURT ORDER MODIFICATION.</strong> The parties agree to request that the Kenosha County Circuit Court enter an order: (a) vacating any prior child support judgment in favor of maternal grandmother; (b) naming Creditor as the legal payee for all child support; (c) incorporating this repayment plan; and (d) awarding maternal grandfather 100% legal custody and placement.</p>
+                <p><strong>5. DEFAULT & REMEDIES.</strong> If Debtor fails to make payments as agreed, Creditor may seek enforcement through the court, and any unpaid balance shall become due on motion. However, good faith modifications may be agreed in writing.</p>
+                <p><strong>6. VOLUNTARY AGREEMENT.</strong> Both parties enter this Agreement freely, without coercion, and acknowledge that it is in the best interests of the minor children.</p>
+            </div>
+
+            <div class="signature-block">
+                <div class="sign-item">
+                    <p><strong>DEBTOR / FATHER</strong></p>
+                    <p>Printed Name: <span class="underline-field" id="signFatherPrint">Michael Hyde</span></p>
+                    <p>Signature: ___________________________</p>
+                    <p>Date: __________________</p>
+                </div>
+                <div class="sign-item">
+                    <p><strong>CREDITOR / MATERNAL GRANDFATHER</strong></p>
+                    <p>Printed Name: <span class="underline-field" id="signGrandPrint">[Grandfather Name]</span></p>
+                    <p>Signature: ___________________________</p>
+                    <p>Date: __________________</p>
+                </div>
+            </div>
+            <div style="margin-top: 30px; font-size: 0.8rem; border-top: 1px solid #ccc; padding-top: 16px;">
+                <p><strong>WITNESS / NOTARY ACKNOWLEDGMENT (Recommended):</strong> State of Wisconsin, County of Kenosha — Subscribed and sworn before me this ____ day of _________, 2026. Notary Public: ___________________ (Seal).</p>
+                <p>This Agreement is attached as Exhibit A to Marital Settlement Agreement (Form FA-4150V) in the divorce case of Michael Hyde and [Spouse].</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        Confidential Draft — To be finalized with signatures & notarization. For use in Kenosha County Circuit Court.
+    </footer>
+</div>
+
+<script>
+    // DOM elements from interactive panel
+    const debtorName = document.getElementById('debtorName');
+    const creditorName = document.getElementById('creditorName');
+    const arrearsAmount = document.getElementById('arrearsAmount');
+    const repaymentMonths = document.getElementById('repaymentMonths');
+    const monthlyArrearsPayment = document.getElementById('monthlyArrearsPayment');
+    const ongoingSupport = document.getElementById('ongoingSupport');
+    const totalMonthlyField = document.getElementById('totalMonthly');
+    const caseCaption = document.getElementById('caseCaption');
+    const effectiveDate = document.getElementById('effectiveDate');
+    const fatherSignedPrint = document.getElementById('fatherSignedPrint');
+    const grandfatherPrint = document.getElementById('grandfatherPrint');
+
+    // document display spans
+    const docDebtorSpan = document.getElementById('docDebtor');
+    const docCreditorSpan = document.getElementById('docCreditor');
+    const docArrearsAmt = document.getElementById('docArrearsAmt');
+    const docArrearsAmt2 = document.getElementById('docArrearsAmt2');
+    const docMonthlyArrears = document.getElementById('docMonthlyArrears');
+    const docTermMonths = document.getElementById('docTermMonths');
+    const docOngoingSupport = document.getElementById('docOngoingSupport');
+    const docTotalMonthlyPayment = document.getElementById('docTotalMonthlyPayment');
+    const docDateDisplay = document.getElementById('docDateDisplay');
+    const signFatherPrintSpan = document.getElementById('signFatherPrint');
+    const signGrandPrintSpan = document.getElementById('signGrandPrint');
+    const docTotalArrearsPaidSpan = document.getElementById('docTotalArrearsPaid');
+
+    function updateTotalMonthly() {
+        let ongoing = parseFloat(ongoingSupport.value) || 0;
+        let arrearsMonthly = parseFloat(monthlyArrearsPayment.value) || 0;
+        let total = ongoing + arrearsMonthly;
+        totalMonthlyField.value = total.toFixed(2);
+        docTotalMonthlyPayment.innerText = total.toFixed(2);
+        // also update total arrears paid display
+        let months = parseInt(repaymentMonths.value) || 0;
+        let monthlyArrearsVal = parseFloat(monthlyArrearsPayment.value) || 0;
+        let totalArrearsPaid = (months * monthlyArrearsVal).toFixed(2);
+        docTotalArrearsPaidSpan.innerText = totalArrearsPaid;
+    }
+
+    function refreshDocument() {
+        // update all fields in legal doc
+        let debtor = debtorName.value.trim() || "Michael Hyde";
+        let creditor = creditorName.value.trim() || "Maternal Grandfather";
+        let arrears = parseFloat(arrearsAmount.value) || 0;
+        let monthsVal = parseInt(repaymentMonths.value) || 36;
+        let monthlyArrears = parseFloat(monthlyArrearsPayment.value) || 0;
+        let ongoing = parseFloat(ongoingSupport.value) || 0;
+        let effDate = effectiveDate.value;
+        let formattedDate = effDate ? new Date(effDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : "___________";
+        
+        docDebtorSpan.innerText = debtor;
+        docCreditorSpan.innerText = creditor;
+        docArrearsAmt.innerText = arrears.toFixed(2);
+        docArrearsAmt2.innerText = arrears.toFixed(2);
+        docMonthlyArrears.innerText = monthlyArrears.toFixed(2);
+        docTermMonths.innerText = monthsVal;
+        docOngoingSupport.innerText = ongoing.toFixed(2);
+        let totalMonthlyCurrent = (ongoing + monthlyArrears).toFixed(2);
+        docTotalMonthlyPayment.innerText = totalMonthlyCurrent;
+        docDateDisplay.innerText = formattedDate;
+        
+        let totalArrearsPaidCalc = (monthsVal * monthlyArrears).toFixed(2);
+        docTotalArrearsPaidSpan.innerText = totalArrearsPaidCalc;
+        
+        // signature printed names
+        let fatherPrintVal = fatherSignedPrint.value.trim() || "Michael Hyde";
+        let grandPrintVal = grandfatherPrint.value.trim() || "[Grandfather Full Name]";
+        signFatherPrintSpan.innerText = fatherPrintVal;
+        signGrandPrintSpan.innerText = grandPrintVal;
+
+        // optional caption can be inserted in a separate area if needed - but not required in final display. add extra grace
+        let extraCaption = caseCaption.value;
+        // we can optionally include caption below header - but keep clean. for court acceptance, we put case caption inside small text.
+        const captionElement = document.querySelector('.court-caption:last-child');
+        if (captionElement && extraCaption) {
+            // avoid duplication, but we optionally add inline
+            if (!document.getElementById('dynamicCaseCaption')) {
+                let spanCap = document.createElement('div');
+                spanCap.id = 'dynamicCaseCaption';
+                spanCap.style.fontSize = '0.8rem';
+                spanCap.style.marginTop = '6px';
+                spanCap.style.fontWeight = 'normal';
+                document.querySelector('.doc-header').appendChild(spanCap);
+            }
+            let capDiv = document.getElementById('dynamicCaseCaption');
+            if (capDiv) capDiv.innerText = "Case Reference: " + extraCaption;
+        } else if (!extraCaption && document.getElementById('dynamicCaseCaption')) {
+            document.getElementById('dynamicCaseCaption').innerText = "";
+        }
+    }
+
+    function updateFromArrearsAndMonths() {
+        let arrearsMain = parseFloat(arrearsAmount.value) || 0;
+        let monthsMain = parseInt(repaymentMonths.value) || 1;
+        let computedMonthly = (arrearsMain / monthsMain).toFixed(2);
+        if (!isNaN(computedMonthly) && computedMonthly !== "NaN") {
+            monthlyArrearsPayment.value = computedMonthly;
+        } else {
+            monthlyArrearsPayment.value = 0;
+        }
+        updateTotalMonthly();
+        refreshDocument();
+    }
+
+    // Event listeners
+    debtorName.addEventListener('input', refreshDocument);
+    creditorName.addEventListener('input', refreshDocument);
+    arrearsAmount.addEventListener('input', function() { updateFromArrearsAndMonths(); });
+    repaymentMonths.addEventListener('input', function() { updateFromArrearsAndMonths(); });
+    monthlyArrearsPayment.addEventListener('input', function() { updateTotalMonthly(); refreshDocument(); });
+    ongoingSupport.addEventListener('input', function() { updateTotalMonthly(); refreshDocument(); });
+    effectiveDate.addEventListener('change', refreshDocument);
+    fatherSignedPrint.addEventListener('input', refreshDocument);
+    grandfatherPrint.addEventListener('input', refreshDocument);
+    caseCaption.addEventListener('input', refreshDocument);
+    
+    // initial load
+    updateFromArrearsAndMonths();
+    refreshDocument();
+
+    // reset to default plausible values
+    document.getElementById('resetBtn').addEventListener('click', () => {
+        debtorName.value = "Michael Hyde";
+        creditorName.value = "Maternal Grandfather";
+        arrearsAmount.value = "15000";
+        repaymentMonths.value = "36";
+        monthlyArrearsPayment.value = "417";
+        ongoingSupport.value = "816";
+        caseCaption.value = "In re the Marriage of: Michael Hyde and (Spouse) , Kenosha County Case No. 2026-FA-XXXX";
+        effectiveDate.value = "2026-06-01";
+        fatherSignedPrint.value = "Michael Hyde";
+        grandfatherPrint.value = "[Grandfather Full Name]";
+        updateFromArrearsAndMonths();
+        refreshDocument();
+    });
+
+    // Print functionality (print only the printable area)
+    document.getElementById('printBtn').addEventListener('click', () => {
+        // ensure latest data
+        refreshDocument();
+        window.print();
+    });
+</script>
+</body>
+</html>
