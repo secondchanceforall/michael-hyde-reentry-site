@@ -1,0 +1,12 @@
+{
+  "total_start_up_required": 21000,
+  "items": [
+    {"id": 1, "expense": "Divorce Filing Cost", "amount": 300},
+    {"id": 2, "expense": "DMV License Fees (Estimated)", "amount": 300},
+    {"id": 3, "expense": "Probation Dues & Outstanding Court Fees", "amount": 800},
+    {"id": 4, "expense": "Start Payment Plan - Student Loans", "amount": 3500},
+    {"id": 5, "expense": "Start Payment Plan - Hospital Bills", "amount": 3500},
+    {"id": 6, "expense": "Pay Arrears of Child Support", "amount": 12000},
+    {"id": 7, "expense": "Essential Needs (Immediate Clothing, Toiletries)", "amount": 600}
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "income": {
+    "weekly_net": 1200,
+    "monthly_net": 4800,
+    "housing_status": "Rent-free / expense-free with father"
+  },
+  "expenses": [
+    {"item": "Child Support (Standard Monthly)", "amount": 850},
+    {"item": "Payment Plan - Student Loans", "amount": 350},
+    {"item": "Payment Plan - Hospital Bills", "amount": 350},
+    {"item": "Phone Bill", "amount": 80},
+    {"item": "Savings (Emergency Target Allocation)", "amount": 300},
+    {"item": "Personal Needs (Hygiene, Essential Clothing)", "amount": 200},
+    {"item": "Transportation (Gas & Tool Maintenance)", "amount": 300},
+    {"item": "Food (Groceries & Dedicated Work Meals)", "amount": 400},
+    {"item": "Miscellaneous / Contingency Margin", "amount": 170}
+  ],
+  "repayment_surplus": {
+    "arrears_allocated_payment": 1000,
+    "remaining_unallocated_surplus": 500
+  }
+}

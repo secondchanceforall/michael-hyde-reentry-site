@@ -1,0 +1,17 @@
+{
+  "region": "Kenosha & Racine County, WI",
+  "legal_aid": [
+    {"name": "ELCA Outreach Center Legal Advice Service", "address": "6218 26th Ave, Kenosha, WI", "phone": "262-652-5545", "focus": "Debt, driver license recovery, small claims"},
+    {"name": "Legal Action of Wisconsin", "phone": "855-947-2529", "focus": "Civil legal barriers, municipal tickets, consumer debt"}
+  ],
+  "reentry_support": [
+    {"name": "It Takes A Village Foundation", "program": "8-day intensive reentry program", "focus": "Job readiness, credentials, credit repair help"},
+    {"name": "Second Chance Program (Racine-Kenosha)", "focus": "DOC identified advocacy, job placement assistance, social services"},
+    {"name": "Wisconsin Community Services (WCS)", "program": "Center for Driver's License Recovery", "focus": "Expert case management & fee assistance"}
+  ],
+  "immediate_aid": [
+    {"name": "Kenosha Human Development Services", "phone": "262-657-7188", "focus": "Rent, utilities, emergency aid"},
+    {"name": "Salvation Army of Kenosha County", "phone": "262-564-0286", "focus": "Essential materials support"},
+    {"name": "Spanish Center of Kenosha", "phone": "262-657-2160", "focus": "Food, clothing, family services"}
+  ]
+}
