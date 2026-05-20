@@ -2,37 +2,348 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Daily Structure & Discipline</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Structure & Discipline - Michael Hyde</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.6; color: #222; max-width: 800px; margin: 40px auto; padding: 0 20px; }
-        h1, h2 { color: #1e4620; border-bottom: 1px solid #eee; padding-bottom: 8px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { text-align: left; padding: 12px; border-bottom: 1px solid #ddd; }
-        th { background-color: #f1f4f1; color: #1e4620; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #1e4620; text-decoration: none; font-weight: bold; }
+        :root {
+            --primary-color: #1e4620; /* Deep Institutional Green */
+            --secondary-color: #d4af37; /* Muted Gold Accent */
+            --dark-text: #222222;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+            padding-top: 70px;
+        }
+
+        /* Top Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        .nav-brand {
+            color: var(--white);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .nav-brand span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            padding: 8px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--white);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Main Content Container */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-top: 6px solid var(--primary-color);
+        }
+
+        header {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .btn-reset {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: 1px solid var(--primary-color);
+            padding: 10px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-reset:hover {
+            background-color: var(--white);
+            color: var(--primary-color);
+        }
+
+        /* Schedule Calendar View Styling */
+        .calendar-container {
+            margin-top: 30px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .calendar-header {
+            background-color: #f1f4f1;
+            padding: 12px 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 150px 1fr;
+        }
+
+        .time-slot-row {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+            background: var(--white);
+        }
+
+        .time-slot-row:last-child {
+            border-bottom: none;
+        }
+
+        .time-label {
+            padding: 10px 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #555;
+            background-color: #fafafa;
+            border-right: 1px solid var(--border-color);
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .activity-input {
+            width: 100%;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            color: var(--dark-text);
+            background: transparent;
+            font-family: inherit;
+            transition: background-color 0.15s ease;
+        }
+
+        .activity-input:focus {
+            outline: none;
+            background-color: #fffdf0;
+        }
+
+        /* Color-coding variations via injection placeholder classes */
+        .slot-routine { color: #555; }
+        .slot-work { font-weight: 600; color: #1b5e20; }
+        .slot-family { font-weight: 600; color: #b71c1c; }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: #777;
+        }
     </style>
 </head>
 <body>
-    <a class="back-link" href="../index.html">? Back to Dashboard</a>
-    <h1>Daily Structure and Discipline Routine</h1>
-    <p>Every hour of the day is structured deliberately to enforce routine, build personal discipline, and exclude negative influences.</p>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a class="nav-brand" href="../index.html">M. Hyde <span>Framework</span></a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Dashboard</a></li>
+            <li><a href="#" class="active">Daily Structure</a></li>
+            <li><a href="filing-steps.html">Filing Steps</a></li>
+            <li><a href="costs-resources.html">Costs & Resources</a></li>
+            <li><a href="timeline.html">Timeline</a></li>
+            <li><a href="family-framework.html">Family Framework</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <a href="../index.html" class="back-link">‚Üê Return to Dashboard</a>
     
-    <table>
-        <thead>
-            <tr><th>Time</th><th>Activity</th></tr>
-        </thead>
-        <tbody>
-            <tr><td>4:30 AM</td><td>Wake Up ó Pray, Meditate, Plan the Day</td></tr>
-            <tr><td>5:00 AM</td><td>Exercise / Physical Training</td></tr>
-            <tr><td>6:00 AM</td><td>Prepare for Work</td></tr>
-            <tr><td>6:30 AM ñ 6:30 PM</td><td>Work (6 Days a Week, 12 Hours a Day)</td></tr>
-            <tr><td>7:00 PM</td><td>Return Home ó Shower, Eat, Relax</td></tr>
-            <tr><td>7:30 PM</td><td>Personal Development (Read, Online Courses, Skill Building)</td></tr>
-            <tr><td>8:30 PM</td><td>Plan Finances / Budget Review</td></tr>
-            <tr><td>9:00 PM</td><td>Connect with Children (Calls / Letters)</td></tr>
-            <tr><td>9:30 PM</td><td>Wind Down ó No TV, No Negative Influences</td></tr>
-            <tr><td>10:00 PM</td><td>Sleep ó Rest for a Better Tomorrow</td></tr>
-        </tbody>
-    </table>
+    <header>
+        <div>
+            <h1>Daily Structure & Discipline</h1>
+            <p style="color: #666; font-weight: 500;">Interactive 15-Minute Interval Execution Log</p>
+        </div>
+        <button class="btn-reset" onclick="loadBaselineRoutine()">Reset to Baseline Routine</button>
+    </header>
+
+    <p>Every hour of the day is managed explicitly to protect routine metrics and isolate potential negative baseline impacts. Click directly into any calendar slot below to update, adjust, or check off tracking adjustments in real time.</p>
+
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <div>Time Block</div>
+            <div>Programmed Focus Activity</div>
+        </div>
+        <div id="calendar-body">
+            </div>
+    </div>
+
+    <footer>
+        Confidential Portfolio ‚Äî Documented Under Academic Oversight ‚Äî Formaly Incarcerated Helping The Incarcerated
+    </footer>
+</div>
+
+<script>
+    // Generates absolute array list tracking 15-minute intervals from 4:30 AM to 10:00 PM
+    function generateTimeSlots() {
+        let slots = [];
+        let startHour = 4;
+        let startMin = 30;
+        let endHour = 22; // 10:00 PM
+        
+        let currentHour = startHour;
+        let currentMin = startMin;
+        
+        while (currentHour < endHour || (currentHour === endHour && currentMin === 0)) {
+            let ampm = currentHour >= 12 ? 'PM' : 'AM';
+            let displayHour = currentHour % 12;
+            displayHour = displayHour === 0 ? 12 : displayHour;
+            let displayMin = currentMin === 0 ? '00' : currentMin;
+            
+            slots.push({
+                timeLabel: `${displayHour}:${displayMin} ${ampm}`,
+                rawHour: currentHour,
+                rawMin: currentMin
+            });
+            
+            currentMin += 15;
+            if (currentMin === 60) {
+                currentMin = 0;
+                currentHour++;
+            }
+        }
+        return slots;
+    }
+
+    // Assigns baseline actions based on the document's structured daily schedule thresholds
+    function getBaselineActivity(hour, min) {
+        let val = hour * 60 + min; // minutes from midnight calculation
+        
+        if (val >= 270 && val < 300) {  // 4:30 AM - 5:00 AM
+            return { text: "Wake Up ‚Äî Pray, Meditate, Structure Daily Targets", css: "slot-routine" };
+        } else if (val >= 300 && val < 360) { // 5:00 AM - 6:00 AM
+            return { text: "Physical Training & Exercise Activity", css: "slot-routine" };
+        } else if (val >= 360 && val < 390) { // 6:00 AM - 6:30 AM
+            return { text: "Shave, Dress, Tool Preparation", css: "slot-routine" };
+        } else if (val >= 390 && val < 1110) { // 6:30 AM - 6:30 PM
+            return { text: "Employment Window (Disciplined 12-Hour Labor Slot)", css: "slot-work" };
+        } else if (val >= 1110 && val < 1170) { // 6:30 PM - 7:30 PM
+            return { text: "Commute Home / Post-Work Clean up / Dinner", css: "slot-routine" };
+        } else if (val >= 1170 && val < 1230) { // 7:30 PM - 8:30 PM
+            return { text: "Skill Acquisition (Reading, Active Trade Module Tracking)", css: "slot-routine" };
+        } else if (val >= 1230 && val < 1290) { // 8:30 PM - 9:30 PM
+            return { text: "Financial Auditing / Budget Balance Check", css: "slot-routine" };
+        } else if (val >= 1290 && val < 1320) { // 9:30 PM - 10:00 PM
+            return { text: "Family Safety Check (Structured Calls & Letters to Children)", css: "slot-family" };
+        } else {
+            return { text: "Wind Down ‚Äî Isolate Negative Inputs / Prepare for Sleep", css: "slot-routine" };
+        }
+    }
+
+    // Renders the interactive layout inside the HTML tree
+    function loadBaselineRoutine() {
+        const bodyContainer = document.getElementById('calendar-body');
+        bodyContainer.innerHTML = ''; // wipe historical values
+        
+        const slots = generateTimeSlots();
+        
+        slots.forEach(slot => {
+            let baseline = getBaselineActivity(slot.rawHour, slot.rawMin);
+            
+            let row = document.createElement('div');
+            row.className = 'time-slot-row';
+            
+            row.innerHTML = `
+                <div class="time-label">${slot.timeLabel}</div>
+                <div>
+                    <input type="text" class="activity-input ${baseline.css}" value="${baseline.text}">
+                </div>
+            `;
+            bodyContainer.appendChild(row);
+        });
+    }
+
+    // Start generator automatically upon deployment loading execution
+    window.onload = loadBaselineRoutine;
+</script>
+
 </body>
 </html>
