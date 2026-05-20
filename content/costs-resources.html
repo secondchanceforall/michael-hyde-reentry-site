@@ -1,1 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costs & Resources - Michael Hyde</title>
+    <style>
+        :root {
+            --primary-color: #1e4620; /* Deep Institutional Green */
+            --secondary-color: #d4af37; /* Muted Gold Accent */
+            --dark-text: #222222;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --border-color: #e0e0e0;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+            padding-top: 70px; /* Space for fixed navbar */
+        }
+
+        /* Top Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        .nav-brand {
+            color: var(--white);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .nav-brand span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            padding: 8px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--white);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Main Content Container */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-top: 6px solid var(--primary-color);
+        }
+
+        header {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #444;
+        }
+
+        /* Financial Ledger Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f1f4f1;
+            color: var(--primary-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .highlight-row {
+            background-color: #fbfdfb;
+            font-weight: 600;
+        }
+
+        /* Resource Directory Grid */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .resource-card {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--secondary-color);
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        .resource-card h3 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .resource-meta {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .resource-meta strong {
+            color: #333;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #f1f4f1;
+            color: var(--primary-color);
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a class="nav-brand" href="../index.html">M. Hyde <span>Framework</span></a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Dashboard</a></li>
+            <li><a href="daily-structure.html">Daily Structure</a></li>
+            <li><a href="filing-steps.html">Filing Steps</a></li>
+            <li><a href="#" class="active">Costs & Resources</a></li>
+            <li><a href="timeline.html">Timeline</a></li>
+            <li><a href="family-framework.html">Family Framework</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <a href="../index.html" class="back-link">← Return to Dashboard</a>
+    
+    <header>
+        <h1>Cost Breakdown & Local Resources</h1>
+        <p style="color: #666; font-weight: 500;">Filing Budget Analysis and Kenosha/Racine Assistance Networks</p>
+    </header>
+
+    <section>
+        <h2>Legal Costs Mitigation Profile</h2>
+        <p>By executing a self-represented (pro se) approach and applying for standard statutory fee waivers, the standard costs associated with marital litigation are systematically mitigated to preserve financial baseline health.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Expense Category Description</th>
+                    <th>Standard Cost</th>
+                    <th>Mitigated Plan Cost</th>
+                    <th class="text-right">Mitigation Mechanism / Authority</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Kenosha County Court Filing Fee</td>
+                    <td>$184.50</td>
+                    <td>$0.00</td>
+                    <td class="text-right">Form CV-410A Fee Waiver Eligibility Request</td>
+                </tr>
+                <tr>
+                    <td>Child Support Program Fee Add-On</td>
+                    <td>$10.00</td>
+                    <td>$0.00</td>
+                    <td class="text-right">Incorporated into Form CV-410A Waiver Order</td>
+                </tr>
+                <tr>
+                    <td>Formal Service of Process (Spouse)</td>
+                    <td>$60.00</td>
+                    <td>$10.00 – $20.00</td>
+                    <td class="text-right">Certified Mail Protocol with Admission of Service</td>
+                </tr>
+                <tr>
+                    <td>Legal Representation &amp; Counsel Fees</td>
+                    <td>$1,500.00+</td>
+                    <td>$0.00</td>
+                    <td class="text-right">Pro Se Self-Representation Execution Strategy</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td>Total Out-of-Pocket Expense Target</td>
+                    <td>$1,754.50+</td>
+                    <td>$10.00 – $20.00</td>
+                    <td class="text-right">Projected Structural Savings: $1,734.50+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Kenosha &amp; Racine Support Services Directory</h2>
+        <p>The following verified local and state resources are integrated into this framework to assist with legal guidance, transportation solutions, and ongoing community transitions.</p>
+        
+        <h3>⚖️ Free Civil Legal Clinics</h3>
+        <div class="resource-grid">
+            <div class="resource-card">
+                <h3>ELCA Outreach Center Legal Service</h3>
+                <div class="resource-meta">
+                    <strong>Address:</strong> 6218 26th Ave, Kenosha, WI 53143<br>
+                    <strong>Contact:</strong> 262-652-5545<br>
+                    <strong>Availability:</strong> Walk-ins during scheduled clinic hours
+                </div>
+                <p>Provides free legal advice regarding consumer debt issues, driver's license recovery paths, and small claims court procedures.</p>
+                <span class="tag">Debt &amp; License Advice</span>
+            </div>
+
+            <div class="resource-card">
+                <h3>Legal Action of Wisconsin</h3>
+                <div class="resource-meta">
+                    <strong>Intake Line:</strong> 855-947-2529<br>
+                    <strong>Hours:</strong> Mon–Fri, 9:00 AM – 4:00 PM<br>
+                    <strong>Office Location:</strong> Serving Racine &amp; Kenosha
+                </div>
+                <p>Offers professional legal representation on non-criminal legal barriers, municipal traffic tickets, debt consumer law, and license restorations.</p>
+                <span class="tag">Civil Legal Services</span>
+            </div>
+        </div>
+
+        <br>
+        <h3>🚐 Driver's License &amp; Transportation Aid</h3>
+        <div class="resource-grid">
+            <div class="resource-card">
+                <h3>WCS Center for Driver's License Recovery</h3>
+                <div class="resource-meta">
+                    <strong>Focus Region:</strong> Southeast Wisconsin Extension Network<br>
+                    <strong>Program Scope:</strong> Case Management &amp; Legal Assistance
+                </div>
+                <p>Employs dedicated case managers and attorneys specializing in tracking down, organizing, and resolving complex, multi-jurisdictional license suspensions.</p>
+                <span class="tag">License Restoration</span>
+            </div>
+
+            <div class="resource-card">
+                <h3>Wheels to Work (WATEA / WETAP)</h3>
+                <div class="resource-meta">
+                    <strong>Eligibility:</strong> Earners under 200% Federal Poverty Level<br>
+                    <strong>Programs:</strong> Low-Interest Repair Loans / Car Placement
+                </div>
+                <p>Provides zero-interest financial support or subsidized vehicle options to ensure returning workers retain dependable transit pipelines to job sites.</p>
+                <span class="tag">Vehicle &amp; Repair Support</span>
+            </div>
+        </div>
+
+        <br>
+        <h3>📋 General Financial Aid &amp; Family Needs</h3>
+        <div class="resource-grid">
+            <div class="resource-card">
+                <h3>Kenosha Human Development Services</h3>
+                <div class="resource-meta">
+                    <strong>Contact:</strong> 262-657-7188<br>
+                    <strong>Focus:</strong> Crisis Stabilization &amp; Emergency Support
+                </div>
+                <p>Assists with local structural navigation, utility assistance programs, temporary stabilization, and mental wellness resource mapping.</p>
+                <span class="tag">Community Support</span>
+            </div>
+
+            <div class="resource-card">
+                <h3>Salvation Army &amp; Spanish Center</h3>
+                <div class="resource-meta">
+                    <strong>Salvation Army:</strong> 262-564-0286<br>
+                    <strong>Spanish Center:</strong> 262-657-2160
+                </div>
+                <p>Local operations coordinating critical material resources including seasonal clothing distributions, nutrition programs, and family framework support services.</p>
+                <span class="tag">Material &amp; Food Assistance</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        Confidential Portfolio — Documented Under Academic Oversight — Formaly Incarcerated Helping The Incarcerated
+    </footer>
+</div>
+
+</body>
+</html>
