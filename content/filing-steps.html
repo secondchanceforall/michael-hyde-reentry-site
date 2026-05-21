@@ -6,200 +6,214 @@
     <title>Step-by-Step Filing Plan - Michael Hyde</title>
     <style>
         :root {
-            --primary-color: #1e4620; /* Deep Institutional Green */
-            --secondary-color: #d4af37; /* Muted Gold Accent */
-            --dark-text: #222222;
-            --light-bg: #f9f9f9;
+            --primary: #1e4620;
+            --gold: #d4af37;
+            --dark: #222222;
+            --bg: #f9f9f9;
             --white: #ffffff;
-            --border-color: #e0e0e0;
+            --border: #e0e0e0;
+            --green-light: #f4f7f4;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            color: var(--dark-text);
-            background-color: var(--light-bg);
-            padding-top: 70px; /* Space for fixed navbar */
+            color: var(--dark);
+            background: var(--bg);
+            padding-top: 60px;
         }
 
-        /* Top Navigation Bar */
+        /* ── NAVBAR ── */
         .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: var(--primary-color);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,.2);
             z-index: 1000;
         }
-
         .nav-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            height: 60px;
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center;
+            padding: 0 16px; height: 60px; gap: 20px;
         }
-
         .nav-brand {
-            color: var(--white);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            text-decoration: none;
-            font-size: 1.1rem;
+            color: var(--white); font-weight: 700;
+            text-transform: uppercase; letter-spacing: .5px;
+            text-decoration: none; font-size: 1rem;
+            white-space: nowrap; flex-shrink: 0;
         }
-
-        .nav-brand span {
-            color: var(--secondary-color);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
+        .nav-brand span { color: var(--gold); }
+        .nav-links { display: flex; list-style: none; gap: 2px; flex-wrap: wrap; }
         .nav-links a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.2s ease;
-            padding: 8px 12px;
-            border-radius: 4px;
+            color: #d0d8d0; text-decoration: none;
+            font-size: .78rem; font-weight: 500;
+            padding: 5px 9px; border-radius: 4px;
+            transition: background .15s, color .15s; white-space: nowrap;
+        }
+        .nav-links a:hover { color: var(--white); background: rgba(255,255,255,.12); }
+        .nav-links a.active { color: var(--gold); background: rgba(212,175,55,.12); }
+
+        /* ── PROGRESS BANNER ── */
+        .progress-bar-wrap {
+            position: sticky; top: 60px; z-index: 900;
+            background: var(--white); border-bottom: 1px solid var(--border);
+            padding: 8px 0 7px;
+        }
+        .progress-inner { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+        .progress-label { font-size: .78rem; color: #666; margin-bottom: 4px; }
+        .progress-track { height: 7px; background: #e5e7eb; border-radius: 4px; overflow: hidden; }
+        .progress-fill {
+            height: 100%; background: var(--primary); border-radius: 4px;
+            width: 0%; transition: width .35s ease;
         }
 
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--white);
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Main Content Container */
+        /* ── CONTAINER ── */
         .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            background: var(--white);
-            padding: 40px;
+            max-width: 960px; margin: 36px auto 60px;
+            background: var(--white); padding: 40px 44px;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            border-top: 6px solid var(--primary-color);
+            box-shadow: 0 4px 16px rgba(0,0,0,.06);
+            border-top: 6px solid var(--primary);
         }
-
-        header {
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-
-        h1 {
-            color: var(--primary-color);
-            font-size: 2.2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 5px;
-        }
-
+        header { border-bottom: 2px solid var(--border); padding-bottom: 18px; margin-bottom: 30px; }
+        h1 { color: var(--primary); font-size: 1.9rem; text-transform: uppercase; letter-spacing: .4px; margin-bottom: 4px; }
+        .subtitle { color: #666; font-weight: 500; font-size: .95rem; }
         .back-link {
-            display: inline-block;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
+            display: inline-block; color: var(--primary); text-decoration: none;
+            font-weight: 700; margin-bottom: 16px; font-size: .88rem;
         }
-
-        .back-link:hover {
-            color: var(--secondary-color);
-        }
-
-        section {
-            margin-bottom: 35px;
-        }
-
+        .back-link:hover { color: var(--gold); }
+        section { margin-bottom: 44px; }
         h2 {
-            color: var(--primary-color);
-            font-size: 1.4rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
-            margin-bottom: 15px;
+            color: var(--primary); font-size: 1.25rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px; margin-bottom: 16px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .step-badge {
+            background: var(--primary); color: var(--white);
+            font-size: .72rem; font-weight: 700; padding: 2px 8px;
+            border-radius: 12px; text-transform: uppercase; letter-spacing: .5px;
+        }
+        p { margin-bottom: 13px; color: #444; font-size: .94rem; }
+
+        /* ── DOCUMENT CHECKLIST ── */
+        .doc-list { list-style: none; border: 1px solid var(--border); border-radius: 7px; overflow: hidden; }
+        .doc-list li {
+            display: flex; align-items: flex-start; gap: 12px;
+            padding: 13px 16px; border-bottom: 1px solid var(--border);
+            background: #fdfdfd; transition: background .15s;
+        }
+        .doc-list li:last-child { border-bottom: none; }
+        .doc-list li:hover { background: var(--green-light); }
+        .doc-list input[type="checkbox"] {
+            margin-top: 3px; accent-color: var(--primary);
+            width: 16px; height: 16px; flex-shrink: 0; cursor: pointer;
+        }
+        .doc-text { flex: 1; }
+        .doc-label { font-weight: 600; font-size: .92rem; }
+        .doc-hint { font-size: .82rem; color: #5a5a5a; margin-top: 3px; line-height: 1.5; }
+        .doc-hint a { color: var(--primary); font-weight: 600; }
+        .doc-list input[type="checkbox"]:checked ~ .doc-text .doc-label {
+            text-decoration: line-through; color: #999;
         }
 
-        p {
-            margin-bottom: 15px;
-            color: #444;
+        /* ── FORM CARDS ── */
+        .forms-grid { display: grid; gap: 11px; }
+        .form-card {
+            border: 1px solid var(--border); border-radius: 8px;
+            overflow: hidden; transition: box-shadow .2s;
         }
-
-        /* Checklist Style */
-        .checklist {
-            list-style: none;
-            margin: 15px 0;
-            background: #fdfdfd;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 15px 20px;
+        .form-card:hover { box-shadow: 0 3px 14px rgba(0,0,0,.09); }
+        .form-card-header {
+            display: flex; align-items: center; gap: 12px;
+            padding: 13px 15px; background: var(--green-light);
+            border-bottom: 1px solid transparent; cursor: pointer;
+            user-select: none;
         }
-
-        .checklist li {
-            padding: 8px 0;
-            border-bottom: 1px dashed var(--border-color);
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
+        .form-card-header.open { border-bottom-color: var(--border); }
+        .form-card-header input[type="checkbox"] {
+            accent-color: var(--primary); width: 16px; height: 16px;
+            flex-shrink: 0; cursor: pointer;
         }
-
-        .checklist li:last-child {
-            border-bottom: none;
-        }
-
-        .checklist input[type="checkbox"] {
-            margin-top: 5px;
-            accent-color: var(--primary-color);
-        }
-
         .form-code {
-            font-family: monospace;
-            background: #f1f4f1;
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: var(--primary-color);
-            font-weight: bold;
+            font-family: monospace; background: var(--primary); color: var(--white);
+            padding: 3px 9px; border-radius: 4px; font-size: .82rem;
+            font-weight: 700; white-space: nowrap; flex-shrink: 0;
+        }
+        .form-title { flex: 1; font-weight: 600; font-size: .91rem; color: #1a1a1a; }
+        .form-toggle { font-size: .75rem; color: #888; flex-shrink: 0; transition: transform .2s; }
+        .form-toggle.open { transform: rotate(180deg); }
+        .form-actions { display: flex; gap: 7px; flex-shrink: 0; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 5px 12px; border-radius: 5px;
+            font-size: .78rem; font-weight: 700;
+            text-decoration: none; cursor: pointer; border: none;
+            transition: opacity .2s, transform .1s; white-space: nowrap;
+        }
+        .btn:hover { opacity: .82; transform: translateY(-1px); }
+        .btn-fill { background: var(--primary); color: var(--white); }
+        .btn-print { background: var(--gold); color: #222; }
+
+        .form-card-body {
+            padding: 14px 16px; font-size: .86rem; color: #4a4a4a;
+            display: none; background: var(--white);
+        }
+        .form-card-body.open { display: block; }
+        .form-card-body strong { color: var(--primary); }
+        .form-card-body ul { margin: 6px 0 6px 18px; }
+        .form-card-body li { margin-bottom: 5px; line-height: 1.5; }
+        .form-card-body .form-note {
+            margin-top: 10px; padding: 8px 12px;
+            background: #fffbea; border-left: 3px solid var(--gold);
+            border-radius: 0 4px 4px 0; font-size: .82rem; color: #5a4a10;
         }
 
-        /* Step Timeline Styling */
+        /* ── STEP BLOCKS ── */
         .step-block {
-            margin-bottom: 25px;
-            padding-left: 20px;
-            border-left: 4px solid var(--primary-color);
+            margin-bottom: 22px; padding: 18px 20px;
+            border-left: 5px solid var(--primary);
+            background: var(--green-light); border-radius: 0 8px 8px 0;
         }
-
-        .step-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 5px;
+        .step-title { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+        .step-links { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .step-link {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 5px 12px; border-radius: 5px; font-size: .79rem;
+            font-weight: 700; text-decoration: none;
+            background: var(--primary); color: var(--white);
+            transition: opacity .2s;
+        }
+        .step-link:hover { opacity: .82; }
+        .step-link.gold { background: var(--gold); color: #222; }
+        .step-link.outline {
+            background: transparent; color: var(--primary);
+            border: 2px solid var(--primary);
         }
 
         footer {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
-            font-size: 0.85rem;
-            color: #777;
+            text-align: center; margin-top: 50px; padding-top: 20px;
+            border-top: 1px solid var(--border); font-size: .82rem; color: #888;
+        }
+
+        @media (max-width: 680px) {
+            .container { padding: 20px 18px; margin: 12px; }
+            .nav-links a { font-size: .72rem; padding: 4px 6px; }
+            h1 { font-size: 1.5rem; }
+            .form-actions { flex-direction: column; }
+        }
+        @media print {
+            .navbar, .progress-bar-wrap, .btn, .form-actions, .step-links { display: none !important; }
+            body { padding-top: 0; background: white; }
+            .container { box-shadow: none; margin: 0; border-top: none; padding: 20px; }
+            .form-card-body { display: block !important; }
         }
     </style>
 </head>
 <body>
 
+<!-- NAVBAR — matches repo structure exactly -->
 <nav class="navbar">
     <div class="nav-container">
         <a class="nav-brand" href="../index.html">M. Hyde <span>Framework</span></a>
@@ -208,90 +222,483 @@
             <li><a href="daily-structure.html">Daily Structure</a></li>
             <li><a href="legal-divorce.html">Legal Plan</a></li>
             <li><a href="personal-growth.html">Personal Growth</a></li>
-            <li><a href="#" class="active">Filing Steps</a></li>
+            <li><a href="family-framework.html">Family Framework</a></li>
+            <li><a href="timeline.html">Timeline</a></li>
+            <li><a href="costs-resources.html">Costs &amp; Resources</a></li>
+            <li><a href="children-support.html">Child Support</a></li>
+            <li><a href="filing-steps.html" class="active">Filing Steps</a></li>
         </ul>
     </div>
 </nav>
 
+<!-- PROGRESS BANNER -->
+<div class="progress-bar-wrap">
+    <div class="progress-inner">
+        <div class="progress-label" id="progress-label">Checklist progress: 0 of 21 items completed</div>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+</div>
+
 <div class="container">
     <a href="../index.html" class="back-link">← Return to Dashboard</a>
-    
+
     <header>
         <h1>Step-by-Step Filing Plan</h1>
-        <p style="color: #666; font-weight: 500;">Pro Se Legal Roadmap & Document Preparation Protocol</p>
+        <p class="subtitle">Pro Se Legal Roadmap — Kenosha County Circuit Court, Wisconsin</p>
     </header>
 
+    <!-- OVERVIEW -->
     <section>
         <h2>Overview</h2>
-        <p>This roadmap details the exact steps required to navigate the self-represented filing process in Kenosha County, ensuring all statutory guidelines are executed systematically and correctly.</p>
+        <p>This roadmap details every step required to file for divorce as a self-represented (pro se) petitioner in Kenosha County. Check off items as you complete them — your progress is tracked above. All court forms open the local PDF copies saved in this site's <code>content/</code> folder. Fill them out, then print using your browser's Print menu (Ctrl+P / Cmd+P).</p>
     </section>
 
+    <!-- STEP 1 — GATHER DOCUMENTS -->
     <section>
-        <h2>Step 1 — Gather Required Documents</h2>
-        <p>Before initiating any paperwork, the following verification materials must be organized and on hand:</p>
-        <ul class="checklist">
-            <li><input type="checkbox"> Proof of Wisconsin residency (Minimum 6 months verification)</li>
-            <li><input type="checkbox"> Proof of Kenosha County residency (Minimum 30 days verification)</li>
-            <li><input type="checkbox"> Proof of income (Current pay stubs for financial disclosures and fee waiver)</li>
-            <li><input type="checkbox"> Historical income proofs (2024 & 2025 completed tax returns)</li>
-            <li><input type="checkbox"> Complete itemized list of all marital assets and liabilities</li>
-            <li><input type="checkbox"> Existing statutory child support order documentation</li>
-            <li><input type="checkbox"> Original certified marriage certificate</li>
+        <h2><span class="step-badge">Step 1</span> Gather Required Documents</h2>
+        <p>Organize every item below before touching a single form. Each entry tells you exactly which document satisfies the requirement and where to get it.</p>
+        <ul class="doc-list">
+
+            <li>
+                <input type="checkbox" class="checklist-item">
+                <div class="doc-text">
+                    <div class="doc-label">Wisconsin Residency — minimum 6 months</div>
+                    <div class="doc-hint">Current Wisconsin driver's license or state ID showing a Wisconsin address, <em>plus</em> one corroborating item: utility bill, bank statement, lease agreement, or official mail postmarked within the last 6 months with your name and address.</div>
+                </div>
+            </li>
+
+            <li>
+                <input type="checkbox" class="checklist-item">
+                <div class="doc-text">
+                    <div class="doc-label">Kenosha County Residency — minimum 30 days</div>
+                    <div class="doc-hint">Any government-issued mail, lease/rental agreement, employer letter, or parole/supervision address-verification letter from your agent confirming your current Kenosha County address dated within the last 30 days.</div>
+                </div>
+            </li>
+
+            <li>
+                <input type="checkbox" class="checklist-item">
+                <div class="doc-text">
+                    <div class="doc-label">Current Proof of Income</div>
+                    <div class="doc-hint">Two most recent pay stubs. If employed through a work-release or reentry program, obtain a signed income letter on employer letterhead. Required for Fee Waiver (CV-410A) and Income &amp; Expense Statement (FA-4138V).</div>
+                </div>
+            </li>
+
+            <li>
+                <input type="checkbox" class="checklist-item">
+                <div class="doc-text">
+                    <div class="doc-label">Tax Returns — 2023 &amp; 2024</div>
+                    <div class="doc-hint">Copies of filed federal returns. If you don't have them, get free IRS transcripts instantly at <a href="https://www.irs.gov/individuals/get-transcript" target="_blank" rel="noopener">irs.gov/individuals/get-transcript</a>. Feeds into Financial Disclosure Statement (FA-4139V).</div>
+                </div>
+            </li>
+
+            <li>
+                <input type="checkbox" class="checklist-item">
+                <div class="doc-text">
+                    <div class="doc-label">Complete Itemized List of All Marital Assets &amp; Debts</div>
+                    <div class="doc-hint">Write out: all real estate (address + estimated value + mortgage balance), vehicles (year/make/model/estimated value), bank accounts (institution + last 4 digits + balance), retirement accounts, personal property of value over $500, and all debts (creditor name, account number, balance). This directly populates FA-4139V and FA-4150V.</div>
+                </div>
+            </li>
+
+            <li>
+                <input type="checkbox" class="checklist-item">
+                <div class="doc-text">
+                    <div class="doc-label">Existing Child Support Order &amp; Payment History</div>
+                    <div class="doc-hint">Locate your current court order showing the case number and ordered amount. Request a full payment history printout from the Wisconsin Support Collections Trust Fund (WI SCTF): call <strong>1-800-991-5530</strong> or visit <a href="https://dcf.wisconsin.gov/cs" target="_blank" rel="noopener">dcf.wisconsin.gov/cs</a>. Documents current arrears balance for FA-4150V.</div>
+                </div>
+            </li>
+
+            <li>
+                <input type="checkbox" class="checklist-item">
+                <div class="doc-text">
+                    <div class="doc-label">Original Certified Marriage Certificate</div>
+                    <div class="doc-hint">Required by the court. Order a certified copy at <a href="https://vitalrecords.wi.gov" target="_blank" rel="noopener">vitalrecords.wi.gov</a> or in person at the Kenosha County Register of Deeds, 1010 56th St, Kenosha (bring photo ID). Fee applies.</div>
+                </div>
+            </li>
+
+            <li>
+                <input type="checkbox" class="checklist-item">
+                <div class="doc-text">
+                    <div class="doc-label">Certified Birth Certificate(s) for Each Minor Child</div>
+                    <div class="doc-hint">Order from <a href="https://vitalrecords.wi.gov" target="_blank" rel="noopener">vitalrecords.wi.gov</a> if not on hand. Needed to support the Proposed Parenting Plan (FA-4147V).</div>
+                </div>
+            </li>
+
+            <li>
+                <input type="checkbox" class="checklist-item">
+                <div class="doc-text">
+                    <div class="doc-label">Spouse's Full Legal Name, Current Address &amp; Date of Birth</div>
+                    <div class="doc-hint">Required for the summons and to complete service of process. If current address is unknown, contact the Kenosha Clerk of Courts before filing — you may need to serve by publication, which has additional steps and costs.</div>
+                </div>
+            </li>
+
         </ul>
     </section>
 
+    <!-- STEP 2 — FORMS -->
     <section>
-        <h2>Step 2 — Mandatory Court Forms</h2>
-        <p>The following official Wisconsin Court System documents are required for this action and are prepared via the self-help assistant:</p>
-        <ul class="checklist">
-            <li><input type="checkbox"> <span class="form-code">FA-4104V</span> — Summons with Minor Children</li>
-            <li><input type="checkbox"> <span class="form-code">FA-4108V</span> — Petition with Minor Children</li>
-            <li><input type="checkbox"> <span class="form-code">FA-4119V</span> — Admission of Service (or process server alternative)</li>
-            <li><input type="checkbox"> <span class="form-code">FA-4120V</span> — Declaration of Service</li>
-            <li><input type="checkbox"> <span class="form-code">FA-4126V</span> — Stipulation for Temporary Order with Minor Children</li>
-            <li><input type="checkbox"> <span class="form-code">FA-4130V</span> — Motion for New (De Novo) Hearing</li>
-            <li><input type="checkbox"> <span class="form-code">FA-4136V</span> — Petition for Appointment of Guardian ad Litem</li>
-            <li><input type="checkbox"> <span class="form-code">FA-4138V</span> — Income and Expense Statement</li>
-            <li><input type="checkbox"> <span class="form-code">FA-4139V</span> — Financial Disclosure Statement</li>
-            <li><input type="checkbox"> <span class="form-code">FA-4147V</span> — Proposed Parenting Plan</li>
-            <li><input type="checkbox"> <span class="form-code">FA-4150V</span> — Marital Settlement Agreement with Minor Children</li>
-            <li><input type="checkbox"> <span class="form-code">CV-410A</span> — Petition for Waiver of Fees and Costs</li>
-        </ul>
+        <h2><span class="step-badge">Step 2</span> Complete Mandatory Court Forms</h2>
+        <p>Every form below is stored locally in this site's <code>content/</code> folder. Click <strong>Open &amp; Fill</strong> to open the PDF — complete it, then use <strong>Ctrl+P</strong> (Windows) or <strong>Cmd+P</strong> (Mac) to print. Click the form row to expand what information you'll need before you start.</p>
+
+        <div class="forms-grid">
+
+            <!-- FA-4104V -->
+            <div class="form-card">
+                <div class="form-card-header" onclick="toggleCard(this)">
+                    <input type="checkbox" class="checklist-item" onclick="event.stopPropagation()">
+                    <span class="form-code">FA-4104V</span>
+                    <span class="form-title">Summons with Minor Children</span>
+                    <div class="form-actions" onclick="event.stopPropagation()">
+                        <a href="FA-4104V.pdf" target="_blank" class="btn btn-fill">Open &amp; Fill ↗</a>
+                    </div>
+                    <span class="form-toggle">▼</span>
+                </div>
+                <div class="form-card-body">
+                    <strong>What you need to fill this out:</strong>
+                    <ul>
+                        <li>Full legal names of both spouses exactly as they appear on the marriage certificate</li>
+                        <li>Kenosha County as the filing county</li>
+                        <li>Respondent's last known mailing address (for service)</li>
+                        <li>Action type: Divorce with Minor Children</li>
+                    </ul>
+                    <div class="form-note">This form formally notifies your spouse that a divorce action has been filed. It is served alongside FA-4108V.</div>
+                </div>
+            </div>
+
+            <!-- FA-4108V -->
+            <div class="form-card">
+                <div class="form-card-header" onclick="toggleCard(this)">
+                    <input type="checkbox" class="checklist-item" onclick="event.stopPropagation()">
+                    <span class="form-code">FA-4108V</span>
+                    <span class="form-title">Petition for Divorce with Minor Children</span>
+                    <div class="form-actions" onclick="event.stopPropagation()">
+                        <a href="FA-4108V.pdf" target="_blank" class="btn btn-fill">Open &amp; Fill ↗</a>
+                    </div>
+                    <span class="form-toggle">▼</span>
+                </div>
+                <div class="form-card-body">
+                    <strong>What you need to fill this out:</strong>
+                    <ul>
+                        <li>Date and location of marriage (from certified marriage certificate)</li>
+                        <li>Full names, dates of birth, and ages of all minor children</li>
+                        <li>Current address and county of residence for both parties</li>
+                        <li>Grounds: irretrievable breakdown of the marriage</li>
+                        <li>Brief statement of requested child custody and placement arrangement</li>
+                        <li>Whether you are requesting child support, maintenance, or property division</li>
+                    </ul>
+                    <div class="form-note">This is the primary filing document that opens the case. File it together with FA-4104V and CV-410A.</div>
+                </div>
+            </div>
+
+            <!-- CV-410A — moved up, filed simultaneously with petition -->
+            <div class="form-card">
+                <div class="form-card-header" onclick="toggleCard(this)">
+                    <input type="checkbox" class="checklist-item" onclick="event.stopPropagation()">
+                    <span class="form-code">CV-410A</span>
+                    <span class="form-title">Petition for Waiver of Fees and Costs</span>
+                    <div class="form-actions" onclick="event.stopPropagation()">
+                        <a href="CV-410A.pdf" target="_blank" class="btn btn-fill">Open &amp; Fill ↗</a>
+                    </div>
+                    <span class="form-toggle">▼</span>
+                </div>
+                <div class="form-card-body">
+                    <strong>What you need to fill this out:</strong>
+                    <ul>
+                        <li>Gross and net monthly income (from pay stubs or employer letter)</li>
+                        <li>Monthly household expenses and number of dependents</li>
+                        <li>Statement that the $194.50 filing fee creates a financial hardship</li>
+                    </ul>
+                    <div class="form-note">File simultaneously with FA-4108V at the clerk's window. If approved, the $184.50 filing fee and $10 child support surcharge are waived entirely.</div>
+                </div>
+            </div>
+
+            <!-- FA-4119V -->
+            <div class="form-card">
+                <div class="form-card-header" onclick="toggleCard(this)">
+                    <input type="checkbox" class="checklist-item" onclick="event.stopPropagation()">
+                    <span class="form-code">FA-4119V</span>
+                    <span class="form-title">Admission of Service</span>
+                    <div class="form-actions" onclick="event.stopPropagation()">
+                        <a href="FA-4119V.pdf" target="_blank" class="btn btn-fill">Open &amp; Fill ↗</a>
+                    </div>
+                    <span class="form-toggle">▼</span>
+                </div>
+                <div class="form-card-body">
+                    <strong>What you need to fill this out:</strong>
+                    <ul>
+                        <li>Case number (assigned by clerk after filing)</li>
+                        <li>Spouse's signature acknowledging they received the summons and petition</li>
+                        <li>Date of receipt</li>
+                    </ul>
+                    <div class="form-note">Lowest-cost service method — send via certified mail (~$10). If spouse refuses to sign, skip to a process server and use FA-4120V instead.</div>
+                </div>
+            </div>
+
+            <!-- FA-4120V -->
+            <div class="form-card">
+                <div class="form-card-header" onclick="toggleCard(this)">
+                    <input type="checkbox" class="checklist-item" onclick="event.stopPropagation()">
+                    <span class="form-code">FA-4120V</span>
+                    <span class="form-title">Declaration of Service</span>
+                    <div class="form-actions" onclick="event.stopPropagation()">
+                        <a href="FA-4120V.pdf" target="_blank" class="btn btn-fill">Open &amp; Fill ↗</a>
+                    </div>
+                    <span class="form-toggle">▼</span>
+                </div>
+                <div class="form-card-body">
+                    <strong>What you need to fill this out:</strong>
+                    <ul>
+                        <li>Date, time, and method of service (certified mail or personal service)</li>
+                        <li>Full name and address of person who was served</li>
+                        <li>Signature of the person who performed service (you or the process server)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- FA-4126VA -->
+            <div class="form-card">
+                <div class="form-card-header" onclick="toggleCard(this)">
+                    <input type="checkbox" class="checklist-item" onclick="event.stopPropagation()">
+                    <span class="form-code">FA-4126VA</span>
+                    <span class="form-title">Stipulation for Temporary Order with Minor Children</span>
+                    <div class="form-actions" onclick="event.stopPropagation()">
+                        <a href="FA-4126VA.pdf" target="_blank" class="btn btn-fill">Open &amp; Fill ↗</a>
+                    </div>
+                    <span class="form-toggle">▼</span>
+                </div>
+                <div class="form-card-body">
+                    <strong>What you need to fill this out:</strong>
+                    <ul>
+                        <li>Both parties' agreed temporary child placement schedule</li>
+                        <li>Temporary child support amount (use the WI Child Support Calculator at <a href="https://dcf.wisconsin.gov/cs/calculator" target="_blank" rel="noopener">dcf.wisconsin.gov/cs/calculator</a>)</li>
+                        <li>Temporary maintenance/spousal support terms, if any</li>
+                        <li>Signatures of both parties</li>
+                    </ul>
+                    <div class="form-note">Governs custody, placement, and support arrangements during the mandatory 120-day waiting period.</div>
+                </div>
+            </div>
+
+            <!-- FA-4136V -->
+            <div class="form-card">
+                <div class="form-card-header" onclick="toggleCard(this)">
+                    <input type="checkbox" class="checklist-item" onclick="event.stopPropagation()">
+                    <span class="form-code">FA-4136V</span>
+                    <span class="form-title">Petition for Appointment of Guardian ad Litem</span>
+                    <div class="form-actions" onclick="event.stopPropagation()">
+                        <a href="FA-4136V.pdf" target="_blank" class="btn btn-fill">Open &amp; Fill ↗</a>
+                    </div>
+                    <span class="form-toggle">▼</span>
+                </div>
+                <div class="form-card-body">
+                    <strong>What you need to fill this out:</strong>
+                    <ul>
+                        <li>Full names and dates of birth of each minor child</li>
+                        <li>Reason a GAL is needed (contested placement, child welfare concerns, high-conflict case)</li>
+                        <li>Income and asset information (court may allocate GAL fees between parties)</li>
+                    </ul>
+                    <div class="form-note">A Guardian ad Litem (GAL) is an attorney appointed to represent the children's best interests independently of either parent. Required in contested custody cases.</div>
+                </div>
+            </div>
+
+            <!-- FA-4138V -->
+            <div class="form-card">
+                <div class="form-card-header" onclick="toggleCard(this)">
+                    <input type="checkbox" class="checklist-item" onclick="event.stopPropagation()">
+                    <span class="form-code">FA-4138V</span>
+                    <span class="form-title">Income and Expense Statement</span>
+                    <div class="form-actions" onclick="event.stopPropagation()">
+                        <a href="FA-4138V.pdf" target="_blank" class="btn btn-fill">Open &amp; Fill ↗</a>
+                    </div>
+                    <span class="form-toggle">▼</span>
+                </div>
+                <div class="form-card-body">
+                    <strong>What you need to fill this out:</strong>
+                    <ul>
+                        <li>Gross and net monthly income from all sources (pay stubs)</li>
+                        <li>Monthly housing costs: rent or mortgage, utilities, renter's insurance</li>
+                        <li>Monthly living expenses: food, transportation, clothing, phone, medical</li>
+                        <li>Monthly child-related costs: childcare, school fees, medical, activities</li>
+                        <li>Current child support payments already being made or received</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- FA-4139V -->
+            <div class="form-card">
+                <div class="form-card-header" onclick="toggleCard(this)">
+                    <input type="checkbox" class="checklist-item" onclick="event.stopPropagation()">
+                    <span class="form-code">FA-4139V</span>
+                    <span class="form-title">Financial Disclosure Statement</span>
+                    <div class="form-actions" onclick="event.stopPropagation()">
+                        <a href="FA-4139V.pdf" target="_blank" class="btn btn-fill">Open &amp; Fill ↗</a>
+                    </div>
+                    <span class="form-toggle">▼</span>
+                </div>
+                <div class="form-card-body">
+                    <strong>What you need to fill this out:</strong>
+                    <ul>
+                        <li>All real estate: address, estimated fair-market value, outstanding mortgage balance</li>
+                        <li>All vehicles: year, make, model, estimated value, loan balance</li>
+                        <li>All bank/credit union accounts: institution name, last 4 digits, current balance</li>
+                        <li>Retirement and investment accounts: institution, account type, current value</li>
+                        <li>All debts: creditor name, account number, current balance, monthly payment</li>
+                        <li>Life insurance: carrier, face value, cash value, named beneficiary</li>
+                        <li>2023 and 2024 federal tax returns</li>
+                    </ul>
+                    <div class="form-note">Both parties must complete and exchange this form. Wisconsin requires full financial transparency in divorce proceedings.</div>
+                </div>
+            </div>
+
+            <!-- FA-4147V -->
+            <div class="form-card">
+                <div class="form-card-header" onclick="toggleCard(this)">
+                    <input type="checkbox" class="checklist-item" onclick="event.stopPropagation()">
+                    <span class="form-code">FA-4147V</span>
+                    <span class="form-title">Proposed Parenting Plan</span>
+                    <div class="form-actions" onclick="event.stopPropagation()">
+                        <a href="FA-4147V.pdf" target="_blank" class="btn btn-fill">Open &amp; Fill ↗</a>
+                    </div>
+                    <span class="form-toggle">▼</span>
+                </div>
+                <div class="form-card-body">
+                    <strong>What you need to fill this out:</strong>
+                    <ul>
+                        <li>Children's full names, dates of birth, current school and grade</li>
+                        <li>Proposed weekly placement schedule (specific days and times with each parent)</li>
+                        <li>Holiday, school break, and summer vacation schedule</li>
+                        <li>Legal custody proposal: joint (both parents decide) or sole (one parent decides)</li>
+                        <li>Transportation plan: who picks up and drops off, at what location</li>
+                        <li>Plan for handling medical, educational, and extracurricular decisions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- FA-4150V -->
+            <div class="form-card">
+                <div class="form-card-header" onclick="toggleCard(this)">
+                    <input type="checkbox" class="checklist-item" onclick="event.stopPropagation()">
+                    <span class="form-code">FA-4150V</span>
+                    <span class="form-title">Marital Settlement Agreement with Minor Children</span>
+                    <div class="form-actions" onclick="event.stopPropagation()">
+                        <a href="FA-4150V.pdf" target="_blank" class="btn btn-fill">Open &amp; Fill ↗</a>
+                    </div>
+                    <span class="form-toggle">▼</span>
+                </div>
+                <div class="form-card-body">
+                    <strong>What you need to fill this out:</strong>
+                    <ul>
+                        <li>Completed FA-4147V (Parenting Plan) — attach as exhibit</li>
+                        <li>Completed FA-4139V (Financial Disclosure) for both parties</li>
+                        <li>Agreed final division of all marital property and debts (who gets what, who owes what)</li>
+                        <li>Final child support amount and payment method</li>
+                        <li>Arrears repayment structure negotiated with maternal grandfather</li>
+                        <li>Both parties' signatures — must be signed before a <strong>notary public</strong></li>
+                    </ul>
+                    <div class="form-note">This is the primary final order document presented to Commissioner Pfeuffer at the final hearing. Get it notarized before the hearing date.</div>
+                </div>
+            </div>
+
+        </div><!-- /forms-grid -->
     </section>
 
+    <!-- FILING PROTOCOL -->
     <section>
-        <h2>Filing Protocol & Procedural Steps</h2>
-        
+        <h2><span class="step-badge">Steps 3–7</span> Filing Protocol &amp; Procedural Steps</h2>
+
         <div class="step-block">
             <div class="step-title">Step 3 — Fee Waiver Submission</div>
-            <p>File Form CV-410A concurrently with the divorce petition. This step addresses the statutory $184.50 filing fee and the matching $10 child support administrative add-on, attempting to bring standard baseline court processing costs down to $0 based on income qualification thresholds.</p>
+            <p>File Form CV-410A at the same time as your divorce petition (FA-4108V). Hand both documents to the Clerk of Circuit Court's window simultaneously. If approved, the standard $184.50 filing fee and the $10 child support administrative surcharge are waived, bringing your baseline court filing cost to $0.</p>
+            <div class="step-links">
+                <a href="CV-410A.pdf" target="_blank" class="step-link">Open CV-410A ↗</a>
+                <a href="https://www.wicourts.gov/services/public/selfhelp/feewaivers.htm" target="_blank" rel="noopener" class="step-link gold">WI Fee Waiver Info ↗</a>
+            </div>
         </div>
 
         <div class="step-block">
             <div class="step-title">Step 4 — E-Filing Execution</div>
-            <p>Submit all verified documents electronically through the Wisconsin eFiling portal (efiling.wicourts.gov). The filing goes under the supervision of the Clerk of Circuit Court, Rebecca Matoska-Mentink, and is reviewed within the Family Court system overseen by Court Commissioner Elizabeth Pfeuffer.</p>
+            <p>Submit all verified documents electronically through the Wisconsin eFiling portal. Create a free account, select Kenosha County Circuit Court — Family Division, and upload your completed PDFs. Filing is reviewed by the Clerk of Circuit Court, <strong>Rebecca Matoska-Mentink</strong>, under Family Court Commissioner <strong>Elizabeth Pfeuffer</strong>.</p>
+            <div class="step-links">
+                <a href="https://efiling.wicourts.gov" target="_blank" rel="noopener" class="step-link">Wisconsin eFiling Portal ↗</a>
+                <a href="https://www.wicourts.gov/services/efiling/index.htm" target="_blank" rel="noopener" class="step-link gold">eFiling Help &amp; Guide ↗</a>
+                <a href="https://www.co.kenosha.wi.us/departments/clerk-of-courts" target="_blank" rel="noopener" class="step-link outline">Kenosha Clerk of Courts ↗</a>
+            </div>
         </div>
 
         <div class="step-block">
             <div class="step-title">Step 5 — Formal Service of Process</div>
-            <p>Formally serve the filed paperwork to the spouse. Prioritize certified mail with an Admission of Service (the lowest-cost method at approximately $10.00). If formal service is rejected, budget an external process server allocation (~$60) to fulfill statutory notice mandates.</p>
+            <p>After filing, serve the summons (FA-4104V) and petition (FA-4108V) on your spouse. Attempt certified mail with an Admission of Service form (FA-4119V) first — lowest cost at approximately $10. If the spouse refuses or does not sign, hire a private process server (budget ~$60) to complete personal service and file the Declaration of Service (FA-4120V) with the court. The 120-day waiting period does not begin until proof of service is filed.</p>
+            <div class="step-links">
+                <a href="FA-4119V.pdf" target="_blank" class="step-link">FA-4119V — Admission ↗</a>
+                <a href="FA-4120V.pdf" target="_blank" class="step-link">FA-4120V — Declaration ↗</a>
+                <a href="https://www.wicourts.gov/services/public/selfhelp/familylaw.htm" target="_blank" rel="noopener" class="step-link gold">WI Self-Help Family Law ↗</a>
+            </div>
         </div>
 
         <div class="step-block">
             <div class="step-title">Step 6 — Mandatory 120-Day Waiting Period</div>
-            <p>Abide by the mandatory Wisconsin statutory cooling-off window. This 120-day clock begins immediately upon proof of service and cannot be skipped. Use this timeframe to draft and finalize the comprehensive Marital Settlement Agreement with the maternal grandfather.</p>
+            <p>Wisconsin law requires a minimum 120-day waiting period beginning from the date proof of service is filed with the court. This window cannot be waived or shortened. Use this time productively: negotiate and finalize the Marital Settlement Agreement (FA-4150V) with the maternal grandfather's participation, complete the Parenting Plan (FA-4147V), and gather the notarized signatures needed before the final hearing.</p>
+            <div class="step-links">
+                <a href="https://docs.legis.wisconsin.gov/statutes/statutes/767/II/263" target="_blank" rel="noopener" class="step-link gold">Wis. Stat. § 767.263 — Waiting Period ↗</a>
+                <a href="FA-4150V.pdf" target="_blank" class="step-link">Draft FA-4150V Now ↗</a>
+                <a href="https://dcf.wisconsin.gov/cs/calculator" target="_blank" rel="noopener" class="step-link outline">Child Support Calculator ↗</a>
+            </div>
         </div>
 
         <div class="step-block">
             <div class="step-title">Step 7 — Final Hearing Appearance</div>
-            <p>Represent yourself pro se at the final hearing scheduled after the 120-day window closes. Present the completed Marital Settlement Agreement (Form FA-4150V) containing the formal placement and arrears structured updates to the Court Commissioner for final decree approval.</p>
+            <p>After the 120-day window closes, the court will schedule a final hearing before Commissioner Elizabeth Pfeuffer. Appear pro se and present the completed, notarized Marital Settlement Agreement (FA-4150V) containing the final child placement schedule, child support amount, arrears repayment plan, and property division. If both parties have signed the agreement, the hearing is typically brief and the commissioner issues the final divorce decree that day.</p>
+            <div class="step-links">
+                <a href="https://www.co.kenosha.wi.us/departments/clerk-of-courts/family-court" target="_blank" rel="noopener" class="step-link">Kenosha Family Court ↗</a>
+                <a href="https://www.wicourts.gov/services/public/selfhelp/familylaw.htm" target="_blank" rel="noopener" class="step-link gold">WI Pro Se Resources ↗</a>
+                <a href="FA-4150V.pdf" target="_blank" class="step-link outline">Final — FA-4150V ↗</a>
+            </div>
         </div>
+
     </section>
 
     <footer>
         Confidential Portfolio — Documented Under Academic Oversight — University of Wisconsin-Parkside
     </footer>
-</div>
+</div><!-- /container -->
 
+<script>
+    // ── EXPAND / COLLAPSE FORM CARDS ──
+    function toggleCard(header) {
+        const body = header.nextElementSibling;
+        const arrow = header.querySelector('.form-toggle');
+        const isOpen = body.classList.contains('open');
+        body.classList.toggle('open', !isOpen);
+        header.classList.toggle('open', !isOpen);
+        if (arrow) arrow.classList.toggle('open', !isOpen);
+    }
+
+    // ── PROGRESS TRACKER ──
+    const TOTAL = document.querySelectorAll('.checklist-item').length;
+
+    function updateProgress() {
+        const checked = document.querySelectorAll('.checklist-item:checked').length;
+        const pct = TOTAL > 0 ? Math.round((checked / TOTAL) * 100) : 0;
+        document.getElementById('progress-fill').style.width = pct + '%';
+        document.getElementById('progress-label').textContent =
+            'Checklist progress: ' + checked + ' of ' + TOTAL + ' items completed (' + pct + '%)';
+        // Save to localStorage so progress persists on refresh
+        const states = Array.from(document.querySelectorAll('.checklist-item'))
+            .map(cb => cb.checked);
+        try { localStorage.setItem('filing_checklist', JSON.stringify(states)); } catch(e) {}
+    }
+
+    // Restore saved state
+    try {
+        const saved = JSON.parse(localStorage.getItem('filing_checklist') || '[]');
+        document.querySelectorAll('.checklist-item').forEach((cb, i) => {
+            if (saved[i]) cb.checked = true;
+        });
+    } catch(e) {}
+
+    document.querySelectorAll('.checklist-item').forEach(cb => {
+        cb.addEventListener('change', updateProgress);
+    });
+
+    updateProgress();
+</script>
 </body>
 </html>
