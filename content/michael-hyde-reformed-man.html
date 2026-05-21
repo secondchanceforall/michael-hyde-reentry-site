@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Michael Hyde | Reformed. Focused. Rebuilding.</title>
+    <!-- Google Fonts & Font Awesome (lightweight icons) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e4620;
+            --primary-soft: #2a5e2a;
+            --gold: #d4af37;
+            --gold-light: #f5e7b2;
+            --dark: #1f2a1c;
+            --gray-bg: #f9faf7;
+            --white: #ffffff;
+            --border: #e2e6df;
+            --success: #2b7a2b;
+            --accent-red: #bc5a3c;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--gray-bg);
+            color: #1f2a1c;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* header / nav (minimal, aligns with original) */
+        .navbar {
+            background: var(--primary);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .logo {
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: -0.3px;
+        }
+        .logo span {
+            color: var(--gold);
+        }
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            margin-left: 24px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* hero section */
+        .hero {
+            background: linear-gradient(115deg, var(--primary) 0%, #2f5230 100%);
+            color: white;
+            padding: 60px 0 70px;
+            border-radius: 0 0 32px 32px;
+            margin-bottom: 48px;
+        }
+        .hero-content {
+            max-width: 800px;
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .hero .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            border-left: 4px solid var(--gold);
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+        .hero-quote {
+            background: rgba(0,0,0,0.25);
+            padding: 20px;
+            border-radius: 32px;
+            font-style: italic;
+            margin-top: 30px;
+        }
+
+        /* section headings */
+        .section-title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 48px 0 16px 0;
+            border-left: 6px solid var(--gold);
+            padding-left: 20px;
+        }
+        .section-sub {
+            margin-bottom: 32px;
+            color: #4a5b44;
+        }
+
+        /* cards / grid */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+            margin: 30px 0;
+        }
+        .card {
+            background: var(--white);
+            border-radius: 28px;
+            padding: 28px 24px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            border: 1px solid var(--border);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+        }
+        .card-icon {
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        .badge {
+            background: var(--gold-light);
+            color: #2f4d2d;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        .commit-list {
+            list-style: none;
+            margin-top: 16px;
+        }
+        .commit-list li {
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .commit-list i {
+            color: var(--gold);
+            width: 24px;
+        }
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+            margin: 32px 0;
+        }
+        footer {
+            background: #eef3ec;
+            margin-top: 60px;
+            padding: 32px 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #44553e;
+            border-top: 1px solid var(--border);
+        }
+        .quote-block {
+            background: #fffdf3;
+            border-left: 5px solid var(--gold);
+            padding: 28px;
+            border-radius: 24px;
+            font-size: 1.1rem;
+            margin: 40px 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .flex-stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .stat-item {
+            background: white;
+            border-radius: 24px;
+            padding: 20px;
+            flex: 1;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        @media (max-width: 680px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-links a { margin-left: 12px; font-size: 0.85rem; }
+            .container { padding: 0 20px; }
+            .section-title { font-size: 1.6rem; }
+        }
+        .btn-outline {
+            border: 2px solid var(--gold);
+            background: transparent;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="container nav-flex">
+            <div class="logo">MICHAEL HYDE <span>|| REDEMPTION ARC</span></div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#discipline">Daily code</a>
+                <a href="#finance">Financial rebuild</a>
+                <a href="#family">Fatherhood</a>
+                <a href="#commit">Commitments</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>From incarceration to<br>intentional reconstruction.</h1>
+            <div class="tagline">Once incarcerated. Never defined by it. Today: sober, focused, employed 72h/week, and fighting to be the father & man he was meant to be.</div>
+            <div class="hero-quote">
+                <i class="fas fa-quote-left" style="color: var(--gold); margin-right: 10px;"></i> 
+                "I take full responsibility for my past actions and the impact they had on my life and my family. I am committed to change, hard work, and making a positive life for myself and my children."
+                <div style="margin-top: 8px;">— Michael Hyde, stated commitment to Probation Officer Noah Gilbert</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- holistic snapshot -->
+        <div class="flex-stats">
+            <div class="stat-item"><i class="fas fa-calendar-week" style="font-size: 2rem; color: var(--gold);"></i><div class="stat-number">72h</div><div>work weeks / 6 days</div><small>Labor & self-respect</small></div>
+            <div class="stat-item"><i class="fas fa-smoking-ban" style="font-size: 2rem; color: var(--gold);"></i><div class="stat-number">0</div><div>alcohol · tobacco · substances</div><small>1,000+ days of sobriety mindset</small></div>
+            <div class="stat-item"><i class="fas fa-hand-holding-heart" style="font-size: 2rem; color: var(--gold);"></i><div class="stat-number">$19.8k</div><div>debt being eliminated</div><small>child support arrears + loans + hospital</small></div>
+            <div class="stat-item"><i class="fas fa-child" style="font-size: 2rem; color: var(--gold);"></i><div class="stat-number">2</div><div>children he supports</div><small>current & consistent</small></div>
+        </div>
+
+        <!-- Who is Michael? holistic identity -->
+        <div class="section-title" id="identity">🧍‍♂️ Who is Michael Hyde — the reformed man</div>
+        <p style="font-size: 1.1rem; margin-bottom: 20px;">Michael is not a statistic. He's a son living with his father rent‑free to redirect every dollar toward restitution, a father who owes $12k in child support arrears and refuses to run from it, a worker showing up before sunrise six days a week, and a man who has voluntarily eliminated alcohol, smoking, and destructive environments. He represents the gritty, unglamorous work of real rehabilitation.</p>
+        <p>After incarceration, Michael could have surrendered to bitterness. Instead, he built a <strong>structured, accountability‑driven life plan</strong> in collaboration with Associate Professor Albert Harris (UW‑Parkside) and his probation officer. His world now runs on discipline: 5 AM wake‑ups, 12‑hour shifts, financial tracking, and a promise to stay lawful. He is rebuilding trust not with grand promises, but with daily routines and transparent budgets.</p>
+
+        <!-- daily discipline accordion / visible -->
+        <div class="section-title" id="discipline">⏰ The daily architecture of a reformed man</div>
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-sun"></i></div>
+                <h3>Sacred morning</h3>
+                <p><strong>5:00 AM</strong> – wake, hygiene, breakfast. <br> <strong>5:30 AM</strong> – exercise & reflection. <br> <strong>6:00 AM</strong> – prep for work. <br> No snooze. No excuses.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-hard-hat"></i></div>
+                <h3>Work as worship of second chances</h3>
+                <p><strong>7:00 AM – 7:00 PM</strong> · 12‑hour shifts · 6 days/week. Estimated $20/hr base + overtime. Michael believes honest fatigue builds character.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-moon"></i></div>
+                <h3>Evening restoration</h3>
+                <p>7:30 PM dinner, 8:00 PM family communication & financial planning, 8:30 PM reading/recovery, 9:30 PM sleep. Zero toxic environments.</p>
+            </div>
+        </div>
+
+        <!-- financial redemption arc -->
+        <div class="section-title" id="finance">💸 Financial redemption: paying the past, building the future</div>
+        <p>Michael's reentry budget is not theoretical — it's a weapon against his past debts. Living expense‑free with his father, he directs ~$5,300 net monthly income toward obligations. Every dollar is tracked.</p>
+        <div class="grid-2">
+            <div class="card">
+                <h3><i class="fas fa-chart-line"></i> Monthly commitments</h3>
+                <ul class="commit-list">
+                    <li><i class="fas fa-gavel"></i> Child support (current) – $850</li>
+                    <li><i class="fas fa-clock"></i> Arrears reduction – $1,000</li>
+                    <li><i class="fas fa-graduation-cap"></i> Student loan – $200</li>
+                    <li><i class="fas fa-hospital-user"></i> Hospital bills – $200</li>
+                    <li><i class="fas fa-car"></i> Transport/fuel – $400</li>
+                    <li><i class="fas fa-piggy-bank"></i> Emergency savings – $500</li>
+                </ul>
+                <div class="stat-number" style="font-size: 1.4rem;">✅ ~$1,620 monthly surplus → accelerated debt payoff</div>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-bullseye"></i> 12‑month targets</h3>
+                <p><strong>Quarter 1:</strong> License reinstated, first $1k saved, perfect probation compliance.<br>
+                <strong>Quarter 2:</strong> Cut child support arrears by 30%, build $3k emergency fund.<br>
+                <strong>Year end:</strong> Reduce total debt by 50%+ and improve credit, possibly prepare for independent housing.</p>
+                <div class="badge">💰 $12,000 child support arrears · $3,500 student loan · $3,500 medical</div>
+            </div>
+        </div>
+
+        <!-- Fatherhood & family pillar -->
+        <div class="section-title" id="family">👨‍👧‍👦 Fatherhood as north star</div>
+        <div class="quote-block">
+            <i class="fas fa-heart" style="color: var(--gold); margin-right: 8px;"></i> "I will support my children consistently — not just financially, but by showing them that a man can fall and get back up with integrity."
+        </div>
+        <div class="grid-2">
+            <div class="card">
+                <i class="fas fa-hand-holding-usd card-icon"></i>
+                <h3>Child support arrears: $12k</h3>
+                <p>Michael pays $1,000/month extra toward arrears on top of $850 monthly current support. He sees every payment as a promise to his kids' stability.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-file-signature card-icon"></i>
+                <h3>Divorce finalization</h3>
+                <p>Filing fee ($300) budgeted immediately after release. Closure = emotional and legal honesty.</p>
+            </div>
+        </div>
+
+        <!-- Sobriety / health / reformed mindset -->
+        <div class="section-title">🌿 Sobriety & whole‑person rehabilitation</div>
+        <p>Michael has taken a public, unbreakable pledge: <strong>no alcohol, no smoking, no drugs, and zero contact with old negative environments</strong>. He exercises daily, plans to attend medical appointments, and uses structure to guard his mental health. His transformation is not performative — it's built into his calendar and his signature.</p>
+        <div class="grid-2">
+            <div class="card">
+                <i class="fas fa-brain card-icon"></i>
+                <h3>Mental discipline</h3>
+                <p>Daily reflection, avoidance of conflict, long‑term goal focus. He replaced impulsivity with routines.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-running card-icon"></i>
+                <h3>Physical covenant</h3>
+                <p>Stretching, better sleep hygiene, and moving his body every morning — fueling the stamina for 72‑hour weeks.</p>
+            </div>
+        </div>
+
+        <!-- accountability & probation compliance -->
+        <div class="section-title" id="commit">⚖️ Full probation compliance: non‑negotiable</div>
+        <p>Michael reports to Probation Officer Noah Gilbert without fail. He has committed to: attending all meetings, reporting address/employment changes, making all court payments on time, and submitting to any monitoring. This plan is not aspirational — it's a contract he voluntarily submitted to the court and his professor mentor.</p>
+        <div class="quote-block" style="background: #eef2ea;">
+            <i class="fas fa-chalkboard-teacher"></i> <strong>Academic oversight:</strong> “Michael's reentry budget and structured life plan reflect a sincere effort to rebuild. He has the tools, the grit, and the daily schedule to succeed.” — Albert Harris, Associate Professor, UW‑Parkside
+        </div>
+
+        <!-- closing: the reformed man's manifesto -->
+        <hr>
+        <div style="text-align: center; margin: 50px 0 30px;">
+            <h2 style="color: var(--primary);">"I am not my worst day. I am my daily choices."</h2>
+            <p style="max-width: 700px; margin: 20px auto;">Michael Hyde lives with his father, works lawful labor, stays sober, and fights every month to shrink his arrears and expand his children's future. He is proof that reentry is possible with structure, support, and relentless accountability.</p>
+            <a href="#" style="background: var(--primary); color: white; padding: 12px 32px; border-radius: 40px; display: inline-block; margin-top: 20px; text-decoration: none; font-weight: 600;"><i class="fas fa-calendar-check"></i> See his interactive calendar (full plan)</a>
+            <p style="margin-top: 20px; font-size: 0.85rem;">*Interactive calendar demo available upon request — Michael updates his daily events in real time*</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>📁 Michael Hyde — Rehabilitation Portfolio | In partnership with UW‑Parkside & Probation Dept. | This reformed man is building a legacy of integrity, one hour at a time.</p>
+            <p style="margin-top: 8px;">📍 Kenosha County, WI · Living with father · 100% alcohol‑free, smoke‑free · Full employment commitment</p>
+        </div>
+    </footer>
+</body>
+</html>
