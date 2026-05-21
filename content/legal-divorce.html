@@ -2,47 +2,351 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Pro Se Divorce & Custody Plan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Pro Se Divorce & Custody Plan | Family Reentry Framework</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.6; color: #222; max-width: 800px; margin: 40px auto; padding: 0 20px; }
-        h1, h2, h3 { color: #1e4620; border-bottom: 1px solid #eee; padding-bottom: 8px; }
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-        th, td { text-align: left; padding: 12px; border-bottom: 1px solid #ddd; }
-        th { background-color: #f1f4f1; color: #1e4620; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #1e4620; text-decoration: none; font-weight: bold; }
-        ul { margin-bottom: 20px; padding-left: 20px; }
-        li { margin-bottom: 8px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, 'Helvetica Neue', sans-serif;
+            background: #f4f7f2;
+            color: #1a2c1a;
+            line-height: 1.5;
+        }
+
+        /* modern navigation */
+        .site-nav {
+            background: #1e4620;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-area {
+            padding: 12px 0;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #f9f3d9;
+            text-decoration: none;
+            letter-spacing: -0.3px;
+            background: #2b5e2a;
+            padding: 6px 14px;
+            border-radius: 40px;
+            transition: 0.2s;
+        }
+
+        .logo:hover {
+            background: #3f7840;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            gap: 6px;
+            padding: 8px 0;
+        }
+
+        .nav-links li a {
+            display: inline-block;
+            padding: 8px 16px;
+            font-weight: 500;
+            text-decoration: none;
+            color: #eef5e6;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            background: transparent;
+        }
+
+        .nav-links li a:hover {
+            background: #2d5e2b;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .nav-links li a.active {
+            background: #f9b81b;
+            color: #1e3a1a;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            font-weight: 600;
+        }
+
+        /* main container */
+        .main-container {
+            max-width: 1100px;
+            margin: 32px auto;
+            padding: 0 24px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+            padding: 32px 36px;
+            transition: all 0.2s;
+        }
+
+        @media (max-width: 700px) {
+            .content-card {
+                padding: 24px 20px;
+            }
+            .nav-links li a {
+                padding: 5px 12px;
+                font-size: 0.8rem;
+            }
+            .nav-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-links {
+                justify-content: center;
+                margin-bottom: 8px;
+            }
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #1e4620;
+            border-left: 6px solid #f9b81b;
+            padding-left: 20px;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin: 1.5rem 0 1rem 0;
+            color: #2a5c2a;
+            border-bottom: 2px solid #e2efdf;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin: 1.2rem 0 0.6rem;
+            color: #2b4f24;
+        }
+
+        p, li {
+            font-size: 1rem;
+            color: #2a2f2a;
+        }
+
+        ul, .highlight-list {
+            margin: 1rem 0 1.2rem 1.8rem;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        th {
+            background-color: #e9f3e6;
+            color: #1c481c;
+            font-weight: 700;
+            padding: 14px 12px;
+            border-bottom: 1px solid #cbdcc5;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8de;
+            background-color: #ffffff;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .info-note {
+            background: #fef8e7;
+            border-left: 5px solid #f9b81b;
+            padding: 16px 22px;
+            border-radius: 20px;
+            margin: 28px 0 20px;
+            font-size: 0.95rem;
+        }
+
+        .badge {
+            background-color: #ecf7e9;
+            color: #1f5a1f;
+            padding: 2px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .integration-card {
+            background: #f1f7ef;
+            border-radius: 24px;
+            padding: 20px 28px;
+            margin-top: 40px;
+            border: 1px solid #cde0c7;
+        }
+
+        footer {
+            margin-top: 48px;
+            text-align: center;
+            padding: 24px 16px 32px;
+            font-size: 0.85rem;
+            color: #5a6e55;
+            border-top: 1px solid #dde8d8;
+        }
+
+        a {
+            color: #2b6e2a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .btn-subtle {
+            display: inline-flex;
+            background: #2b6e2a10;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+        .timeline-highlight {
+            font-weight: 600;
+            color: #1e4620;
+        }
     </style>
 </head>
 <body>
-    <a class="back-link" href="../index.html">? Back to Dashboard</a>
-    <h1>Pro Se Divorce & Custody Action Plan</h1>
+
+<!-- FULL NAVIGATION BAR (consistent with entire site structure) -->
+<nav class="site-nav">
+    <div class="nav-container">
+        <div class="logo-area">
+            <a href="../index.html" class="logo">⚖️ Hyde Reentry Compass</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html">🏠 Dashboard</a></li>
+            <li><a href="filing-steps.html">📋 Filing Steps</a></li>
+            <li><a href="legal-divorce.html" class="active">⚖️ Divorce & Custody</a></li>
+            <li><a href="children-support.html">👶 Child Support</a></li>
+            <li><a href="family-framework.html">🏡 Family Framework</a></li>
+            <li><a href="daily-structure.html">⏰ Daily Structure</a></li>
+            <li><a href="personal-growth.html">🌱 Personal Growth</a></li>
+            <li><a href="costs-resources.html">💰 Costs & Resources</a></li>
+            <li><a href="timeline.html">📅 Timeline</a></li>
+            <li><a href="arrears-agreement.html">📄 Arrears Agreement</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main class="main-container">
+    <div class="content-card">
+        <h1>Pro Se Divorce & Custody Action Plan</h1>
+        <p><span class="badge">Wisconsin Chapter 767 · No‑Fault</span> <span class="badge" style="background:#e1eccd;">Pro Se Representation</span></p>
+        <p><strong>Filing initiated under Wisconsin’s no-fault divorce statute (Chapter 767)</strong>, citing irretrievable breakdown of the marriage. Representation will be completely pro se, using <strong>Form CV-410A</strong> to seek a full waiver of the court filing fee (<strong>$0.50</strong> administrative cost), minimizing out‑of‑pocket tracking expenses.</p>
+
+        <h2>👨‍👧‍👦 Children & Structured Custody Proposal</h2>
+        <p>To prioritize parental placement stability and protect the best interests of the children, the following formal restructuring is proposed:</p>
+        <ul>
+            <li><strong>100% Legal & Physical Custody:</strong> Awarded formal designation to the <strong>maternal grandfather</strong>, who acts as the primary de facto caregiver and provides a stable, nurturing home environment.</li>
+            <li><strong>Structured Visitation Routine:</strong> One day per week, four hours per visit, ensuring consistent and meaningful parent-child bonding under supervised yet flexible conditions.</li>
+            <li><strong>Support Allocation:</strong> Redirection of ongoing child support and all arrears payments directly to the grandfather's household to cover daily care, education, and health expenses.</li>
+        </ul>
+        
+        <div class="info-note">
+            📌 <strong>Legal strategy alignment:</strong> This arrangement reinforces family continuity while Michael Hyde focuses on employment, financial rehabilitation, and full compliance with probation. Redirected support ensures children's needs are met without disruption.
+        </div>
+
+        <h2>📅 Projected Timeline to Final Decree</h2>
+        <table>
+            <thead>
+                <tr><th>Period</th><th>Action Steps</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Weeks 1–2</strong></td><td>Gather financial documents; confirm residency verification (Kenosha County).</td></tr>
+                <tr><td><strong>Weeks 2–3</strong></td><td>Complete forms; prepare fee waiver request (CV-410A) and supporting affidavit.</td></tr>
+                <tr><td><strong>Weeks 3–4</strong></td><td>Review documents; consult Kenosha County Legal Clinic resources for pro se assistance.</td></tr>
+                <tr><td><strong>Week 4</strong></td><td>E-file petition and fee waiver; formally serve spouse via sheriff or certified mail.</td></tr>
+                <tr><td><strong>Days 1–120</strong></td><td class="timeline-highlight">Mandatory statutory Wisconsin 120‑day waiting/cooling period.</td></tr>
+                <tr><td><strong>Months 4–5</strong></td><td>Finalize Marital Settlement Agreement (MSA); attend final hearing via Zoom or in-person.</td></tr>
+                <tr><td><strong>Months 5–6</strong></td><td>Receive final divorce decree; close case; implement support redirection order.</td></tr>
+            </tbody>
+        </table>
+
+        <h2>📁 Required Documentation & Forms</h2>
+        <p>All court forms available at <strong>wicourts.gov/forms</strong> plus Kenosha County Family Court. Key packets:</p>
+        <ul>
+            <li><strong>CV-410A</strong> – Petition to Waive Filing Fees & Costs</li>
+            <li><strong>FA-4104V</strong> – Summons with minor children</li>
+            <li><strong>FA-4119V</strong> – Marital Settlement Agreement worksheet</li>
+            <li><strong>FA-4147V</strong> – Order for income withholding (child support)</li>
+        </ul>
+
+        <h2>🧾 Financial & Arrears Alignment</h2>
+        <p>Pursuant to the structured reentry budget, child support obligations will be paid <strong>directly to the maternal grandfather</strong> once custody is transferred. This ensures accountability while reducing arrears (<strong>$12,000 outstanding</strong> as of current filing). Monthly support obligation of $850 will be redirected, and a supplemental arrears repayment schedule will accelerate the balance.</p>
+        
+        <!-- Integration section linking to Michael Hyde's reentry financial plan (seamless merge) -->
+        <div class="integration-card">
+            <h3 style="margin-top: 0; border-bottom: none; color:#1e4620;">🔄 Reentry Financial Integration</h3>
+            <p><strong>Michael Hyde's reentry budget (submitted to Probation Officer Noah Gilbert)</strong> prioritizes child support stability and arrears reduction. With housing provided rent-free, the monthly budget allocates:</p>
+            <ul style="margin-bottom: 8px;">
+                <li><strong>Ongoing child support:</strong> $850/month (redirected to grandfather)</li>
+                <li><strong>Arrears acceleration:</strong> $1,000/month → aiming to eliminate $12k arrears within 12 months</li>
+                <li><strong>Full compliance:</strong> automatic income withholding ensures consistent payments.</li>
+            </ul>
+            <p>This divorce & custody plan officially designates the maternal grandfather as payee, aligning with Wisconsin's best-interest standard and providing immediate financial protection for the children while the father follows a 72-hour work week rehabilitation schedule.</p>
+            <div style="margin-top: 12px;"><span class="badge">✅ Budget surplus ~$1,620/month for additional arrears/debt</span></div>
+        </div>
+
+        <h2>📌 Critical Legal Considerations</h2>
+        <ul>
+            <li><strong>Pro Se filing strategy:</strong> all documents self-prepared, using free legal aid from Kenosha Legal Action Center to review before submission.</li>
+            <li><strong>Parental rights & relocation:</strong> the maternal grandfather will serve as custodial guardian; the decree will include specific visitation enforcement provisions.</li>
+            <li><strong>Child support redirection:</strong> request an Income Withholding Order (FA-4147V) sending all payments to grandfather’s address, superseding prior DCF payee.</li>
+            <li><strong>Waiver of filing fees:</strong> CV-410A based on current low income and incarceration history; expected to be granted, making filing cost effectively $0.50.</li>
+        </ul>
+
+        <h2>🏛️ Legal Clinic & Self-Help Resources</h2>
+        <p>Kenosha County Courthouse – Self-Help Center (262-653-2400) offers free family law form preparation assistance. Also <strong>Wisconsin Legal Aid (wilegalcares.org)</strong> provides brief advice for pro se litigants. The entire divorce package is designed for smooth e-filing via Wisconsin’s CCAP eFiling portal.</p>
+        
+        <div style="background: #fafaf4; border-radius: 24px; padding: 16px 24px; margin-top: 24px;">
+            <p style="margin: 0; font-size: 0.9rem;">✍️ <strong>Next immediate step:</strong> Gather last 3 years of tax returns, pay stubs, and child support payment history. File petition by Week 4 to trigger 120-day waiting period — final decree estimated within months 5–6 post-filing.</p>
+        </div>
+    </div>
     
-    <h2>Legal Filing Approach</h2>
-    <p>Filing will be initiated under Wisconsin�s no-fault divorce statute (Chapter 767), citing irretrievable breakdown of the marriage. Representation will be completely pro se, using Form CV-410A to seek a full waiver of the court filing fee (.50), minimizing out-of-pocket tracking costs to �.</p>
-
-    <h2>Children & Structured Custody Proposal</h2>
-    <p>To prioritize parental placement stability, the following formal restructuring is proposed:</p>
-    <ul>
-        <li><strong>100% Legal & Physical Custody:</strong> Awarded formal designation to the maternal grandfather, who acts as the primary de facto caregiver.</li>
-        <li><strong>Structured Visited Routine:</strong> One day per week, four hours per visit.</li>
-        <li><strong>Support Allocation:</strong> Redirection of ongoing and arrears payments directly to the grandfather's household.</li>
-    </ul>
-
-    <h2>Projected Timeline to Final Decree</h2>
-    <table>
-        <thead>
-            <tr><th>Period</th><th>Action Steps</th></tr>
-        </thead>
-        <tbody>
-            <tr><td>Weeks 1�2</td><td>Gather financial documents; confirm residency verification.</td></tr>
-            <tr><td>Weeks 2�3</td><td>Complete forms; prepare fee waiver request (CV-410A).</td></tr>
-            <tr><td>Weeks 3�4</td><td>Review documents; consult Kenosha County Legal Clinic resources.</td></tr>
-            <tr><td>Week 4</td><td>E-file petition and fee waiver; formally serve spouse.</td></tr>
-            <tr><td>Days 1�120</td><td>Mandatory statutory Wisconsin 120-day waiting cooling period.</td></tr>
-            <tr><td>Months 4�5</td><td>Finalize Marital Settlement Agreement; attend final hearing.</td></tr>
-            <tr><td>Months 5�6</td><td>Receive final divorce decree; close case.</td></tr>
-        </tbody>
-    </table>
+    <footer>
+        <p>⚖️ Pro Se Divorce & Custody Navigator — Part of Michael Hyde Structured Reentry Plan | Supervised by UW Parkside Reentry Initiative</p>
+        <p style="margin-top: 8px;">📬 Contact: Albert Harris, Associate Professor | <a href="mailto:harria01@uwp.edu">harria01@uwp.edu</a> | 262-236-5443</p>
+        <p style="font-size: 0.75rem;">This information is for educational and planning purposes only. Always consult with an attorney or self-help center for legal advice.</p>
+    </footer>
+</main>
 </body>
 </html>
