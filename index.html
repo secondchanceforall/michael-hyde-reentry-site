@@ -3,262 +3,293 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Michael Hyde - Reentry Life Plan</title>
+    <title>Michael Hyde · Reentry Accountability Framework</title>
     <style>
-        :root {
-            --primary-color: #1e4620; /* Deep Institutional Green */
-            --secondary-color: #d4af37; /* Muted Gold Accent */
-            --dark-text: #222222;
-            --light-bg: #f9f9f9;
-            --white: #ffffff;
-            --border-color: #e0e0e0;
-        }
-
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e4620;      /* deep institutional green */
+            --primary-light: #2a5a2a;
+            --gold: #c9a03d;         /* muted gold accent */
+            --gold-dark: #a07e2c;
+            --gray-50: #f8f9fa;
+            --gray-100: #f0f2f0;
+            --gray-300: #d6d9d6;
+            --gray-600: #5c6e5c;
+            --gray-800: #2c3e2c;
+            --text-dark: #1f2a1f;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.03), 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 8px rgba(0,0,0,0.04);
+            --border-light: #e2e6e2;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--dark-text);
-            background-color: var(--light-bg);
-            padding-top: 70px;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background: var(--gray-50);
+            color: var(--text-dark);
+            line-height: 1.45;
+            padding-top: 64px; /* fixed navbar height */
         }
 
-        /* Top Navigation Bar */
+        /* ========= NAVIGATION (COMPACT, BORDERLESS) ========= */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: var(--primary-color);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-300);
+            box-shadow: var(--shadow-sm);
             z-index: 1000;
         }
 
         .nav-container {
-            max-width: 1100px;
+            max-width: 1280px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
+            flex-wrap: wrap;
             align-items: center;
-            padding: 0 20px;
-            height: 60px;
+            justify-content: space-between;
+            padding: 0 24px;
+            gap: 12px;
+            min-height: 64px;
         }
 
         .nav-brand {
-            color: var(--white);
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 1.2rem;
+            letter-spacing: -0.3px;
+            color: var(--primary);
             text-decoration: none;
-            font-size: 1.1rem;
+            white-space: nowrap;
         }
 
         .nav-brand span {
-            color: var(--secondary-color);
+            color: var(--gold);
+            font-weight: 800;
         }
 
         .nav-links {
             display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
             list-style: none;
-            gap: 15px;
-            overflow-x: auto; /* Allows scrolling on smaller screens */
         }
 
         .nav-links a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-size: 0.85rem;
+            display: inline-block;
+            padding: 6px 14px;
+            font-size: 0.8rem;
             font-weight: 500;
-            transition: color 0.2s ease;
-            padding: 8px 10px;
-            border-radius: 4px;
+            color: var(--gray-800);
+            text-decoration: none;
+            border-radius: 40px;
+            transition: all 0.2s;
+            background: transparent;
             white-space: nowrap;
         }
 
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--white);
-            background-color: rgba(255, 255, 255, 0.1);
+        .nav-links a:hover {
+            background: var(--gray-100);
+            color: var(--primary);
         }
 
-        /* Main Content Container */
+        .nav-links a.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ========= MAIN LAYOUT (TIGHTER) ========= */
         .container {
-            max-width: 1000px;
-            margin: 40px auto;
+            max-width: 1200px;
+            margin: 28px auto 48px;
+            background: transparent;
+            padding: 0 24px;
+        }
+
+        /* header section */
+        .hero {
+            margin-bottom: 32px;
+        }
+
+        .hero h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.3px;
+            border-left: 4px solid var(--gold);
+            padding-left: 18px;
+            margin-bottom: 8px;
+        }
+
+        .hero .tagline {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            margin-left: 22px;
+        }
+
+        /* meta row (smaller, cleaner) */
+        .meta-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
             background: var(--white);
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            border-top: 6px solid var(--primary-color);
+            border-radius: 20px;
+            padding: 14px 24px;
+            margin: 24px 0 32px 0;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
         }
 
-        header {
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+        .meta-item {
+            display: flex;
+            flex-direction: column;
         }
 
-        h1 {
-            color: var(--primary-color);
-            font-size: 2.2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 5px;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: #666;
-            font-weight: 500;
-        }
-
-        .meta-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-bottom: 35px;
-            background: #f1f4f1;
-            padding: 20px;
-            border-radius: 6px;
-            border-left: 4px solid var(--secondary-color);
-        }
-
-        .meta-item span {
-            display: block;
-            font-size: 0.85rem;
-            color: #555;
+        .meta-item .label {
+            font-size: 0.7rem;
             text-transform: uppercase;
             font-weight: 600;
+            color: var(--gray-600);
+            letter-spacing: 0.4px;
         }
 
-        .meta-item p {
-            font-size: 1.05rem;
+        .meta-item .value {
             font-weight: 700;
-            color: var(--primary-color);
+            font-size: 1rem;
+            color: var(--primary);
         }
 
-        section {
+        /* quote box more compact */
+        .quote-compact {
+            background: #fefaf0;
+            border-left: 4px solid var(--gold);
+            padding: 20px 24px;
+            border-radius: 16px;
             margin-bottom: 40px;
+            font-size: 0.95rem;
+            color: #2a382a;
         }
 
-        h2 {
-            color: var(--primary-color);
-            font-size: 1.4rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
+        .quote-compact span {
+            display: block;
+            margin-top: 8px;
+            font-weight: 600;
+            color: var(--primary);
+            text-align: right;
+            font-size: 0.8rem;
+        }
+
+        /* section heading */
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--gray-300);
+            padding-bottom: 6px;
         }
 
-        /* Interactive Clickable Cards */
-        .dashboard-grid {
+        /* CARDS — DENSE, CLEAN, 2-COLUMN */
+        .cards-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .card-link {
-            text-decoration: none;
-            color: inherit;
-            display: block;
+            gap: 18px;
+            margin-bottom: 24px;
         }
 
         .card {
             background: var(--white);
-            border: 1px solid var(--border-color);
-            padding: 25px;
-            border-radius: 6px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            border: 1px solid var(--border-light);
+            border-radius: 18px;
+            padding: 18px 20px;
             transition: all 0.2s ease;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-        }
-
-        /* Paramount Feature Card */
-        .feature-card-wrapper {
-            grid-column: 1 / -1; /* Spans full width */
-        }
-
-        .feature-card {
-            border-left: 6px solid var(--secondary-color);
-            background: #fffdf8;
+            text-decoration: none;
+            display: block;
+            box-shadow: var(--shadow-sm);
         }
 
         .card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-            border-color: var(--secondary-color);
+            border-color: var(--gold);
+            box-shadow: var(--shadow-md);
         }
 
-        .card h3 {
-            color: var(--primary-color);
-            font-size: 1.25rem;
-            margin-bottom: 10px;
+        .card-title {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-        }
-
-        .card h3::after {
-            content: '→';
-            color: var(--secondary-color);
-            font-size: 1.5rem;
-            transition: transform 0.2s ease;
-        }
-
-        .card:hover h3::after {
-            transform: translateX(5px);
-        }
-
-        .card-synopsis {
-            font-size: 0.95rem;
-            color: #555;
-            line-height: 1.5;
-        }
-
-        .quote-box {
-            background: #f1f4f1;
-            border-left: 4px solid var(--primary-color);
-            padding: 25px;
-            border-radius: 0 6px 6px 0;
-            margin-top: 30px;
-            font-style: italic;
-        }
-
-        .quote-box p {
-            color: #333;
-            font-size: 1.05rem;
-            margin-bottom: 10px;
-        }
-
-        .quote-box span {
-            display: block;
-            font-style: normal;
+            align-items: baseline;
             font-weight: 700;
-            font-size: 0.9rem;
-            color: var(--primary-color);
-            text-align: right;
-            text-transform: uppercase;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 8px;
         }
 
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
+        .card-title span {
+            font-size: 1.2rem;
+            color: var(--gold);
+        }
+
+        .card-desc {
             font-size: 0.85rem;
-            color: #777;
+            color: var(--gray-600);
+            line-height: 1.4;
         }
 
-        @media (max-width: 768px) {
-            .dashboard-grid {
+        /* full-width featured card variant */
+        .feature-card {
+            grid-column: span 2;
+            background: #fefaf5;
+            border-left: 4px solid var(--gold);
+        }
+
+        /* footer */
+        .footer-note {
+            text-align: center;
+            margin-top: 48px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
+            font-size: 0.7rem;
+            color: #7e8c7e;
+        }
+
+        @media (max-width: 780px) {
+            .cards-grid {
                 grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .feature-card {
+                grid-column: span 1;
+            }
+            .nav-container {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 10px 20px;
+            }
+            .nav-links {
+                justify-content: center;
+                margin-top: 4px;
+            }
+            body {
+                padding-top: 110px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .nav-links a {
+                padding: 4px 10px;
+                font-size: 0.7rem;
+            }
+            .hero h1 {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -267,141 +298,95 @@
 
 <nav class="navbar">
     <div class="nav-container">
-        <a class="nav-brand" href="#">M. Hyde <span>Framework</span></a>
+        <a class="nav-brand" href="#">M. HYDE <span>· REENTRY</span></a>
         <ul class="nav-links">
-            <li><a href="#" class="active">Dashboard</a></li>
-            <li><a href="content/personal-growth.html">Personal Goals</a></li>
-            <li><a href="content/daily-structure.html">Daily Structure</a></li>
-            <li><a href="content/legal-divorce.html">Legal Strategy</a></li>
-            <li><a href="content/costs-resources.html">Finances</a></li>
-            <li><a href="content/family-framework.html">Family Framework</a></li>
+            <li><a href="index.html" class="active">Dashboard</a></li>
+            <li><a href="content/personal-growth.html">Growth Plan</a></li>
+            <li><a href="content/daily-structure.html">Daily Log</a></li>
+            <li><a href="content/legal-divorce.html">Legal Base</a></li>
+            <li><a href="content/filing-steps.html">Filing Steps</a></li>
+            <li><a href="content/timeline.html">Timeline</a></li>
+            <li><a href="content/costs-resources.html">Budget & Aid</a></li>
+            <li><a href="content/family-framework.html">Family Plan</a></li>
+            <li><a href="content/children-support.html">Child Support</a></li>
+            <li><a href="content/arrears-agreement.html">Arrears Agr.</a></li>
         </ul>
     </div>
 </nav>
 
 <div class="container">
-    <header>
+    <div class="hero">
         <h1>Michael Hyde</h1>
-        <div class="subtitle">Comprehensive Reentry Framework & Accountability Portal</div>
-    </header>
-
-    <div class="meta-grid">
-        <div class="meta-item">
-            <span>Client</span>
-            <p>Michael Hyde</p>
-        </div>
-        <div class="meta-item">
-            <span>Probation Officer</span>
-            <p>Noah Gilbert</p>
-        </div>
-        <div class="meta-item">
-            <span>Academic Reference</span>
-            <p>Professor Al Harris</p>
-        </div>
-        <div class="meta-item">
-            <span>Jurisdiction</span>
-            <p>Kenosha County, WI</p>
-        </div>
+        <div class="tagline">Accountability · Structural Reentry · Full‑Spectrum Framework</div>
     </div>
 
-    <div class="quote-box">
-        <p>“I take full responsibility for my past actions and the impact they had on my life and my family. I am committed to change, hard work, and making a positive life for myself and my children. I will follow all conditions of my probation and continue to strive for a better future.”</p>
-        <span>— Michael Hyde, Stated Commitment</span>
+    <div class="meta-strip">
+        <div class="meta-item"><span class="label">Client</span><span class="value">Michael Hyde</span></div>
+        <div class="meta-item"><span class="label">Probation Officer</span><span class="value">Noah Gilbert</span></div>
+        <div class="meta-item"><span class="label">Academic Mentor</span><span class="value">Prof. Al Harris</span></div>
+        <div class="meta-item"><span class="label">Jurisdiction</span><span class="value">Kenosha County, WI</span></div>
     </div>
 
-    <section style="margin-top: 40px;">
-        <h2>Core Tenets of the Reentry Plan</h2>
-        <p>Select any module below to review the explicit metrics, operational structures, and legal documents driving this transition framework.</p>
-        
-        <div class="dashboard-grid">
-            
-            <a href="content/personal-growth.html" class="card-link feature-card-wrapper">
-                <div class="card feature-card">
-                    <h3>The Man & His Commitments</h3>
-                    <div class="card-synopsis">
-                        <strong>Paramount Objective:</strong> Discover who Michael Hyde is working to become. This module outlines his absolute commitment to sobriety, personal accountability, cognitive development, and the long-term 12-to-24-month milestones required to achieve total stability.
-                    </div>
-                </div>
-            </a>
+    <div class="quote-compact">
+        “I take full responsibility for my past and the impact on my family. I am committed to absolute change, hard work, and building a stable future for my children. Every condition of my probation will be met.”
+        <span>— Michael Hyde, formal commitment statement</span>
+    </div>
 
-            <a href="content/daily-structure.html" class="card-link">
-                <div class="card">
-                    <h3>Daily Structure & Discipline</h3>
-                    <div class="card-synopsis">
-                        Interactive 15-minute interval execution log tracking a rigorous 12-hour labor block, physical training, and isolated family connection windows designed to eliminate negative inputs.
-                    </div>
-                </div>
-            </a>
+    <div class="section-title">
+        📋 Operational modules · court & life integration
+    </div>
 
-            <a href="content/legal-divorce.html" class="card-link">
-                <div class="card">
-                    <h3>Overall Legal & Custody Strategy</h3>
-                    <div class="card-synopsis">
-                        The primary legal approach for filing a no-fault Wisconsin divorce, minimizing fees, and formally restructuring the statutory record to match the reality of the children's living situation.
-                    </div>
-                </div>
-            </a>
+    <div class="cards-grid">
+        <!-- Paramount / featured card -->
+        <a href="content/personal-growth.html" class="card feature-card">
+            <div class="card-title">🎯 The Man & His Milestones <span>→</span></div>
+            <div class="card-desc">Paramount objective: sobriety, cognitive reframing, 12–24 month absolute stability blueprint. Core identity reformation beyond legal compliance.</div>
+        </a>
 
-            <a href="content/filing-steps.html" class="card-link">
-                <div class="card">
-                    <h3>Step-by-Step Filing Roadmap</h3>
-                    <div class="card-synopsis">
-                        A granular, technical checklist of the mandatory court forms (FA-4104V, etc.) and the exact chronological e-filing execution required in Kenosha County.
-                    </div>
-                </div>
-            </a>
+        <a href="content/daily-structure.html" class="card">
+            <div class="card-title">⏱️ Daily structure <span>→</span></div>
+            <div class="card-desc">15‑min interval execution log, 12‑hour labor blocks, physical training, family contact windows — zero idle risk.</div>
+        </a>
 
-            <a href="content/timeline.html" class="card-link">
-                <div class="card">
-                    <h3>Projected Timeline</h3>
-                    <div class="card-synopsis">
-                        The estimated 5-to-6 month benchmark progression, mapping out document preparation, e-filing, and the mandatory 120-day statutory cooling-off period.
-                    </div>
-                </div>
-            </a>
+        <a href="content/legal-divorce.html" class="card">
+            <div class="card-title">⚖️ Legal & custody strategy <span>→</span></div>
+            <div class="card-desc">No‑fault Wisconsin divorce, pro se filing, statutory realignment of children’s placement and support payee.</div>
+        </a>
 
-            <a href="content/costs-resources.html" class="card-link">
-                <div class="card">
-                    <h3>Budget & Resource Mitigation</h3>
-                    <div class="card-synopsis">
-                        Aggressive $4,800/mo income architecture prioritizing debt elimination, coupled with a localized directory of Kenosha and Racine community support networks.
-                    </div>
-                </div>
-            </a>
+        <a href="content/filing-steps.html" class="card">
+            <div class="card-title">📑 Step‑by‑step filing <span>→</span></div>
+            <div class="card-desc">Complete FA‑series forms list (4104V, 4108V, 4138V, 4150V) + e‑filing protocol in Kenosha County.</div>
+        </a>
 
-            <a href="content/family-framework.html" class="card-link">
-                <div class="card">
-                    <h3>Family Framework Overview</h3>
-                    <div class="card-synopsis">
-                        The overarching proposal to secure the children's stability by formally granting 100% legal and physical placement to their maternal grandfather.
-                    </div>
-                </div>
-            </a>
+        <a href="content/timeline.html" class="card">
+            <div class="card-title">📅 Projected timeline <span>→</span></div>
+            <div class="card-desc">120‑day statutory waiting period, final hearing milestones, expected case closure in 5–6 months.</div>
+        </a>
 
-            <a href="content/children-support.html" class="card-link">
-                <div class="card">
-                    <h3>Children & Support Redirection</h3>
-                    <div class="card-synopsis">
-                        Details on rectifying the legal discrepancy of the payee, ensuring all ongoing support payments go directly to the household where the children actually reside.
-                    </div>
-                </div>
-            </a>
+        <a href="content/costs-resources.html" class="card">
+            <div class="card-title">💰 Budget & resource map <span>→</span></div>
+            <div class="card-desc">$4,800/mo income architecture, fee waiver strategy, Kenosha legal clinics and support networks.</div>
+        </a>
 
-            <a href="content/arrears-agreement.html" class="card-link">
-                <div class="card">
-                    <h3>Grandfather Arrears Agreement</h3>
-                    <div class="card-synopsis">
-                        The explicit, good-faith request proposing the maternal grandfather "loan" the $15,000 arrears debt, creating a single, structured repayment plan under Wis. Stat. § 49.22(9).
-                    </div>
-                </div>
-            </a>
+        <a href="content/family-framework.html" class="card">
+            <div class="card-title">🏠 Family framework overview <span>→</span></div>
+            <div class="card-desc">Proposal for 100% legal/physical placement to maternal grandfather, structured father visitation.</div>
+        </a>
 
-        </div>
-    </section>
+        <a href="content/children-support.html" class="card">
+            <div class="card-title">👶 Child support redirection <span>→</span></div>
+            <div class="card-desc">Rectifying legal discrepancy: ensure all ongoing & arrears payments go to actual caregiver (grandfather).</div>
+        </a>
 
-    <footer>
-        Confidential Portfolio — Documented Under Academic Oversight — Formaly Incarcerated Helping The Incarcerated
-    </footer>
+        <a href="content/arrears-agreement.html" class="card">
+            <div class="card-title">📄 Arrears loan agreement <span>→</span></div>
+            <div class="card-desc">Interactive, court‑ready “loan & redirection” contract to resolve $15k arrears with structured repayment.</div>
+        </a>
+    </div>
+
+    <div class="footer-note">
+        Confidential reentry portfolio — documented under academic oversight · Formerly incarcerated helping the incarcerated
+    </div>
 </div>
 
 </body>
