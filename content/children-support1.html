@@ -1,0 +1,536 @@
+Here is the updated `children-support.html` file with a navbar that is now identical to the one on your `legal-divorce.html` page, with the "Child Support" link correctly highlighted as the active page.
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Children & Child Support Plan | Michael Hyde Reentry</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ---------- GLOBAL + REENTRY CARD STYLES (preserved from original) ---------- */
+        :root {
+            --primary-color: #1e4620;      /* Deep Institutional Green */
+            --secondary-color: #d4af37;     /* Muted Gold Accent */
+            --dark-text: #222222;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --border-color: #e0e0e0;
+            --support-bg: #fffaf0;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            --highlight-gold: #f7e9cd;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+            /* removed padding-top: 70px; sticky nav now handles spacing naturally */
+        }
+
+        /* main container */
+        .container {
+            max-width: 1100px;
+            margin: 32px auto;
+            background: var(--white);
+            padding: 40px 42px;
+            border-radius: 24px;
+            box-shadow: var(--card-shadow);
+            border-top: 6px solid var(--primary-color);
+        }
+
+        /* header & meta */
+        header {
+            margin-bottom: 32px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            letter-spacing: -0.2px;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: #5a6e5a;
+            font-weight: 500;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 16px;
+            margin-top: 8px;
+        }
+
+        /* meta badge row */
+        .meta-badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            background: #f4f7f2;
+            padding: 18px 24px;
+            border-radius: 20px;
+            margin-bottom: 32px;
+        }
+
+        .meta-chip {
+            flex: 1;
+            min-width: 160px;
+        }
+
+        .meta-chip span:first-child {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #3b5c3b;
+            letter-spacing: 0.5px;
+        }
+
+        .meta-chip p {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #1e2e1e;
+            margin-top: 4px;
+        }
+
+        /* section styling */
+        section {
+            margin-bottom: 48px;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 18px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2c542c;
+            margin: 24px 0 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 24px 0;
+        }
+
+        .info-card {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            transition: all 0.2s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .info-card h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: #1e4620;
+            border-left: 3px solid var(--secondary-color);
+            padding-left: 12px;
+        }
+
+        .highlight-badge {
+            background: var(--highlight-gold);
+            border-left: 4px solid var(--secondary-color);
+            padding: 18px 22px;
+            border-radius: 16px;
+            margin: 24px 0;
+            font-weight: 500;
+        }
+
+        .legal-box {
+            background: #eef4ea;
+            padding: 20px 24px;
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .comparison-table th {
+            background-color: #e9f0e5;
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 700;
+            color: #1e4620;
+        }
+
+        .comparison-table td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+            vertical-align: top;
+        }
+
+        .payment-flow {
+            background: #fef9e6;
+            border-radius: 20px;
+            padding: 20px;
+            font-family: monospace;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 8px 18px;
+            border: 1px solid var(--primary-color);
+            border-radius: 40px;
+            color: var(--primary-color);
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .footer-note {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6b6b6b;
+        }
+
+        @media (max-width: 760px) {
+            .container {
+                padding: 24px 20px;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+
+        .quote-sign {
+            font-style: italic;
+            margin: 20px 0 0;
+            padding: 12px 20px;
+            background: #fff7e8;
+            border-radius: 12px;
+            color: #2d2d2d;
+        }
+
+        /* ---------- IDENTICAL NAVBAR FROM LEGAL-DIVORCE.HTML (sticky, exact styles) ---------- */
+        .site-nav {
+            background: #1e4620;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-area {
+            padding: 12px 0;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #f9f3d9;
+            text-decoration: none;
+            letter-spacing: -0.3px;
+            background: #2b5e2a;
+            padding: 6px 14px;
+            border-radius: 40px;
+            transition: 0.2s;
+        }
+
+        .logo:hover {
+            background: #3f7840;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            gap: 6px;
+            padding: 8px 0;
+        }
+
+        .nav-links li a {
+            display: inline-block;
+            padding: 8px 16px;
+            font-weight: 500;
+            text-decoration: none;
+            color: #eef5e6;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            background: transparent;
+        }
+
+        .nav-links li a:hover {
+            background: #2d5e2b;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .nav-links li a.active {
+            background: #f9b81b;
+            color: #1e3a1a;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            font-weight: 600;
+        }
+
+        @media (max-width: 700px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-links {
+                justify-content: center;
+                margin-bottom: 8px;
+            }
+            .nav-links li a {
+                padding: 5px 12px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== IDENTICAL NAVIGATION BAR (from legal-divorce.html, active set to Child Support) ========== -->
+<nav class="site-nav">
+    <div class="nav-container">
+        <div class="logo-area">
+            <a href="../index.html" class="logo">⚖️ Hyde Reentry Compass</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html">🏠 Dashboard</a></li>
+            <li><a href="filing-steps.html">📋 Filing Steps</a></li>
+            <li><a href="legal-divorce.html">⚖️ Divorce & Custody</a></li>
+            <li><a href="children-support.html" class="active">👶 Child Support</a></li>
+            <li><a href="family-framework.html">🏡 Family Framework</a></li>
+            <li><a href="daily-structure.html">⏰ Daily Structure</a></li>
+            <li><a href="personal-growth.html">🌱 Personal Growth</a></li>
+            <li><a href="costs-resources.html">💰 Costs & Resources</a></li>
+            <li><a href="timeline.html">📅 Timeline</a></li>
+            <li><a href="arrears-agreement.html">📄 Arrears Agreement</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- MAIN CONTENT (fully preserved from original children-support.html) -->
+<div class="container">
+    <header>
+        <h1>Children & Child Support Plan</h1>
+        <div class="page-subtitle">Proposed legal restructuring — Custody, placement & financial realignment</div>
+    </header>
+
+    <div class="meta-badge-row">
+        <div class="meta-chip"><span>Current Arrears Balance</span><p>$15,000 (owed to maternal grandmother — legal fiction)</p></div>
+        <div class="meta-chip"><span>Primary Caregiver (de facto)</span><p>Maternal grandfather · 100% physical placement</p></div>
+        <div class="meta-chip"><span>Proposed Custody Shift</span><p>Legal custody + physical to maternal grandfather</p></div>
+        <div class="meta-chip"><span>Parenting Time (father)</span><p>4 hours weekly — structured, consistent</p></div>
+    </div>
+
+    <!-- CURRENT SITUATION vs REALITY -->
+    <section>
+        <h2>📌 Current situation vs. legal reality</h2>
+        <div class="card-grid">
+            <div class="info-card">
+                <h4>⚖️ Court records (fiction)</h4>
+                <ul style="margin-left: 20px; margin-top: 8px; color: #333;">
+                    <li>Child support recipient: <strong>Maternal grandmother</strong> (no contact with children)</li>
+                    <li>Arrears $15,000 legally owed to grandmother</li>
+                    <li>No formal custody order naming maternal grandfather</li>
+                </ul>
+            </div>
+            <div class="info-card">
+                <h4>🏠 Actual family arrangement</h4>
+                <ul style="margin-left: 20px; margin-top: 8px; color: #333;">
+                    <li>Children reside 100% of time with <strong>maternal grandfather</strong></li>
+                    <li>Grandfather provides all daily care, housing, education & health decisions</li>
+                    <li>Maternal grandmother absent, no involvement since divorce from grandfather</li>
+                </ul>
+            </div>
+        </div>
+        <div class="highlight-badge">
+            🔄 <strong>Core legal fix:</strong> The divorce action will terminate the legal fiction. I am filing to correct the child support payee, extinguish the inaccurate obligation, and establish an enforceable order that matches reality — protecting children’s best interests.
+        </div>
+    </section>
+
+    <!-- PROPOSED CUSTODY ORDER -->
+    <section>
+        <h2>📝 Proposed court order — full custody to maternal grandfather</h2>
+        <div class="legal-box">
+            <p style="font-weight: 500; margin-bottom: 12px;">Request to Kenosha County Circuit Court (Family Court Commissioner Elizabeth Pfeuffer):</p>
+            <ul style="margin-left: 24px;">
+                <li><strong>Legal Custody & Physical Placement:</strong> Maternal grandfather shall be awarded <strong>100% legal custody</strong> and <strong>100% physical placement</strong> of both minor children. He is the <em>de facto</em> primary caregiver.</li>
+                <li><strong>Father’s placement (Michael Hyde):</strong> Consistent, structured parenting time of <strong>one day per week for four (4) hours</strong> (e.g., Sunday 1pm–5pm), subject to parole coordination and grandfather’s convenience. This preserves parental bond while respecting children’s stability.</li>
+                <li><strong>Child Support Payee Modification:</strong> All future child support payments — both ongoing monthly support AND payments toward the $15,000 arrears — shall be made directly to <strong>maternal grandfather</strong>, not the maternal grandmother.</li>
+            </ul>
+        </div>
+        <p style="margin-top: 10px;">This court order will supersede any previous support orders, creating a clean, enforceable structure that serves the children’s actual home. The arrangement will be incorporated into the <strong>Marital Settlement Agreement (Form FA-4150V)</strong> and Parenting Plan (FA-4147V).</p>
+    </section>
+
+    <!-- THE $15,000 ARREARS "LOAN" PROPOSAL -->
+    <section>
+        <h2>💰 The $15,000 arrears solution — good faith 'loan' framework</h2>
+        <div class="info-card" style="background: #f9f6ef;">
+            <h4>📄 Formal request to maternal grandfather</h4>
+            <p><strong>“I am asking you to formally ‘loan’ me the $15,000 child support arrears that the court currently shows I owe to your ex-wife.</strong> In practice, after the court enters a new order naming you as the payee, I will make a single monthly payment to you that includes:</p>
+            <ul style="margin: 12px 0 12px 24px;">
+                <li>(1) my ongoing monthly child support obligation (calculated under Wisconsin child support guidelines, 21% of income for two children);</li>
+                <li>(2) an agreed-upon monthly amount toward the $15,000 arrears until the full balance is repaid.</li>
+            </ul>
+            <p>Every dollar — both ongoing support and arrears repayment — goes directly to <strong>you</strong> for the benefit of the children in your home. In exchange for you ‘loaning’ me the arrears (i.e., accepting repayment rather than your ex-wife), I fully satisfy the $15,000 debt through those monthly payments.”</p>
+            <div style="margin-top: 16px; background: white; border-radius: 14px; padding: 14px; border: 1px solid #e2dccd;">
+                <p style="font-weight: 700;">Why this works for grandfather:</p>
+                <p>✔ He gains legal custody and direct child support income.<br>
+                ✔ The $15,000 arrears will be repaid to him, not lost to a non-custodial grandmother.<br>
+                ✔ Provides a predictable, court-monitored financial stream for the children’s needs.</p>
+            </div>
+        </div>
+
+        <!-- Illustrative repayment table -->
+        <h3>📊 Illustrative monthly payment structure (sample)</h3>
+        <table class="comparison-table">
+            <thead>
+                <tr><th>Component</th><th>Estimated Amount</th><th>Recipient</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Ongoing monthly child support (projected: $4,800 net income → approx. 21% guideline)</td><td><strong>$816 / month</strong></td><td>Maternal grandfather</td></tr>
+                <tr><td>Arrears repayment ($15,000 over 36 months @ 0% interest, as proposed)</td><td><strong>$417 / month</strong></td><td>Maternal grandfather</td></tr>
+                <tr style="background:#f1f3ea;"><td><strong>Total monthly payment to grandfather</strong></td><td><strong>$1,233 / month</strong></td><td>Direct household support + arrears satisfaction</td></tr>
+            </tbody>
+        </table>
+        <p class="quote-sign" style="margin-top: 16px;">📌 Actual ongoing support amount will be set per Wisconsin child support guidelines, but the “loan” agreement ensures the full arrears balance is repaid to the actual caregiver, protecting the children and resolving my legal risk of incarceration.</p>
+    </section>
+
+    <!-- BENEFITS BREAKDOWN -->
+    <section>
+        <h2>✅ Why this approach benefits everyone</h2>
+        <div class="card-grid">
+            <div class="info-card"><h4>👶 For the children</h4>All support money flows to the home where they reside 100% of the time. Legal clarity reduces future conflict, and grandfather receives financial means for housing, health, and education.</div>
+            <div class="info-card"><h4>🧓 For maternal grandfather</h4>Obtains formal legal custody, child support income, and structured repayment of $15k arrears — money he can use for the children’s needs. The court order reflects his true role.</div>
+            <div class="info-card"><h4>🧑‍⚖️ For Michael (father)</h4>Resolves the $15,000 arrears in a way that directly supports his children; maintains 4-hour weekly placement; prevents future incarceration or wage garnishment tied to outdated obligation.</div>
+            <div class="info-card"><h4>🏛️ For the court</h4>Ends an informal, legally inaccurate arrangement. Replaces it with a clean, enforceable order based on actual facts (custody, payee, placement). Promotes efficiency and child welfare.</div>
+        </div>
+        <div class="legal-box" style="background: #e7f0e3;">
+            <p>⭐ <strong>Critical legal note:</strong> The “loan” structure is formalized as an acknowledgement of redirected arrears payment. Once the court modifies the payee to maternal grandfather, I will make monthly payments that include both current support + arrears installment. Maternal grandfather will not be required to "pay" the arrears to grandmother; the original support order will be vacated/amended as part of the divorce & new custody determination under <strong>Wis. Stat. § 767.451</strong> (modification of child support). All parties agree to this resolution.</p>
+        </div>
+    </section>
+
+    <!-- MY PLACEMENT: 4 HOURS/WEEK + STRUCTURE -->
+    <section>
+        <h2>🕊️ Parenting time framework — consistency & accountability</h2>
+        <div class="info-card" style="margin-bottom: 12px;">
+            <h4>Father’s visitation plan (proposed parenting plan excerpt)</h4>
+            <p><strong>Schedule:</strong> One day per week (Sunday preferred) for four (4) consecutive hours. Location to be mutually agreed, may include supervised transfer initially, but designed to strengthen the father-child relationship in a stable environment. No overnights until further agreement due to current transition period.</p>
+            <p><strong>Holiday & communication:</strong> Reasonable telephone/video calls twice per week. Major holidays to be discussed in good faith with grandfather as primary custodian.</p>
+            <p><em>This placement is fully aligned with my parole conditions (Officer Noah Gilbert), ensures I remain active in my children’s lives, and respects the grandfather’s central role.</em></p>
+        </div>
+        <div class="highlight-badge" style="margin-top: 8px;">
+            📅 Documentation: Proposed Parenting Plan (Form FA-4147V) will be attached to the divorce filing, signed and notarized before final hearing.
+        </div>
+    </section>
+
+    <!-- NEXT STEPS + LEGAL FORMS -->
+    <section>
+        <h2>📋 Next steps & incorporation into divorce filing</h2>
+        <ul style="margin-left: 28px; margin-bottom: 20px;">
+            <li>Work directly with maternal grandfather to finalize written “Acknowledgment of Arrears Repayment Agreement” (loan memo).</li>
+            <li>Complete <strong>Marital Settlement Agreement (FA-4150V)</strong> with explicit language: custody, placement schedule, child support payee modification, repayment schedule for arrears.</li>
+            <li>File amended Financial Disclosure Statement (FA-4139V) showing adjusted child support obligations.</li>
+            <li>Petition for Guardian ad Litem (FA-4136V) if needed for children's best interest review — but intend to proceed with uncontested agreement.</li>
+            <li>Present entire package to Kenosha County Court Commissioner during final hearing after 120-day waiting period.</li>
+        </ul>
+        <div style="background:#f5f5f5; border-radius: 24px; padding: 18px 22px;">
+            <p style="font-weight: 700;">📎 Critical forms used for this child support restructuring:</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px;">
+                <span class="btn-outline">FA-4150V (Marital Settlement Agreement)</span>
+                <span class="btn-outline">FA-4147V (Parenting Plan)</span>
+                <span class="btn-outline">FA-4138V (Income & Expense)</span>
+                <span class="btn-outline">FA-4139V (Financial Disclosure)</span>
+                <span class="btn-outline">FA-4126VA (Stipulation Temp Order)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANSPARENCY, ARREARS & INCARCERATION PREVENTION -->
+    <section>
+        <h2>⚖️ Preventing future incarceration & rebuilding trust</h2>
+        <p>Currently, the $15,000 arrears balance poses a real risk of enforcement action (suspension of license, interception of tax refunds, or even contempt proceedings). By restructuring the payee to the maternal grandfather <strong>and</strong> agreeing to a concrete monthly arrears repayment plan, I eliminate the legal fiction that threatens my ability to work and remain compliant with reentry obligations. Every dollar paid will be tracked and reported to the court. This structured approach demonstrates proactive accountability to Probation Officer Noah Gilbert and family court.</p>
+        <div class="quote-sign">
+            “I am committed to fully satisfying every dollar of child support obligation, but it must go to the person actually raising my children. This plan resolves the past while building a sustainable future for my kids.”
+            <div style="margin-top: 8px; font-style: normal; font-weight: bold;">— Michael Hyde, Petitioner Pro Se</div>
+        </div>
+    </section>
+
+    <!-- AFFIRMATION AND CONTACT FOR GRANDFATHER -->
+    <section>
+        <div style="background: #eef2ea; border-radius: 24px; padding: 24px; border: 1px solid #cddcbf;">
+            <h3 style="margin-top: 0;">🤝 Invitation to maternal grandfather</h3>
+            <p>I have prepared a draft “Loan & Arrears Redirection Agreement” that outlines the $15,000 repayment schedule, interest-free, with a term of 36 months (or accelerated if my income increases). Once you review and agree, we will notarize and attach to the Marital Settlement Agreement. The court will then issue a final order that:</p>
+            <ul>
+                <li>Names you as legal custodian and payee for child support.</li>
+                <li>Establishes the structured weekly placement for me.</li>
+                <li>Releases any existing support judgment against me in favor of the grandmother and substitutes your name and repayment plan.</li>
+            </ul>
+            <p style="margin-top: 14px;">📞 I will contact you directly to arrange a meeting, and we can use Kenosha County Legal Clinic if you wish to review the agreement with a volunteer attorney. Thank you for the love and stability you already provide to my children.</p>
+        </div>
+    </section>
+
+    <!-- TIMELINE MILESTONE (INTEGRATION WITH DIVORCE TIMELINE) -->
+    <section>
+        <h2>⏳ Alignment with divorce waiting period</h2>
+        <p>The 120-day mandatory waiting period (Wis. Stat. §767.315) begins after I serve my spouse. During that time I will finalize the agreement with maternal grandfather, exchange financial disclosures, and submit the final Marital Settlement Agreement. The Commissioner will review the child support restructure as part of the final hearing at month 4–5, and upon approval, the new support order will be entered — including the arrears repayment plan.</p>
+        <div style="background-color: #f9f3e1; border-radius: 16px; padding: 12px 20px; margin-top: 12px;">
+            ✅ <strong>Key milestones for children & support portion:</strong><br>
+            • Week 2–3: Draft Parenting Plan + Arrears Loan Memo with grandfather<br>
+            • Week 5: E-file petition + child support modification forms concurrently with divorce<br>
+            • Day 1–120: Engage in good faith, finalize MSA<br>
+            • Final hearing: Court signs order transferring custody & support to grandfather<br>
+        </div>
+    </section>
+
+    <footer class="footer-note">
+        Confidential Reentry Document — Michael Hyde, Petitioner Pro Se — Updated May 2026<br>
+        Verified with Kenosha County Court forms & Wisconsin self-help center. The proposed child support changes are designed to be in the children's best interests and comply with WI family code. All agreements will be signed and notarized prior to final decree.
+    </footer>
+</div>
+
+</body>
+</html>
+```
