@@ -1,3 +1,5 @@
+Here is the updated `daily-structure.html` file. Only the navigation bar has been replaced to match the standard design from your `legal-divorce.html` page, with the "Daily Structure" link highlighted as active.
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,65 +32,96 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--light-bg);
             color: var(--dark-text);
-            padding-top: 70px;
+            padding-top: 0;
             line-height: 1.5;
         }
 
-        /* Navbar (exactly as in given index) */
-        .navbar {
-            position: fixed;
+        /* ========== IDENTICAL NAVBAR (from legal-divorce.html) ========== */
+        .site-nav {
+            background: #1e4620;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            background-color: var(--primary-color);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            z-index: 1000;
+            z-index: 100;
         }
 
         .nav-container {
             max-width: 1300px;
             margin: 0 auto;
+            padding: 0 24px;
             display: flex;
-            justify-content: space-between;
+            flex-wrap: wrap;
             align-items: center;
-            padding: 0 20px;
-            height: 60px;
+            justify-content: space-between;
         }
 
-        .nav-brand {
-            color: var(--white);
+        .logo-area {
+            padding: 12px 0;
+        }
+
+        .logo {
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 1.3rem;
+            color: #f9f3d9;
             text-decoration: none;
-            font-size: 1.1rem;
+            letter-spacing: -0.3px;
+            background: #2b5e2a;
+            padding: 6px 14px;
+            border-radius: 40px;
+            transition: 0.2s;
         }
 
-        .nav-brand span {
-            color: var(--secondary-color);
+        .logo:hover {
+            background: #3f7840;
+            color: white;
         }
 
         .nav-links {
             display: flex;
-            list-style: none;
-            gap: 12px;
             flex-wrap: wrap;
+            list-style: none;
+            gap: 6px;
+            padding: 8px 0;
         }
 
-        .nav-links a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-size: 0.85rem;
+        .nav-links li a {
+            display: inline-block;
+            padding: 8px 16px;
             font-weight: 500;
-            transition: 0.2s;
-            padding: 6px 10px;
-            border-radius: 4px;
-            white-space: nowrap;
+            text-decoration: none;
+            color: #eef5e6;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            background: transparent;
         }
 
-        .nav-links a:hover, .nav-links a.active {
+        .nav-links li a:hover {
+            background: #2d5e2b;
             color: white;
-            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .nav-links li a.active {
+            background: #f9b81b;
+            color: #1e3a1a;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            font-weight: 600;
+        }
+
+        @media (max-width: 700px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-links {
+                justify-content: center;
+                margin-bottom: 8px;
+            }
+            .nav-links li a {
+                padding: 5px 12px;
+                font-size: 0.8rem;
+            }
         }
 
         /* main layout */
@@ -348,16 +381,23 @@
 </head>
 <body>
 
-<nav class="navbar">
+<!-- ========== IDENTICAL NAVIGATION BAR (matching legal-divorce.html, active = Daily Structure) ========== -->
+<nav class="site-nav">
     <div class="nav-container">
-        <a class="nav-brand" href="#">M. Hyde <span>Accountability</span></a>
+        <div class="logo-area">
+            <a href="../index.html" class="logo">⚖️ Hyde Reentry Compass</a>
+        </div>
         <ul class="nav-links">
-            <li><a href="#" class="active">Interactive Calendar</a></li>
-            <li><a href="#">Daily Structure</a></li>
-            <li><a href="#">Filing Steps</a></li>
-            <li><a href="#">Costs & Resources</a></li>
-            <li><a href="#">Timeline</a></li>
-            <li><a href="#">Family Framework</a></li>
+            <li><a href="../index.html">🏠 Dashboard</a></li>
+            <li><a href="filing-steps.html">📋 Filing Steps</a></li>
+            <li><a href="legal-divorce.html">⚖️ Divorce & Custody</a></li>
+            <li><a href="children-support.html">👶 Child Support</a></li>
+            <li><a href="family-framework.html">🏡 Family Framework</a></li>
+            <li><a href="daily-structure.html" class="active">⏰ Daily Structure</a></li>
+            <li><a href="personal-growth.html">🌱 Personal Growth</a></li>
+            <li><a href="costs-resources.html">💰 Costs & Resources</a></li>
+            <li><a href="timeline.html">📅 Timeline</a></li>
+            <li><a href="arrears-agreement.html">📄 Arrears Agreement</a></li>
         </ul>
     </div>
 </nav>
@@ -820,3 +860,4 @@
 </script>
 </body>
 </html>
+```
