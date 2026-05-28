@@ -1,1 +1,798 @@
+Here is an interactive HTML document that creates a "Family Support Circle" tool. Michael can visually map his family members, classify their influence, and manage their details in a dynamic radial chart and sortable table.
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Family Support Circle | Michael Hyde Reentry</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, 'Helvetica Neue', sans-serif;
+            background: #f4f7f2;
+            color: #1a2c1a;
+            line-height: 1.5;
+        }
+
+        /* navigation identical to legal-divorce */
+        .site-nav {
+            background: #1e4620;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-area {
+            padding: 12px 0;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #f9f3d9;
+            text-decoration: none;
+            letter-spacing: -0.3px;
+            background: #2b5e2a;
+            padding: 6px 14px;
+            border-radius: 40px;
+            transition: 0.2s;
+        }
+
+        .logo:hover {
+            background: #3f7840;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            gap: 6px;
+            padding: 8px 0;
+        }
+
+        .nav-links li a {
+            display: inline-block;
+            padding: 8px 16px;
+            font-weight: 500;
+            text-decoration: none;
+            color: #eef5e6;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            background: transparent;
+        }
+
+        .nav-links li a:hover {
+            background: #2d5e2b;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .nav-links li a.active {
+            background: #f9b81b;
+            color: #1e3a1a;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            font-weight: 600;
+        }
+
+        @media (max-width: 700px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav-links {
+                justify-content: center;
+                margin-bottom: 8px;
+            }
+            .nav-links li a {
+                padding: 5px 12px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* main layout */
+        .main-container {
+            max-width: 1300px;
+            margin: 32px auto;
+            padding: 0 24px;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+            padding: 32px 36px;
+        }
+
+        @media (max-width: 760px) {
+            .content-card {
+                padding: 24px 20px;
+            }
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #1e4620;
+            border-left: 6px solid #f9b81b;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .subhead {
+            color: #4a6741;
+            margin-bottom: 24px;
+            border-bottom: 1px solid #e2efdf;
+            padding-bottom: 12px;
+        }
+
+        /* two column layout: canvas + form */
+        .family-dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            margin: 32px 0 28px;
+        }
+
+        .canvas-area {
+            flex: 1.2;
+            min-width: 280px;
+            background: #fefdf7;
+            border-radius: 28px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            border: 1px solid #e0ecd8;
+        }
+
+        .canvas-area h3 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #2a5c2a;
+        }
+
+        .family-canvas {
+            display: flex;
+            justify-content: center;
+            background: #ffffff;
+            border-radius: 32px;
+            padding: 12px;
+            border: 1px solid #ddecd4;
+        }
+
+        canvas {
+            background: #fefef7;
+            border-radius: 50%;
+            width: 100%;
+            height: auto;
+            max-width: 500px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .form-area {
+            flex: 0.9;
+            min-width: 280px;
+            background: #fafaf5;
+            border-radius: 28px;
+            padding: 22px 24px;
+            border: 1px solid #e2ecd9;
+        }
+
+        .form-area h3 {
+            font-size: 1.3rem;
+            margin-bottom: 18px;
+            color: #1e4620;
+            border-left: 4px solid #f9b81b;
+            padding-left: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            color: #2b4f2b;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #cfdec8;
+            border-radius: 24px;
+            font-family: inherit;
+            background: white;
+            transition: 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #f9b81b;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(249,184,27,0.2);
+        }
+
+        .influence-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .positive-bg { background: #dff0e0; color: #1d6b2c; border-left: 3px solid #2e7d32; }
+        .negative-bg { background: #ffe6e3; color: #b33a2c; border-left: 3px solid #d9534f; }
+        .neutral-bg { background: #eef0e8; color: #5f6b55; border-left: 3px solid #a0a890; }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #1e4620;
+            color: white;
+            border: none;
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-secondary {
+            background: #eef3ea;
+            border: 1px solid #c2d7b9;
+            color: #2c5e2a;
+            padding: 8px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+
+        .btn-danger {
+            background: #fff0ef;
+            border: 1px solid #e0b4af;
+            color: #b33a2c;
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            transform: translateY(-1px);
+            filter: brightness(0.96);
+        }
+
+        /* family table */
+        .family-table-section {
+            margin-top: 32px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 20px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+        th {
+            background: #e9f3e6;
+            padding: 14px 12px;
+            text-align: left;
+            color: #1e4620;
+            font-weight: 700;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8de;
+            vertical-align: middle;
+        }
+
+        .table-actions button {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin: 0 5px;
+            padding: 4px 8px;
+            border-radius: 30px;
+            transition: 0.1s;
+        }
+
+        .table-actions button:hover {
+            background: #ecf3e8;
+        }
+
+        .legend {
+            display: flex;
+            gap: 24px;
+            margin-top: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            font-size: 0.75rem;
+        }
+
+        .legend span {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+
+        footer {
+            margin-top: 48px;
+            text-align: center;
+            padding: 24px 16px 32px;
+            font-size: 0.85rem;
+            color: #5a6e55;
+            border-top: 1px solid #dde8d8;
+        }
+
+        .empty-canvas-msg {
+            text-align: center;
+            color: #92a88b;
+            padding: 40px;
+            font-style: italic;
+        }
+        .influence-tag {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<!-- identical navbar (family-framework active) -->
+<nav class="site-nav">
+    <div class="nav-container">
+        <div class="logo-area">
+            <a href="index.html" class="logo">⚖️ Hyde Reentry Compass</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">🏠 Dashboard</a></li>
+            <li><a href="filing-steps.html">📋 Filing Steps</a></li>
+            <li><a href="legal-divorce.html">⚖️ Divorce & Custody</a></li>
+            <li><a href="children-support.html">👶 Child Support</a></li>
+            <li><a href="family-framework.html" class="active">🏡 Family Framework</a></li>
+            <li><a href="daily-structure.html">⏰ Daily Structure</a></li>
+            <li><a href="personal-growth.html">🌱 Personal Growth</a></li>
+            <li><a href="costs-resources.html">💰 Costs & Resources</a></li>
+            <li><a href="timeline.html">📅 Timeline</a></li>
+            <li><a href="arrears-agreement.html">📄 Arrears Agreement</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main class="main-container">
+    <div class="content-card">
+        <h1>🌳 Family Support Circle</h1>
+        <div class="subhead">Map your direct and extended family — recognize each member’s influence (positive / negative / neutral) as you build your reentry foundation.</div>
+
+        <!-- DASHBOARD: canvas + form -->
+        <div class="family-dashboard">
+            <!-- Left: Radial Family Chart -->
+            <div class="canvas-area">
+                <h3>🌟 My Family Constellation</h3>
+                <div class="family-canvas">
+                    <canvas id="familyCanvas" width="500" height="500" style="max-width:100%; height:auto; border-radius:50%"></canvas>
+                </div>
+                <div class="legend">
+                    <div><span style="background:#2e7d32;"></span> Positive influence</div>
+                    <div><span style="background:#d9534f;"></span> Negative influence</div>
+                    <div><span style="background:#9e9e9e;"></span> Neutral / mixed</div>
+                    <div><span style="background:#1e4620;"></span> 💚 Michael (center)</div>
+                </div>
+                <p class="info-note" style="font-size:0.7rem; text-align:center; margin-top:12px;">💡 Hover or click on a circle? Tap any node in the table or chart to edit. The chart shows how each family member connects to you.</p>
+            </div>
+
+            <!-- Right: Add / Edit Family Member -->
+            <div class="form-area">
+                <h3>➕ Add or edit family member</h3>
+                <form id="familyMemberForm">
+                    <div class="form-group">
+                        <label>Full name *</label>
+                        <input type="text" id="memberName" placeholder="e.g., Robert Harris (Maternal Grandfather)" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Relationship (direct / extended)</label>
+                        <input type="text" id="memberRelation" placeholder="e.g., Maternal grandfather, Aunt, Cousin, Mother">
+                    </div>
+                    <div class="form-group">
+                        <label>Influence on my reentry & life</label>
+                        <select id="memberInfluence">
+                            <option value="positive">✨ Positive — supportive, encouraging</option>
+                            <option value="negative">⚠️ Negative — toxic, harmful, destabilizing</option>
+                            <option value="neutral">⚖️ Neutral — distant or mixed impact</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>📝 What they mean to me (notes, role, boundaries)</label>
+                        <textarea id="memberNotes" rows="2" placeholder="How do they affect my journey? What support or challenge do they bring?"></textarea>
+                    </div>
+                    <div class="action-buttons">
+                        <button type="submit" id="saveMemberBtn" class="btn-primary">💾 Save Family Member</button>
+                        <button type="button" id="cancelEditBtn" class="btn-secondary" style="display: none;">Cancel Edit</button>
+                        <button type="button" id="clearAllBtn" class="btn-secondary btn-danger">🗑️ Clear All</button>
+                    </div>
+                    <input type="hidden" id="editMemberId" value="">
+                </form>
+                <div class="info-note" style="margin-top: 18px; background:#eef3ea; border-radius: 20px; padding: 10px; font-size:0.75rem;">
+                    🧩 <strong>Family framework insight:</strong> understanding each person's role helps set boundaries, nurture positive ties, and manage conflict. Only family members (blood, marriage, extended) included.
+                </div>
+            </div>
+        </div>
+
+        <!-- Family members table -->
+        <div class="family-table-section">
+            <h3 style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">📋 My Family Circle Registry <span id="memberCountBadge" class="badge" style="background:#eef3ea;">0 members</span></h3>
+            <div style="overflow-x: auto;">
+                <table id="familyTable">
+                    <thead>
+                        <tr><th>Name</th><th>Relationship</th><th>Influence</th><th>Notes / Impact</th><th style="width:80px">Actions</th></tr>
+                    </thead>
+                    <tbody id="familyTableBody">
+                        <tr><td colspan="5" style="text-align:center; padding: 32px;">✨ No family members added yet. Use the form to map your support circle.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>🌿 Family Framework — A tool for self-reflection & reentry planning | Michael Hyde Structured Reentry Plan</p>
+        <p style="margin-top: 8px;">📬 Contact: Albert Harris, Associate Professor | <a href="mailto:secondchancehousingusa@gmail.com">email</a> | 262-236-5443</p>
+        <p style="font-size: 0.75rem;">Data stored locally in your browser. Use this compass to recognize family dynamics — positive anchors and cautionary figures.</p>
+    </footer>
+</main>
+
+<script>
+    // ---------- FAMILY DATA MODEL (localStorage) ----------
+    let familyMembers = [];  // each: { id, name, relation, influence, notes, createdAt }
+    let editMode = false;
+    let editingId = null;
+
+    // DOM elements
+    const nameInput = document.getElementById('memberName');
+    const relationInput = document.getElementById('memberRelation');
+    const influenceSelect = document.getElementById('memberInfluence');
+    const notesInput = document.getElementById('memberNotes');
+    const editIdHidden = document.getElementById('editMemberId');
+    const saveBtn = document.getElementById('saveMemberBtn');
+    const cancelEditBtn = document.getElementById('cancelEditBtn');
+    const clearAllBtn = document.getElementById('clearAllBtn');
+    const familyTableBody = document.getElementById('familyTableBody');
+    const memberCountBadge = document.getElementById('memberCountBadge');
+    const canvas = document.getElementById('familyCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let canvasWidth = 500, canvasHeight = 500;
+
+    function resizeCanvas() {
+        const container = canvas.parentElement;
+        const size = Math.min(container.clientWidth, 480);
+        canvas.width = size;
+        canvas.height = size;
+        canvasWidth = size;
+        canvasHeight = size;
+        drawFamilyCircle();
+    }
+    window.addEventListener('resize', () => resizeCanvas());
+
+    // Load from localStorage
+    function loadMembers() {
+        const stored = localStorage.getItem('michael_family_circle');
+        if (stored) {
+            try {
+                familyMembers = JSON.parse(stored);
+            } catch(e) { familyMembers = []; }
+        } else {
+            // optional demo examples: just to illustrate, but user can delete
+            familyMembers = [
+                { id: 'demo1', name: 'Maternal Grandfather', relation: 'Custodial guardian, primary caregiver', influence: 'positive', notes: 'Provides stable home, raises my children. Anchor of support.', createdAt: Date.now() },
+                { id: 'demo2', name: 'Maternal Grandmother (estranged)', relation: 'Legal fiction payee, absent', influence: 'negative', notes: 'No contact, but court record shows her as recipient. Complicates child support but I\'m correcting.', createdAt: Date.now() },
+                { id: 'demo3', name: 'Michael Jr. (son)', relation: 'Child', influence: 'positive', notes: 'My motivation; I need to show up and rebuild our bond.', createdAt: Date.now() }
+            ];
+            saveMembers();
+        }
+        renderTable();
+        drawFamilyCircle();
+        updateBadge();
+    }
+
+    function saveMembers() {
+        localStorage.setItem('michael_family_circle', JSON.stringify(familyMembers));
+        renderTable();
+        drawFamilyCircle();
+        updateBadge();
+    }
+
+    function updateBadge() {
+        memberCountBadge.textContent = `${familyMembers.length} member${familyMembers.length !== 1 ? 's' : ''}`;
+    }
+
+    // Add or update member
+    function saveMember(name, relation, influence, notes) {
+        if (!name.trim()) {
+            alert("Please enter a family member's name.");
+            return false;
+        }
+        if (editMode && editingId) {
+            const index = familyMembers.findIndex(m => m.id === editingId);
+            if (index !== -1) {
+                familyMembers[index] = {
+                    ...familyMembers[index],
+                    name: name.trim(),
+                    relation: relation.trim() || '—',
+                    influence: influence,
+                    notes: notes.trim() || '',
+                    updatedAt: Date.now()
+                };
+            }
+            resetForm();
+        } else {
+            // new member
+            const newMember = {
+                id: Date.now() + '-' + Math.random().toString(36).substr(2, 6),
+                name: name.trim(),
+                relation: relation.trim() || '—',
+                influence: influence,
+                notes: notes.trim() || '',
+                createdAt: Date.now()
+            };
+            familyMembers.push(newMember);
+        }
+        saveMembers();
+        resetForm();
+        return true;
+    }
+
+    function deleteMember(id) {
+        if (confirm("Remove this family member from your circle?")) {
+            familyMembers = familyMembers.filter(m => m.id !== id);
+            saveMembers();
+            if (editMode && editingId === id) resetForm();
+        }
+    }
+
+    function editMember(id) {
+        const member = familyMembers.find(m => m.id === id);
+        if (!member) return;
+        nameInput.value = member.name;
+        relationInput.value = member.relation;
+        influenceSelect.value = member.influence;
+        notesInput.value = member.notes;
+        editIdHidden.value = member.id;
+        editMode = true;
+        editingId = member.id;
+        saveBtn.textContent = '✏️ Update Member';
+        cancelEditBtn.style.display = 'inline-flex';
+        // scroll to form
+        document.querySelector('.form-area').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetForm() {
+        nameInput.value = '';
+        relationInput.value = '';
+        influenceSelect.value = 'positive';
+        notesInput.value = '';
+        editIdHidden.value = '';
+        editMode = false;
+        editingId = null;
+        saveBtn.textContent = '💾 Save Family Member';
+        cancelEditBtn.style.display = 'none';
+    }
+
+    function clearAllMembers() {
+        if (familyMembers.length === 0) return;
+        if (confirm("⚠️ PERMANENT: Delete every family member from this circle? This will erase all data.")) {
+            familyMembers = [];
+            saveMembers();
+            resetForm();
+        }
+    }
+
+    // Render table
+    function renderTable() {
+        if (!familyTableBody) return;
+        if (familyMembers.length === 0) {
+            familyTableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 32px;">👪 No family members yet. Add your support circle.</td></tr>';
+            return;
+        }
+        let html = '';
+        familyMembers.forEach(member => {
+            let influenceClass = '';
+            let influenceLabel = '';
+            if (member.influence === 'positive') { influenceClass = 'positive-bg'; influenceLabel = '✨ Positive'; }
+            else if (member.influence === 'negative') { influenceClass = 'negative-bg'; influenceLabel = '⚠️ Negative'; }
+            else { influenceClass = 'neutral-bg'; influenceLabel = '⚖️ Neutral'; }
+            html += `<tr>
+                <td><strong>${escapeHtml(member.name)}</strong></td>
+                <td>${escapeHtml(member.relation)}</td>
+                <td><span class="influence-tag ${influenceClass}">${influenceLabel}</span></td>
+                <td>${escapeHtml(member.notes || '—')}</td>
+                <td class="table-actions">
+                    <button class="edit-family" data-id="${member.id}" title="Edit">✏️</button>
+                    <button class="delete-family" data-id="${member.id}" title="Delete">🗑️</button>
+                </td>
+            </tr>`;
+        });
+        familyTableBody.innerHTML = html;
+        // attach event listeners to edit/delete buttons
+        document.querySelectorAll('.edit-family').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = btn.getAttribute('data-id');
+                editMember(id);
+            });
+        });
+        document.querySelectorAll('.delete-family').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = btn.getAttribute('data-id');
+                deleteMember(id);
+            });
+        });
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    // -------------- RADIAL FAMILY CHART (canvas) --------------
+    function drawFamilyCircle() {
+        if (!ctx) return;
+        const w = canvasWidth, h = canvasHeight;
+        ctx.clearRect(0, 0, w, h);
+        const centerX = w/2, centerY = h/2;
+        const radiusCore = Math.min(w, h) * 0.12;   // central node size
+        const orbitRadius = Math.min(w, h) * 0.32;   // distance for members
+
+        // Draw central "Michael" node
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radiusCore, 0, 2*Math.PI);
+        ctx.fillStyle = "#1e4620";
+        ctx.fill();
+        ctx.fillStyle = "white";
+        ctx.font = `bold ${Math.max(12, radiusCore * 0.5)}px "Segoe UI"`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("ME", centerX, centerY);
+        
+        // If no members, show hint
+        if (familyMembers.length === 0) {
+            ctx.font = "12px system-ui";
+            ctx.fillStyle = "#8aa882";
+            ctx.fillText("➕ Add family members", centerX, centerY + radiusCore + 18);
+            return;
+        }
+
+        const count = familyMembers.length;
+        const angleStep = (Math.PI * 2) / count;
+
+        // Draw lines and nodes
+        for (let i = 0; i < count; i++) {
+            const member = familyMembers[i];
+            const angle = i * angleStep - Math.PI/2; // start from top
+            const x = centerX + orbitRadius * Math.cos(angle);
+            const y = centerY + orbitRadius * Math.sin(angle);
+            const nodeRadius = Math.min(28, Math.max(18, w * 0.045));
+            
+            // draw line from center to node
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(x, y);
+            ctx.strokeStyle = "#cbdcc5";
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            
+            // node background color based on influence
+            let nodeColor = "#9e9e9e";
+            if (member.influence === 'positive') nodeColor = "#2e7d32";
+            else if (member.influence === 'negative') nodeColor = "#d9534f";
+            else nodeColor = "#8f9b82";
+            
+            ctx.beginPath();
+            ctx.arc(x, y, nodeRadius, 0, 2*Math.PI);
+            ctx.fillStyle = nodeColor;
+            ctx.fill();
+            ctx.fillStyle = "white";
+            ctx.font = `bold ${Math.max(10, nodeRadius * 0.65)}px "Segoe UI"`;
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            let shortName = member.name;
+            if (shortName.length > 12) shortName = shortName.substring(0,10)+'..';
+            ctx.fillText(shortName, x, y);
+            
+            // tiny tooltip effect on hover not necessary, but we store data coordinates for click detection
+        }
+
+        // Optional: add labels for influence legend hint
+        ctx.font = "9px system-ui";
+        ctx.fillStyle = "#5a7153";
+        ctx.fillText("✧ Each circle = family member", centerX, h - 12);
+    }
+
+    // Canvas click detection: allow edit on tap/click
+    function handleCanvasClick(e) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;   // canvas physical size vs CSS
+        const scaleY = canvas.height / rect.height;
+        let mouseX = (e.clientX - rect.left) * scaleX;
+        let mouseY = (e.clientY - rect.top) * scaleY;
+        const centerX = canvasWidth/2, centerY = canvasHeight/2;
+        const orbitRadius = Math.min(canvasWidth, canvasHeight) * 0.32;
+        const count = familyMembers.length;
+        if (count === 0) return;
+        const angleStep = (Math.PI * 2) / count;
+        for (let i = 0; i < count; i++) {
+            const angle = i * angleStep - Math.PI/2;
+            const x = centerX + orbitRadius * Math.cos(angle);
+            const y = centerY + orbitRadius * Math.sin(angle);
+            const nodeRadius = Math.min(28, Math.max(18, canvasWidth * 0.045));
+            const dx = mouseX - x, dy = mouseY - y;
+            const dist = Math.hypot(dx, dy);
+            if (dist <= nodeRadius) {
+                const member = familyMembers[i];
+                alert(`👤 ${member.name}\n📌 ${member.relation}\n💫 Influence: ${member.influence.toUpperCase()}\n📝 Notes: ${member.notes || '—'}\n\nClick "Edit" in table to modify.`);
+                return;
+            }
+        }
+    }
+
+    // initialize canvas and attach click
+    function initCanvas() {
+        resizeCanvas();
+        canvas.addEventListener('click', handleCanvasClick);
+    }
+
+    // event listeners
+    document.getElementById('familyMemberForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        saveMember(nameInput.value, relationInput.value, influenceSelect.value, notesInput.value);
+    });
+    cancelEditBtn.addEventListener('click', resetForm);
+    clearAllBtn.addEventListener('click', clearAllMembers);
+
+    // initial load
+    loadMembers();
+    initCanvas();
+    window.addEventListener('resize', () => { resizeCanvas(); drawFamilyCircle(); });
+</script>
+</body>
+</html>
+```
