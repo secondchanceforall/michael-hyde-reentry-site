@@ -85,11 +85,12 @@
             border-radius: 16px;
             padding: 1.6rem 2rem;
             margin-bottom: 2rem;
-            transition: border-color 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         .route-card:hover {
             border-color: #b0c4db;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
         }
 
         .route-card .route-title {
@@ -113,6 +114,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         .route-desc {
@@ -142,15 +144,13 @@
             font-weight: 600;
         }
 
-        .form-label {
-            font-weight: 600;
-            color: #0b3b5c;
+        .route-desc .example-firms {
             background: #eef3f9;
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            display: inline-block;
-            margin-top: 1rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            margin: 0.5rem 0 0.2rem 0;
+            font-size: 0.95rem;
+            border-left: 3px solid #0b3b5c;
         }
 
         /* ── yes/no row ── */
@@ -197,16 +197,29 @@
             flex-shrink: 0;
         }
 
-        /* ── fill-in fields ── */
+        /* ── fill-in fields (hidden by default) ── */
+        .details-wrapper {
+            display: none;
+            /* hidden until YES is selected */
+            margin-top: 0.8rem;
+            border-radius: 12px;
+            border: 1px solid #d0dbe9;
+            background: #ffffff;
+            padding: 0.2rem 0.2rem 0.2rem 0.2rem;
+            transition: all 0.2s ease;
+        }
+
+        .details-wrapper.visible {
+            display: block;
+        }
+
         .detail-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 0.8rem 1.5rem;
-            margin: 0.8rem 0 0.2rem 0;
-            padding: 0.8rem 1.2rem;
+            padding: 1.2rem 1.4rem;
             background: #ffffff;
             border-radius: 12px;
-            border: 1px solid #e2e8f0;
         }
 
         .detail-grid .field {
@@ -251,17 +264,17 @@
             grid-column: 1 / -1;
         }
 
-        /* ── form badge (VE-SAC etc) ── */
+        /* ── form badge ── */
         .form-badge {
             display: inline-block;
             background: #0b3b5c;
             color: #fff;
             font-weight: 700;
             font-size: 0.8rem;
-            padding: 0.25rem 1rem;
+            padding: 0.3rem 1.2rem;
             border-radius: 40px;
             letter-spacing: 0.3px;
-            margin-top: 0.6rem;
+            margin: 0.6rem 0 1rem 1.4rem;
         }
 
         /* ── important note ── */
@@ -289,7 +302,7 @@
             color: #0b3b5c;
         }
 
-        /* ── footer / meta ── */
+        /* ── footer ── */
         .footer-note {
             border-top: 1px solid #dde3ed;
             padding-top: 1.2rem;
@@ -322,6 +335,11 @@
                 break-inside: avoid;
                 border-color: #aaa;
                 background: #fff;
+            }
+            .details-wrapper {
+                display: block !important;
+                /* show all fields on print */
+                border-color: #888;
             }
             .yn-row .yn-options input[type="radio"] {
                 accent-color: #000;
@@ -364,6 +382,12 @@
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
+            .route-desc .example-firms {
+                background: #eef3f9 !important;
+                border-left-color: #0b3b5c !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
         }
 
         @media (max-width: 650px) {
@@ -390,6 +414,9 @@
             .header .badge {
                 font-size: 0.75rem;
                 padding: 0.3rem 0.8rem;
+            }
+            .form-badge {
+                margin-left: 0.8rem;
             }
         }
     </style>
@@ -418,19 +445,13 @@
         <!-- ============================================================ -->
         <!-- ROUTE 1 — Private Security Company Manager                     -->
         <!-- ============================================================ -->
-        <div class="route-card">
+        <div class="route-card" id="route1">
             <div class="route-title">
                 <span class="num">1</span>
                 Private Security Company Manager
             </div>
 
-            <div class="route-desc">
-                <p>You worked full-time for 3 years as a manager or administrator for an <strong>Illinois-licensed private security company</strong>.</p>
-                <ul>
-                    <li><strong>Form required:</strong> <span style="background:#eef3f9; padding:0.1rem 0.8rem; border-radius:30px; font-weight:600;">VE-SAC</span> — Verification of Employment / Experience</li>
-                    <li>Your former employer completes this form to verify your employment and managerial duties.</li>
-                </ul>
-            </div>
+            <!-- Descriptive text removed as requested -->
 
             <!-- YES / NO question -->
             <div class="yn-row">
@@ -441,90 +462,96 @@
                 </div>
             </div>
 
-            <!-- fill-in details -->
-            <div class="detail-grid">
-                <div class="field">
-                    <label>Employer / Company Name</label>
-                    <input type="text" placeholder="e.g. SecureGuard Inc." />
+            <!-- Hidden details – revealed only on YES -->
+            <div class="details-wrapper" id="details1">
+                <div class="detail-grid">
+                    <div class="field">
+                        <label>Employer / Company Name</label>
+                        <input type="text" placeholder="e.g. SecureGuard Inc." />
+                    </div>
+                    <div class="field">
+                        <label>Employer IDFPR License #</label>
+                        <input type="text" placeholder="e.g. 123.000456" />
+                    </div>
+                    <div class="field">
+                        <label>Your Job Title</label>
+                        <input type="text" placeholder="e.g. Operations Manager" />
+                    </div>
+                    <div class="field">
+                        <label>Dates of Employment (full-time)</label>
+                        <input type="text" placeholder="e.g. 2021 – 2024" />
+                    </div>
+                    <div class="field field--full">
+                        <label>Brief description of managerial / administrative duties</label>
+                        <textarea placeholder="e.g. Oversaw 45 security officers, handled scheduling, client relations, and compliance reporting…"></textarea>
+                    </div>
                 </div>
-                <div class="field">
-                    <label>Employer IDFPR License # (if known)</label>
-                    <input type="text" placeholder="e.g. 123.000456" />
-                </div>
-                <div class="field">
-                    <label>Your Job Title</label>
-                    <input type="text" placeholder="e.g. Operations Manager" />
-                </div>
-                <div class="field">
-                    <label>Dates of Employment (full-time)</label>
-                    <input type="text" placeholder="e.g. 2021 – 2024" />
-                </div>
-                <div class="field field--full">
-                    <label>Brief description of managerial / administrative duties</label>
-                    <textarea placeholder="e.g. Oversaw 45 security officers, handled scheduling, client relations, and compliance reporting…"></textarea>
-                </div>
-            </div>
-
-            <div style="margin-top:0.6rem;">
-                <span class="form-badge">If YES → Form VE-SAC</span>
+                <div class="form-badge">Form VE-SAC required</div>
             </div>
         </div>
 
         <!-- ============================================================ -->
         <!-- ROUTE 2 — Proprietary Security Force Manager                  -->
         <!-- ============================================================ -->
-        <div class="route-card">
+        <div class="route-card" id="route2">
             <div class="route-title">
                 <span class="num">2</span>
                 Proprietary Security Force Manager
             </div>
 
+            <!-- New description with examples, requirement text removed as requested -->
             <div class="route-desc">
-                <p>You worked full-time for 3 years as a manager of a company's <strong>proprietary security force with 30 or more employees</strong>.</p>
-                <ul>
-                    <li>The security force must be <strong>registered with Illinois IDFPR</strong>.</li>
-                    <li><strong>Form required:</strong> <span style="background:#eef3f9; padding:0.1rem 0.8rem; border-radius:30px; font-weight:600;">VE-PSF</span> — Verification of Employment / Experience</li>
-                    <li>Your employer verifies your management experience and the size of the security force.</li>
-                </ul>
-            </div>
-
-            <!-- (No YES/NO question requested for #2, but we keep the details for completeness) -->
-            <div style="margin-top:1rem; background:#ffffff; padding:0.8rem 1.2rem; border-radius:12px; border:1px solid #e2e8f0;">
-                <p style="font-size:0.95rem; color:#1e2a3a;"><strong>📋 Documentation needed:</strong> VE-PSF form completed by your employer.</p>
-            </div>
-
-            <div class="detail-grid">
-                <div class="field">
-                    <label>Employer / Company Name</label>
-                    <input type="text" placeholder="e.g. Allied Manufacturing" />
-                </div>
-                <div class="field">
-                    <label>Security Force Registration #</label>
-                    <input type="text" placeholder="if known" />
-                </div>
-                <div class="field">
-                    <label>Your Job Title</label>
-                    <input type="text" placeholder="e.g. Security Director" />
-                </div>
-                <div class="field">
-                    <label>Dates of Employment (full-time)</label>
-                    <input type="text" placeholder="e.g. 2020 – 2023" />
-                </div>
-                <div class="field field--full">
-                    <label>Number of employees in security force (must be 30+)</label>
-                    <input type="text" placeholder="e.g. 45" />
+                <p>You must have managed a proprietary security force with <strong>30+ employees</strong>, registered with Illinois IDFPR.</p>
+                <div class="example-firms">
+                    <strong>Examples of such firms in Illinois:</strong> Archer Daniels Midland (ADM), Caterpillar Inc., State Farm Insurance, Advocate Aurora Health, and other large industrial or healthcare corporations with in-house security.
                 </div>
             </div>
 
-            <div style="margin-top:0.6rem;">
-                <span class="form-badge">Form VE-PSF required</span>
+            <!-- YES / NO question (newly added for route 2) -->
+            <div class="yn-row">
+                <span class="yn-question">Have you worked full-time for at least 3 years within the last 5 years as a manager of a proprietary security force with 30 or more employees, registered with Illinois IDFPR?</span>
+                <div class="yn-options">
+                    <label><input type="radio" name="q2" value="yes" /> YES</label>
+                    <label><input type="radio" name="q2" value="no" /> NO</label>
+                </div>
+            </div>
+
+            <!-- Hidden details – revealed only on YES -->
+            <div class="details-wrapper" id="details2">
+                <div class="detail-grid">
+                    <div class="field">
+                        <label>Employer / Company Name</label>
+                        <input type="text" placeholder="e.g. Allied Manufacturing" />
+                    </div>
+                    <div class="field">
+                        <label>Security Force Registration # (if known)</label>
+                        <input type="text" placeholder="e.g. REG-1234" />
+                    </div>
+                    <div class="field">
+                        <label>Your Job Title</label>
+                        <input type="text" placeholder="e.g. Security Director" />
+                    </div>
+                    <div class="field">
+                        <label>Dates of Employment (full-time)</label>
+                        <input type="text" placeholder="e.g. 2020 – 2023" />
+                    </div>
+                    <div class="field">
+                        <label>Number of employees in security force (must be 30+)</label>
+                        <input type="text" placeholder="e.g. 45" />
+                    </div>
+                    <div class="field field--full">
+                        <label>Brief description of management duties</label>
+                        <textarea placeholder="e.g. Oversaw security operations, budget, hiring, and compliance for in-house force."></textarea>
+                    </div>
+                </div>
+                <div class="form-badge">Form VE-PSF required</div>
             </div>
         </div>
 
         <!-- ============================================================ -->
         <!-- ROUTE 3 — Security Supervisor                                 -->
         <!-- ============================================================ -->
-        <div class="route-card">
+        <div class="route-card" id="route3">
             <div class="route-title">
                 <span class="num">3</span>
                 Security Supervisor
@@ -538,7 +565,6 @@
                     <li><strong>Federal, state, or local law enforcement</strong></li>
                     <li>Certain qualifying positions with a State's Attorney, Public Defender, or Department of Corrections</li>
                 </ul>
-                <p style="margin-top:0.3rem;"><strong>Form required:</strong> <span style="background:#eef3f9; padding:0.1rem 0.8rem; border-radius:30px; font-weight:600;">VE-DSC</span> — Verification of Employment / Experience</p>
             </div>
 
             <!-- YES / NO question -->
@@ -550,32 +576,31 @@
                 </div>
             </div>
 
-            <!-- fill-in details -->
-            <div class="detail-grid">
-                <div class="field">
-                    <label>Employer / Agency Name</label>
-                    <input type="text" placeholder="e.g. City of Springfield PD" />
+            <!-- Hidden details – revealed only on YES (now consistent with routes 1 & 2) -->
+            <div class="details-wrapper" id="details3">
+                <div class="detail-grid">
+                    <div class="field">
+                        <label>Employer / Agency Name</label>
+                        <input type="text" placeholder="e.g. City of Springfield PD" />
+                    </div>
+                    <div class="field">
+                        <label>Your Job Title</label>
+                        <input type="text" placeholder="e.g. Sergeant / Supervisor" />
+                    </div>
+                    <div class="field">
+                        <label>Dates of Employment (full-time)</label>
+                        <input type="text" placeholder="e.g. 2019 – 2022" />
+                    </div>
+                    <div class="field">
+                        <label>Type of qualifying employer</label>
+                        <input type="text" placeholder="e.g. Law enforcement, Military, Corp. security, etc." />
+                    </div>
+                    <div class="field field--full">
+                        <label>Brief description of supervisory duties</label>
+                        <textarea placeholder="e.g. Supervised 12 officers, conducted performance reviews, managed incident response…"></textarea>
+                    </div>
                 </div>
-                <div class="field">
-                    <label>Your Job Title</label>
-                    <input type="text" placeholder="e.g. Sergeant / Supervisor" />
-                </div>
-                <div class="field">
-                    <label>Dates of Employment (full-time)</label>
-                    <input type="text" placeholder="e.g. 2019 – 2022" />
-                </div>
-                <div class="field">
-                    <label>Type of qualifying employer</label>
-                    <input type="text" placeholder="e.g. Law enforcement, Military, Corp. security, etc." />
-                </div>
-                <div class="field field--full">
-                    <label>Brief description of supervisory duties</label>
-                    <textarea placeholder="e.g. Supervised 12 officers, conducted performance reviews, managed incident response…"></textarea>
-                </div>
-            </div>
-
-            <div style="margin-top:0.6rem;">
-                <span class="form-badge">If YES → Form VE-DSC</span>
+                <div class="form-badge">Form VE-DSC required</div>
             </div>
         </div>
 
@@ -617,23 +642,64 @@
 
     </div>
 
-    <!-- ── tiny script to make it feel interactive (optional) ── -->
     <script>
         (function() {
-            // Just a small convenience: log selections for demo, but no action needed.
-            // The form is designed to be printed or filled manually.
-            const radios = document.querySelectorAll('input[type="radio"]');
-            for (const r of radios) {
-                r.addEventListener('change', function() {
-                    // nothing fancy — just a subtle visual cue
-                    const row = this.closest('.yn-row');
-                    if (row) {
-                        row.style.transition = 'background 0.15s';
-                        row.style.background = '#f3f7fe';
-                        setTimeout(() => { row.style.background = ''; }, 300);
-                    }
+            // Get all route cards
+            const cards = document.querySelectorAll('.route-card');
+
+            cards.forEach((card, index) => {
+                const radios = card.querySelectorAll('input[type="radio"]');
+                const detailsWrapper = card.querySelector('.details-wrapper');
+
+                // Find the next route card (for scrolling on "NO")
+                let nextCard = null;
+                if (index < cards.length - 1) {
+                    nextCard = cards[index + 1];
+                }
+
+                radios.forEach(radio => {
+                    radio.addEventListener('change', function() {
+                        // Show/hide details based on YES/NO
+                        if (this.value === 'yes') {
+                            if (detailsWrapper) {
+                                detailsWrapper.classList.add('visible');
+                                detailsWrapper.style.display = 'block';
+                            }
+                        } else {
+                            // NO selected
+                            if (detailsWrapper) {
+                                detailsWrapper.classList.remove('visible');
+                                detailsWrapper.style.display = 'none';
+                            }
+                            // Move to the next qualification if there is one
+                            if (nextCard) {
+                                nextCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                // small highlight effect on the next card
+                                nextCard.style.transition = 'background 0.3s';
+                                nextCard.style.background = '#f0f5fe';
+                                setTimeout(() => {
+                                    nextCard.style.background = '';
+                                }, 600);
+                            }
+                        }
+                    });
                 });
-            }
+            });
+
+            // If a radio is already checked on load (e.g., browser back), ensure visibility
+            document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
+                const card = radio.closest('.route-card');
+                if (card) {
+                    const details = card.querySelector('.details-wrapper');
+                    if (details && radio.value === 'yes') {
+                        details.classList.add('visible');
+                        details.style.display = 'block';
+                    } else if (details && radio.value === 'no') {
+                        details.classList.remove('visible');
+                        details.style.display = 'none';
+                    }
+                }
+            });
         })();
     </script>
 
