@@ -277,29 +277,37 @@
             margin: 0.6rem 0 1rem 1.4rem;
         }
 
-        /* ── important note ── */
-        .important-box {
-            background: #fff6e8;
-            border-left: 5px solid #c76f1e;
-            padding: 1.2rem 1.6rem;
+        /* ── rejection statement (replaces important box) ── */
+        .rejection-box {
+            background: #fef0f0;
+            border-left: 5px solid #b22222;
+            padding: 1.2rem 1.8rem;
             border-radius: 12px;
             margin: 2rem 0 1.5rem 0;
         }
 
-        .important-box h3 {
-            color: #a85d16;
-            font-size: 1.05rem;
+        .rejection-box h3 {
+            color: #a51d1d;
+            font-size: 1.1rem;
             margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .important-box p {
+        .rejection-box h3::before {
+            content: "⛔";
+            font-size: 1.3rem;
+        }
+
+        .rejection-box p {
             font-size: 0.98rem;
-            line-height: 1.6;
-            color: #2d3a4b;
+            line-height: 1.7;
+            color: #2d2d2d;
         }
 
-        .important-box strong {
-            color: #0b3b5c;
+        .rejection-box strong {
+            color: #b22222;
         }
 
         /* ── footer ── */
@@ -361,8 +369,9 @@
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
-            .important-box {
-                background: #faf3ea !important;
+            .rejection-box {
+                background: #fef0f0 !important;
+                border-left-color: #b22222 !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
@@ -451,8 +460,6 @@
                 Private Security Company Manager
             </div>
 
-            <!-- Descriptive text removed as requested -->
-
             <!-- YES / NO question -->
             <div class="yn-row">
                 <span class="yn-question">Have you worked full-time for at least 3 years within the last 5 years as a manager or administrator for an Illinois-licensed private security company?</span>
@@ -499,7 +506,6 @@
                 Proprietary Security Force Manager
             </div>
 
-            <!-- New description with examples, requirement text removed as requested -->
             <div class="route-desc">
                 <p>You must have managed a proprietary security force with <strong>30+ employees</strong>, registered with Illinois IDFPR.</p>
                 <div class="example-firms">
@@ -507,7 +513,7 @@
                 </div>
             </div>
 
-            <!-- YES / NO question (newly added for route 2) -->
+            <!-- YES / NO question -->
             <div class="yn-row">
                 <span class="yn-question">Have you worked full-time for at least 3 years within the last 5 years as a manager of a proprietary security force with 30 or more employees, registered with Illinois IDFPR?</span>
                 <div class="yn-options">
@@ -576,7 +582,7 @@
                 </div>
             </div>
 
-            <!-- Hidden details – revealed only on YES (now consistent with routes 1 & 2) -->
+            <!-- Hidden details – revealed only on YES -->
             <div class="details-wrapper" id="details3">
                 <div class="detail-grid">
                     <div class="field">
@@ -605,21 +611,16 @@
         </div>
 
         <!-- ============================================================ -->
-        <!-- IMPORTANT NOTE                                                -->
+        <!-- REJECTION STATEMENT (replaces the old Important box)          -->
         <!-- ============================================================ -->
-        <div class="important-box">
-            <h3>⚠️ Important — Guard Experience Alone May Not Qualify</h3>
+        <div class="rejection-box">
+            <h3>Your application will be rejected if you answer NO to all three</h3>
             <p>
-                Your <strong>10+ years as a security guard</strong> does <strong>not</strong> automatically satisfy this requirement.
-                The key question is: <strong>Did you have qualifying MANAGERIAL or SUPERVISORY experience during the last 5 years?</strong>
+                The Illinois Department of Financial and Professional Regulation (IDFPR) requires <strong>at least one</strong> of the three qualifying experience routes to be met.
+                If you select <strong>NO</strong> for every route above, your application for a Private Security Contractor license will be <strong>denied</strong> because you do not meet the mandatory 3‑year managerial or supervisory experience requirement within the last 5 years.
             </p>
-            <p style="margin-top:0.4rem;">
-                If <strong>YES</strong>, the correct VE form can document that experience. If you were only a security officer/guard
-                and never had qualifying management or supervisory duties, your 10 years of guard experience alone
-                may <strong>not</strong> satisfy the Private Security Contractor experience requirement.
-            </p>
-            <p style="margin-top:0.5rem; font-weight:500; color:#0b3b5c;">
-                Illinois IDFPR specifically requires the appropriate <strong>VE-SAC, VE-PSF, or VE-DSC</strong> form to document qualifying experience.
+            <p style="margin-top:0.5rem;">
+                Only experience that fits one of the three categories – and is documented with the corresponding VE form – can satisfy the requirement. Guard-only experience, regardless of total years, does not qualify.
             </p>
         </div>
 
